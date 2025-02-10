@@ -1,7 +1,9 @@
+import Header from "./features/dashboard/common/Header"
+
 function App() {
   return (
     <>
-     <h1>Project init</h1>
+     <Header></Header>
     </>
   )
 }
