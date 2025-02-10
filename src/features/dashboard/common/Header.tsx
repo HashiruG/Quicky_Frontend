@@ -5,7 +5,7 @@ import { Search, Truck } from "lucide-react";
 const Header = () => {
   return (
     <div>
-      <header className="flex sticky top-0 z-50 w-full items-center justify-between border-b bg-slate-950">
+      <header className="flex fixed top-0 z-50 w-full items-center justify-between  bg-slate-950">
         <div className="flex flex-2 p-3 justify-center">
           <Truck className="h-8 w-8 stroke-white"></Truck>
           <h1 className="text-xl px-3 text-white">QUICKY</h1>
