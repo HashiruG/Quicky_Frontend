@@ -1,11 +1,13 @@
-import Header from "./features/dashboard/common/Header"
+import LoginPage from "./pages/LoginPage";
+import OngoingOffersPage from "./pages/OngoingOffersPage";
 
 function App() {
   return (
     <>
-     <Header></Header>
+      {/* <LoginPage></LoginPage> */}
+      <OngoingOffersPage></OngoingOffersPage>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
