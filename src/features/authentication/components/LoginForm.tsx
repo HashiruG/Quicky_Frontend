@@ -8,11 +8,14 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {login} from "../../../services/authenticationService"
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [loginInput, setLoginInput] = useState({ email: "", password: "" });
   const [passwordValidity, setPasswordValidity] = useState(true);
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setLoginInput((prevValue) => {
@@ -32,7 +35,7 @@ const LoginForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (loginInput.password.trim().length < 6) {
@@ -40,10 +43,14 @@ const LoginForm = () => {
       return;
     }
 
-    try {
-      //database connection
-    } catch (error) {
-      console.log(error);
+    const token = await login(loginInput.email, loginInput.password);
+    console.log(token);
+    
+    if (token !== "Invalid credentials!") {
+      navigate("/offers"); 
+    } else {
+      console.log("Invalid credentials!");
+      
     }
   };
 
