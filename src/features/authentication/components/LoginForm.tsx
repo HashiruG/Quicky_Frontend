@@ -8,14 +8,21 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {login} from "../../../services/authenticationService"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import axios from "axios";
+=======
+>>>>>>> 521d4c8 (feat(auth): add login functionality with the backend to recieve the jwt token)
 
 const LoginForm = () => {
   const [loginInput, setLoginInput] = useState({ username: "", password: "" });
   const [passwordValidity, setPasswordValidity] = useState(true);
+<<<<<<< HEAD
   const [errorMessage, setErrorMessage] = useState("");
+=======
+>>>>>>> 521d4c8 (feat(auth): add login functionality with the backend to recieve the jwt token)
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
@@ -36,7 +43,11 @@ const LoginForm = () => {
     });
   };
 
+<<<<<<< HEAD
   const handleSubmit = async (e) => {
+=======
+  const handleSubmit = async(e) => {
+>>>>>>> 521d4c8 (feat(auth): add login functionality with the backend to recieve the jwt token)
     e.preventDefault();
 
     if (loginInput.password.trim().length < 6) {
@@ -44,6 +55,7 @@ const LoginForm = () => {
       return;
     }
 
+<<<<<<< HEAD
     try {
       const response = await axios.post("http://localhost:8080/auth/login", loginInput);
       if (response.status === 200) {
@@ -54,6 +66,16 @@ const LoginForm = () => {
     } catch (error) {
       setErrorMessage("Invalid credentials. Please try again.");
       console.error(error);
+=======
+    const token = await login(loginInput.email, loginInput.password);
+    console.log(token);
+    
+    if (token !== "Invalid credentials!") {
+      navigate("/offers"); 
+    } else {
+      console.log("Invalid credentials!");
+      
+>>>>>>> 521d4c8 (feat(auth): add login functionality with the backend to recieve the jwt token)
     }
   };
 
