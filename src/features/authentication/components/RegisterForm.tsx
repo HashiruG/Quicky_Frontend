@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const RegisterForm = () => {
   const [registerInputs, setRegisterInputs] = useState({
@@ -20,10 +20,6 @@ const RegisterForm = () => {
     email: "",
     password: "",
   });
-
-  useEffect(() => {
-    console.log("Updated state:", registerInputs);
-  }, [registerInputs]);
 
   function validateEmail(email: string) {
     const emailRegex = /^[a-z][^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -86,9 +82,6 @@ const RegisterForm = () => {
       alert("Please fix the errors before submitting.");
       return;
     }
-
-    console.log("Form Submitted:", registerInputs);
-    alert("Registration successful!");
   }
 
   return (
