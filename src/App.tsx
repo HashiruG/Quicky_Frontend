@@ -1,11 +1,14 @@
-import RegisterPage from "./pages/RegisterPage";
-
 function App() {
   return (
-    <>
-      <RegisterPage></RegisterPage>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/offers" element={<OngoingOffersPage />} />
+      </Routes>
+    </Router>
   );
+
 }
 
 export default App;
