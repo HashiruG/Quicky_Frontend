@@ -10,7 +10,7 @@ const data = [{
     status: "completed",
     rating: 5.0
 },{
-    id: "1",
+    id: "2",
     driverName: "Driver",
     pickupLocation: "Colombo",
     dropoffLocation: "Moratuwa",
@@ -18,7 +18,7 @@ const data = [{
     status: "completed",
     rating: 5.0
 },{
-    id: "1",
+    id: "3",
     driverName: "Driver",
     pickupLocation: "Colombo",
     dropoffLocation: "Moratuwa",
@@ -26,7 +26,7 @@ const data = [{
     status: "completed",
     rating: 5.0
 },{
-    id: "1",
+    id: "3",
     driverName: "Driver",
     pickupLocation: "Colombo",
     dropoffLocation: "Moratuwa",
@@ -34,7 +34,7 @@ const data = [{
     status: "completed",
     rating: 5.0
 },{
-    id: "1",
+    id: "4",
     driverName: "Driver",
     pickupLocation: "Colombo",
     dropoffLocation: "Moratuwa",
@@ -42,7 +42,7 @@ const data = [{
     status: "completed",
     rating: 5.0
 },{
-    id: "1",
+    id: "5",
     driverName: "Driver",
     pickupLocation: "Colombo",
     dropoffLocation: "Moratuwa",
