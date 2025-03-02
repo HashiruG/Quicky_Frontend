@@ -11,15 +11,15 @@ const OngoingOffersPage = () => {
         <div>
           <SidebarProvider>
             <SideBarComponent />
-            <SidebarTrigger className="p-5 md:hidden" />
+            <SidebarTrigger className="md:hidden" />
           </SidebarProvider>
         </div>
 
         <div className="flex flex-col mt-16">
-          <div className="flex p-8">
+          <div className="flex py-7 px-5">
             <h1 className="text-4xl font-semibold">Ongoing Offers</h1>
           </div>
-          <div className="flex flex-wrap justify-start gap-10 mx-7">
+          <div className="flex flex-col justify-center md:flex-row flex-wrap md:justify-start gap-10 mx-5">
             <Offer></Offer>
             <Offer></Offer>
             <Offer></Offer>
