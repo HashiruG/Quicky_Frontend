@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   TrendingUpDown,
   Gauge,
@@ -6,7 +7,7 @@ import {
   Package,
   BadgePercent,
   Eye,
-  CirclePlus
+  CirclePlus,
 } from "lucide-react";
 
 import {
@@ -24,34 +25,37 @@ import {
 const items = [
   {
     title: "Dashboard",
-    url: "#",
+    url: "/dashboard",
     icon: Gauge,
   },
   {
     title: "Realtime Driver Statuses",
-    url: "#",
+    url: "/realtime-driver-statuses",
     icon: MapPin,
   },
   {
     title: "Driver Management",
-    url: "#",
+    url: "/driver-management",
     icon: CarTaxiFront,
   },
   {
     title: "Delivery Management",
-    url: "#",
+    url: "/delivery-management",
     icon: Package,
   },
   {
     title: "Churn Prediction",
-    url: "#",
-    icon: TrendingUpDown
+    url: "/churn-prediction",
+    icon: TrendingUpDown,
   },
   {
     title: "Manage Offers",
-    url: "#",
+    url: "/manage-offers",
     icon: BadgePercent,
-    subMenus: [{name:"View Offers", icon:Eye},{name:"Add new Offers", icon:CirclePlus} ],
+    subMenus: [
+      { name: "View Offers", url: "/manage-offers/view", icon: Eye },
+      { name: "Add new Offers", url: "/manage-offers/add", icon: CirclePlus },
+    ],
   },
 ];
 
@@ -73,13 +77,13 @@ const SideBarComponent = () => {
                     </SidebarMenuItem>
                     <ul className="pl-6">
                       {item.subMenus.map((subMenu) => (
-                        <SidebarMenuSub>
+                        <SidebarMenuSub key={subMenu.name}>
                           <SidebarMenuSubItem>
                             <SidebarMenuButton asChild>
-                              <a href={item.url} className="flex items-center">
+                              <Link to={subMenu.url} className="flex items-center">
                                 <subMenu.icon />
                                 <span className="ml-2">{subMenu.name}</span>
-                              </a>
+                              </Link>
                             </SidebarMenuButton>
                           </SidebarMenuSubItem>
                         </SidebarMenuSub>
@@ -89,10 +93,10 @@ const SideBarComponent = () => {
                 ) : (
                   <SidebarMenuItem className="py-2" key={item.title}>
                     <SidebarMenuButton asChild>
-                      <a href={item.url} className="flex items-center">
+                      <Link to={item.url} className="flex items-center">
                         <item.icon />
                         <span className="ml-2">{item.title}</span>
-                      </a>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 )
