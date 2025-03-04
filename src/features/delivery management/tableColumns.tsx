@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown } from "lucide-react";
 
 export type Delivery = {
   id: string;
@@ -14,11 +16,32 @@ export type Delivery = {
 export const columns: ColumnDef<Delivery>[] = [
   {
     accessorKey: "id",
-    header: "Delivery Id",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Id
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "date",
-    header: "Date",
+    sortingFn: "datetime",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Date
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "driverName",
@@ -33,15 +56,35 @@ export const columns: ColumnDef<Delivery>[] = [
     header: "Drop Off Location",
   },
   {
-    accessorKey: "deliveryValue",
-    header: "Delivery Value",
-  },
-  {
     accessorKey: "status",
     header: "Status",
   },
   {
+    accessorKey: "deliveryValue",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Delivery Value
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
     accessorKey: "rating",
-    header: "Rating",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Rating
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
 ];
