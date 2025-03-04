@@ -10,6 +10,7 @@ import AddNewOfferPage from './pages/AddNewOfferPage';
 import NewPasswordPage from './pages/NewPasswordPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 
+
 function App() {
   return (
     <Router>
@@ -24,7 +25,6 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/change-password" element={<NewPasswordPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        
       </Routes>
     </Router>
   );
