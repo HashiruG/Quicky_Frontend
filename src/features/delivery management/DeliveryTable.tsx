@@ -3,6 +3,7 @@ import { DataTable } from "@/components/ui/data-table"
 
 const data = [{
     id: "1",
+    date: new Date().toLocaleDateString(),
     driverName: "Driver",
     pickupLocation: "Colombo",
     dropoffLocation: "Moratuwa",
@@ -11,6 +12,7 @@ const data = [{
     rating: 5.0
 },{
     id: "2",
+    date: new Date().toLocaleDateString(),
     driverName: "Driver",
     pickupLocation: "Colombo",
     dropoffLocation: "Moratuwa",
@@ -19,6 +21,7 @@ const data = [{
     rating: 5.0
 },{
     id: "3",
+    date: new Date().toLocaleDateString(),
     driverName: "Driver",
     pickupLocation: "Colombo",
     dropoffLocation: "Moratuwa",
@@ -27,6 +30,7 @@ const data = [{
     rating: 5.0
 },{
     id: "3",
+    date: new Date().toLocaleDateString(),
     driverName: "Driver",
     pickupLocation: "Colombo",
     dropoffLocation: "Moratuwa",
@@ -35,6 +39,7 @@ const data = [{
     rating: 5.0
 },{
     id: "4",
+    date: new Date().toLocaleDateString(),
     driverName: "Driver",
     pickupLocation: "Colombo",
     dropoffLocation: "Moratuwa",
@@ -43,6 +48,7 @@ const data = [{
     rating: 5.0
 },{
     id: "5",
+    date: new Date().toLocaleDateString(),
     driverName: "Driver",
     pickupLocation: "Colombo",
     dropoffLocation: "Moratuwa",

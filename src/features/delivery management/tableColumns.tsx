@@ -2,6 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 export type Delivery = {
   id: string;
+  date: Date;
   driverName: string;
   pickupLocation: string;
   dropoffLocation: string;
@@ -14,6 +15,10 @@ export const columns: ColumnDef<Delivery>[] = [
   {
     accessorKey: "id",
     header: "Delivery Id",
+  },
+  {
+    accessorKey: "date",
+    header: "Date",
   },
   {
     accessorKey: "driverName",
