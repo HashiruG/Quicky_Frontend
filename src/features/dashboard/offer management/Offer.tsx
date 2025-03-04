@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const Offer = () => {
   return (
-    <Card className="w-1/5">
+    <Card className="md:w-1/5">
       <CardHeader>
         <img src={OfferImsge}></img>
       </CardHeader>
