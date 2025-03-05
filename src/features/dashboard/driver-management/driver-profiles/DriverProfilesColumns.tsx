@@ -12,7 +12,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "../../../../components/ui/column-header";
 
-export type Payment = {
+export type DriverProfilesColumns = {
   id: string;
   name: string;
   ami: number;
@@ -21,7 +21,7 @@ export type Payment = {
   rating: number;
 };
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<DriverProfilesColumns>[] = [
   {
     accessorKey: "id",
     header: ({ column }) => {
@@ -71,7 +71,7 @@ export const columns: ColumnDef<Payment>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original;
+      const DriverProfilesColumns = row.original;
 
       return (
         <DropdownMenu>
@@ -84,7 +84,9 @@ export const columns: ColumnDef<Payment>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() =>
+                navigator.clipboard.writeText(DriverProfilesColumns.id)
+              }
             >
               Copy Driver ID
             </DropdownMenuItem>

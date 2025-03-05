@@ -22,8 +22,8 @@ import {
 
 import * as React from "react";
 import { Input } from "@/components/ui/input";
-import { DataTablePagination } from "../../../../components/ui/pagination";
-import { DataTableViewOptions } from "../../../../components/ui/column-toggle";
+import { DataTablePagination } from "./pagination";
+import { DataTableViewOptions } from "./column-toggle";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

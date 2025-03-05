@@ -4,12 +4,12 @@ import SideBarComponent from "@/features/dashboard/common/SideBarComponent";
 
 import { useEffect, useState } from "react";
 import {
-  Payment,
+  DriverProfilesColumns,
   columns,
-} from "@/features/dashboard/driver-management/driver-profiles/columns";
-import { DataTable } from "@/features/dashboard/driver-management/driver-profiles/data-table";
+} from "@/features/dashboard/driver-management/driver-profiles/DriverProfilesColumns";
+import { DataTable } from "@/components/ui/data-table";
 
-async function getData(): Promise<Payment[]> {
+async function getData(): Promise<DriverProfilesColumns[]> {
   return [
     {
       id: "1",
@@ -414,8 +414,8 @@ async function getData(): Promise<Payment[]> {
   ];
 }
 
-export default function DemoPage() {
-  const [data, setData] = useState<Payment[]>([]);
+export default function DriverProfiles() {
+  const [data, setData] = useState<DriverProfilesColumns[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
