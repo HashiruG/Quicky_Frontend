@@ -2,6 +2,7 @@ import * as React from "react";
 import {
   ColumnFiltersState,
   getFilteredRowModel,
+  getPaginationRowModel,
   ColumnDef,
   SortingState,
   flexRender,
@@ -20,6 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "./button";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -36,6 +38,11 @@ export function DataTable<TData, TValue>({
     []
   );
 
+  const [pagination, setPagination] = React.useState({
+    pageIndex: 0, 
+    pageSize: 7, 
+  });
+
   const table = useReactTable({
     data,
     columns,
@@ -44,9 +51,12 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    onPaginationChange: setPagination,
     state: {
       sorting,
       columnFilters,
+      pagination
     },
   });
 
@@ -111,6 +121,24 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
+      </div>
+      <div className="flex items-center justify-end space-x-2 py-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Previous
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+        </Button>
       </div>
     </div>
   );
