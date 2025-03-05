@@ -9,6 +9,7 @@ import ChurnPredictionPage from './pages/ChurnPredictionPage';
 import AddNewOfferPage from './pages/AddNewOfferPage';
 import NewPasswordPage from './pages/NewPasswordPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import DeliveryRecordsPage from './pages/DeliveryRecordsPage';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/realtime-driver-statuses" element={<DriverStatusPage />} />
         <Route path="/driver-management" element={<DriverManagementPage />} />
+        <Route path="/delivery-management" element={<DeliveryRecordsPage />} />
         <Route path="/churn-prediction" element={<ChurnPredictionPage />} />
         <Route path="/manage-offers/view" element={<OngoingOffersPage />} />
         <Route path="/manage-offers/add" element={<AddNewOfferPage />} />
@@ -28,7 +30,6 @@ function App() {
       </Routes>
     </Router>
   );
-
 }
 
 export default App;
