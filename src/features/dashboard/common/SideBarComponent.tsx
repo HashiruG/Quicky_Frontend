@@ -6,7 +6,7 @@ import {
   Package,
   BadgePercent,
   Eye,
-  CirclePlus
+  CirclePlus,
 } from "lucide-react";
 
 import {
@@ -36,6 +36,10 @@ const items = [
     title: "Driver Management",
     url: "#",
     icon: CarTaxiFront,
+    subMenus: [
+      { name: "Driver profiles", icon: Eye },
+      { name: "New registrations", icon: CirclePlus },
+    ],
   },
   {
     title: "Delivery Management",
@@ -45,13 +49,16 @@ const items = [
   {
     title: "Churn Prediction",
     url: "#",
-    icon: TrendingUpDown
+    icon: TrendingUpDown,
   },
   {
     title: "Manage Offers",
     url: "#",
     icon: BadgePercent,
-    subMenus: [{name:"View Offers", icon:Eye},{name:"Add new Offers", icon:CirclePlus} ],
+    subMenus: [
+      { name: "View Offers", icon: Eye },
+      { name: "Add new Offers", icon: CirclePlus },
+    ],
   },
 ];
 
