@@ -37,6 +37,10 @@ const items = [
     title: "Driver Management",
     url: "/driver-management",
     icon: CarTaxiFront,
+    subMenus: [
+      { name: "Driver profiles", icon: Eye },
+      { name: "New registrations", icon: CirclePlus },
+    ],
   },
   {
     title: "Delivery Management",
@@ -45,7 +49,9 @@ const items = [
   },
   {
     title: "Churn Prediction",
+
     url: "/churn-prediction",
+
     icon: TrendingUpDown,
   },
   {
@@ -53,8 +59,10 @@ const items = [
     url: "/manage-offers",
     icon: BadgePercent,
     subMenus: [
+
       { name: "View Offers", url: "/manage-offers/view", icon: Eye },
       { name: "Add new Offers", url: "/manage-offers/add", icon: CirclePlus },
+
     ],
   },
 ];
