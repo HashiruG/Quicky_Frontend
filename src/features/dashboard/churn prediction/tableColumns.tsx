@@ -1,5 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox"
+import { Button } from "@/components/ui/button";
+import { ArrowUpDown } from "lucide-react";
 
 
 export type ChurnPrediction = {
@@ -50,7 +52,17 @@ export const columns: ColumnDef<ChurnPrediction>[] = [
   },
   {
     accessorKey: "earnings",
-    header: "Earnings",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Earnings
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
   },
   {
     accessorKey: "status",

@@ -15,7 +15,7 @@ const data = [
     driverId: "d0124",
     driverName: "John",
     mobileNumber: "0718521364",
-    earnings: 1890,
+    earnings: 3990,
     status: "rewarded",
   },
   {
