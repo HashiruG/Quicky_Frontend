@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -16,7 +15,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { log } from "console";
 import { useState } from "react";
 
 const NewOfferForm = () => {
@@ -58,12 +56,11 @@ const NewOfferForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="w-full" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-6">
-        <Card>
+        <Card className="">
           <CardHeader>
-            <CardTitle className="text-4xl">Add New Offer</CardTitle>
-            <CardDescription>Enter the new offer details</CardDescription>
+            <CardTitle className="text-2xl">Enter offer details</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-8">
