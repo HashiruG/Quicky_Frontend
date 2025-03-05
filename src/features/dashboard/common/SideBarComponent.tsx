@@ -38,8 +38,12 @@ const items = [
     url: "/driver-management",
     icon: CarTaxiFront,
     subMenus: [
-      { name: "Driver profiles", icon: Eye },
-      { name: "New registrations", icon: CirclePlus },
+      { name: "Driver profiles", url: "/driver-management/driver-profiles", icon: Eye },
+      {
+        name: "New registrations",
+        url: "/driver-management/new-registrations",
+        icon: CirclePlus,
+      },
     ],
   },
   {
@@ -59,10 +63,8 @@ const items = [
     url: "/manage-offers",
     icon: BadgePercent,
     subMenus: [
-
       { name: "View Offers", url: "/manage-offers/view", icon: Eye },
       { name: "Add new Offers", url: "/manage-offers/add", icon: CirclePlus },
-
     ],
   },
 ];
@@ -88,7 +90,10 @@ const SideBarComponent = () => {
                         <SidebarMenuSub key={subMenu.name}>
                           <SidebarMenuSubItem>
                             <SidebarMenuButton asChild>
-                              <Link to={subMenu.url} className="flex items-center">
+                              <Link
+                                to={subMenu.url}
+                                className="flex items-center"
+                              >
                                 <subMenu.icon />
                                 <span className="ml-2">{subMenu.name}</span>
                               </Link>
