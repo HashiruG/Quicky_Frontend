@@ -1,11 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -16,8 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { log } from "console";
 import { useState } from "react";
+import { DateRangePicker } from "./DateRangePicker";
 
 const NewOfferForm = () => {
   const [offerInput, setOfferInput] = useState({
@@ -28,42 +22,40 @@ const NewOfferForm = () => {
   });
 
   const handleTypeChange = (value) => {
-    setOfferInput((prevValue) =>{
-        return({...prevValue, offerType:value})
-    })
+    setOfferInput((prevValue) => {
+      return { ...prevValue, offerType: value };
+    });
   };
 
-  const handleTitleChange = (e) =>{
-    setOfferInput((prevValue) =>{
-        return({...prevValue, offerTitle:e.target.value})
-    })
-  }
+  const handleTitleChange = (e) => {
+    setOfferInput((prevValue) => {
+      return { ...prevValue, offerTitle: e.target.value };
+    });
+  };
 
-  const handleDescriptionChange = (e) =>{
-    setOfferInput((prevValue) =>{
-        return({...prevValue, offerDescription:e.target.value})
-    })
-  }
+  const handleDescriptionChange = (e) => {
+    setOfferInput((prevValue) => {
+      return { ...prevValue, offerDescription: e.target.value };
+    });
+  };
 
-  const handleValueChange = (e) =>{
-    setOfferInput((prevValue) =>{
-        return({...prevValue, offerValue:e.target.value})
-    })
-  }
+  const handleValueChange = (e) => {
+    setOfferInput((prevValue) => {
+      return { ...prevValue, offerValue: e.target.value };
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(offerInput);
-    
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="w-full" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-6">
-        <Card>
+        <Card className="">
           <CardHeader>
-            <CardTitle className="text-4xl">Add New Offer</CardTitle>
-            <CardDescription>Enter the new offer details</CardDescription>
+            <CardTitle className="text-2xl">Enter offer details</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-8">
@@ -89,18 +81,8 @@ const NewOfferForm = () => {
               </div>
 
               <div className="grid gap-2">
-                <Select onValueChange={handleTypeChange}>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Select the offer type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="Fixed">Fixed</SelectItem>
-                      <SelectItem value="Percentage">Percentage</SelectItem>
-                      <SelectItem value="Cashback">Cashback</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+                <Label>Offer Validity Range</Label>
+                <DateRangePicker></DateRangePicker>
               </div>
 
               <div className="grid gap-2">
