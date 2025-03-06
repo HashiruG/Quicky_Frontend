@@ -62,7 +62,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
+    <div className="w-full flex flex-col">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter emails..."
@@ -74,7 +74,7 @@ export function DataTable<TData, TValue>({
         />
         <DataTableViewOptions table={table} />
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md border w-full">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
