@@ -6,8 +6,8 @@ import {
   CarTaxiFront,
   Package,
   BadgePercent,
-  Eye,
-  CirclePlus,
+  ChevronDown,
+  Dot
 } from "lucide-react";
 
 import {
@@ -18,9 +18,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import { Collapsible, CollapsibleTrigger } from "@radix-ui/react-collapsible";
+import { CollapsibleContent } from "@/components/ui/collapsible";
 
 const items = [
   {
@@ -38,11 +38,13 @@ const items = [
     url: "/driver-management",
     icon: CarTaxiFront,
     subMenus: [
-      { name: "Driver profiles", url: "/driver-management/driver-profiles", icon: Eye },
+      {
+        name: "Driver profiles",
+        url: "/driver-management/driver-profiles",
+      },
       {
         name: "New registrations",
         url: "/driver-management/new-registrations",
-        icon: CirclePlus,
       },
     ],
   },
@@ -53,9 +55,7 @@ const items = [
   },
   {
     title: "Churn Prediction",
-
     url: "/churn-prediction",
-
     icon: TrendingUpDown,
   },
   {
@@ -63,8 +63,8 @@ const items = [
     url: "/manage-offers",
     icon: BadgePercent,
     subMenus: [
-      { name: "View Offers", url: "/manage-offers/view", icon: Eye },
-      { name: "Add new Offers", url: "/manage-offers/add", icon: CirclePlus },
+      { name: "View Offers", url: "/manage-offers/view"},
+      { name: "Add new Offers", url: "/manage-offers/add" },
     ],
   },
 ];
@@ -78,36 +78,39 @@ const SideBarComponent = () => {
             <SidebarMenu>
               {items.map((item) =>
                 item.subMenus ? (
-                  <div key={item.title} className="pb-2">
+                  <Collapsible key={item.title}>
                     <SidebarMenuItem className="py-2">
-                      <div className="flex items-center">
-                        <item.icon />
-                        <span className="ml-2">{item.title}</span>
-                      </div>
+                      <SidebarMenuButton>
+                        <CollapsibleTrigger asChild>
+                          <div className="flex items-center w-full">
+                            <item.icon size={20}/>
+                            <span className="ml-2">{item.title}</span>
+                            <ChevronDown className="ml-auto mr-2" />
+                          </div>
+                        </CollapsibleTrigger>
+                      </SidebarMenuButton>
                     </SidebarMenuItem>
                     <ul className="pl-6">
                       {item.subMenus.map((subMenu) => (
-                        <SidebarMenuSub key={subMenu.name}>
-                          <SidebarMenuSubItem>
-                            <SidebarMenuButton asChild>
-                              <Link
-                                to={subMenu.url}
-                                className="flex items-center"
-                              >
-                                <subMenu.icon />
-                                <span className="ml-2">{subMenu.name}</span>
-                              </Link>
-                            </SidebarMenuButton>
-                          </SidebarMenuSubItem>
-                        </SidebarMenuSub>
+                        <CollapsibleContent key={subMenu.name}>
+                          <SidebarMenuButton asChild>
+                            <Link
+                              to={subMenu.url}
+                              className="flex items-center"
+                            >
+                              <Dot />
+                              <span className="ml-2">{subMenu.name}</span>
+                            </Link>
+                          </SidebarMenuButton>
+                        </CollapsibleContent>
                       ))}
                     </ul>
-                  </div>
+                  </Collapsible>
                 ) : (
                   <SidebarMenuItem className="py-2" key={item.title}>
                     <SidebarMenuButton asChild>
                       <Link to={item.url} className="flex items-center">
-                        <item.icon />
+                        <item.icon size={20}/>
                         <span className="ml-2">{item.title}</span>
                       </Link>
                     </SidebarMenuButton>
