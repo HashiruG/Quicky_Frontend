@@ -71,7 +71,7 @@ const items = [
 
 const SideBarComponent = () => {
   return (
-    <Sidebar className="top-14">
+    <Sidebar className="top-14 ">
       <SidebarContent className="bg-slate-950 text-white m-0">
         <SidebarGroup>
           <SidebarGroupContent>

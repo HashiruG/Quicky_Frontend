@@ -11,11 +11,11 @@ const Layout: React.FC<{ children: React.ReactNode, title:string }> = ({ childre
         <div>
         <SidebarProvider>
           <SideBarComponent />
-          <SidebarTrigger className="mt-4 mx-2 md:hidden z-50" />
+          <SidebarTrigger className="mt-4 mx-2 lg:hidden z-50" />
         </SidebarProvider>
         </div>
         <div className="flex flex-col mt-16 w-full">
-          <div className="flex justify-center md:justify-start p-8">
+          <div className="flex justify-center lg:justify-start p-8">
             <h1 className="text-4xl font-semibold">{title}</h1>
           </div>
           <div className="flex mx-7">{children}</div>
