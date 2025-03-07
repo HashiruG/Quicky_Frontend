@@ -4,7 +4,7 @@ import {
   NewRegistrationsColumns,
   columns,
 } from "@/features/dashboard/driver-management/new-registrations/NewRegistrationsColumns";
-import { DataTableV2 } from "@/components/ui/data-table-v2";
+import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
 import { getData } from "@/features/dashboard/driver-management/new-registrations/NewRegistrationsDataSet";
 
 export default function NewRegistrationsPage() {

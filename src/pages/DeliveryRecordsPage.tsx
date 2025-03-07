@@ -1,7 +1,7 @@
 import Layout from "@/features/dashboard/common/Layout";
 import { columns } from "@/features/delivery management/DeliveryManagementColumns";
 import data from "@/features/delivery management/DeliveryManagementData";
-import { DataTableV2 } from "@/components/ui/data-table-v2";
+import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
  
 const DeliveryRecordsPage = () => {
   return (
