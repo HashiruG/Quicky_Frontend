@@ -1,3 +1,6 @@
+"use client";
+
+import * as React from "react";
 import {
   ColumnDef,
   SortingState,
@@ -20,19 +23,19 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import * as React from "react";
-import { Input } from "@/components/ui/input";
-import { DataTablePagination } from "../../../../components/ui/pagination";
-import { DataTableViewOptions } from "../../../../components/ui/column-toggle";
+import { DataTablePagination } from "./pagination";
+import ColumnFilterInput from "@/features/dashboard/common/ColumnFilterInput";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  filterableColumnId?: string;
 }
 
-export function DataTable<TData, TValue>({
+export function DataTableV2<TData, TValue>({
   columns,
   data,
+  filterableColumnId,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -40,7 +43,6 @@ export function DataTable<TData, TValue>({
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
     data,
@@ -50,47 +52,44 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    initialState: {
+      pagination: { pageSize: 5 },
+    },
     state: {
       sorting,
       columnFilters,
       columnVisibility,
-      rowSelection,
     },
   });
 
   return (
     <div className="w-full flex flex-col">
       <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-        <DataTableViewOptions table={table} />
+        {filterableColumnId && (
+          <ColumnFilterInput
+            table={table}
+            columnId={filterableColumnId}
+            placeholder={`Filter by ${filterableColumnId}`}
+          />
+        )}
       </div>
       <div className="rounded-md border w-full">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
