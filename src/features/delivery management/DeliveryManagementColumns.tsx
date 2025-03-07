@@ -2,14 +2,14 @@ import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
-export type Delivery = {
+type Delivery = {
   id: string;
-  date: Date;
+  date: string;
   driverName: string;
   pickupLocation: string;
   dropoffLocation: string;
   deliveryValue: number;
-  status: "pending" | "completed" | "not completed";
+  status: "Pending" | "Completed" | "Not Completed";
   rating: number;
 };
 
@@ -30,7 +30,6 @@ export const columns: ColumnDef<Delivery>[] = [
   },
   {
     accessorKey: "date",
-    sortingFn: "datetime",
     header: ({ column }) => {
       return (
         <Button

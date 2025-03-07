@@ -1,6 +1,3 @@
-import { columns } from "./tableColumns"
-import { DataTable } from "@/components/ui/data-table"
-
 const data = [{
     id: "1",
     date: new Date(2025,2,18).toLocaleDateString(), 
@@ -129,11 +126,6 @@ const data = [{
     rating: 4.0
 }]
 
+export default data;
 
 
-export default function DeliveryTable() {
-
-  return (
-      <DataTable columns={columns} data={data} />
-  )
-}

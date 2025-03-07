@@ -1,11 +1,13 @@
-import ChurnPredictionTable from "@/features/dashboard/churn prediction/ChurnPredictionTable";
+import { DataTableV2 } from "@/components/ui/data-table-v2";
+import data from "@/features/dashboard/churn prediction/ChurnPredictionData";
+import { columns } from "@/features/dashboard/churn prediction/ChurnPredictionColumns";
 import Layout from "@/features/dashboard/common/Layout";
 
 const ChurnPredictionPage = () => {
   return (
     <Layout title="Churn Predictions">
-      <ChurnPredictionTable></ChurnPredictionTable>
-    </Layout>
+    <DataTableV2 columns={columns} data={data} />
+  </Layout>
   );
 };
 

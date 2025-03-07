@@ -47,7 +47,7 @@ export const columns: ColumnDef<ChurnPrediction>[] = [
     header: "Driver Name",
   },
   {
-    accessorKey: "mobileNumber",
+    accessorKey: "driverMobile",
     header: "Driver Mobile",
   },
   {
