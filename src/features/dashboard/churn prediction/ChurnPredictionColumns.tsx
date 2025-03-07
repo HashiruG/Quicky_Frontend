@@ -1,16 +1,15 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox"
-import { Button } from "@/components/ui/button";
-import { ArrowUpDown } from "lucide-react";
+import SortButton from "../common/SortButton";
 
 
 export type ChurnPrediction = {
   id: string;
   driverId: string;
   driverName: string;
-  driverMobile:string;
+  driverMobile: string;
   earnings: number;
-  status: "rewarded" |"not rewarded";
+  status:string;
 
 };
 
@@ -52,18 +51,8 @@ export const columns: ColumnDef<ChurnPrediction>[] = [
   },
   {
     accessorKey: "earnings",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Earnings
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
+    header: ({ column }) => <SortButton column={column} label="Earnings" />,
     },
-  },
   {
     accessorKey: "status",
     header: "Status",

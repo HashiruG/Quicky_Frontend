@@ -1,7 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
-
+import SortButton from "../dashboard/common/SortButton";
 type Delivery = {
   id: string;
   date: string;
@@ -9,38 +7,18 @@ type Delivery = {
   pickupLocation: string;
   dropoffLocation: string;
   deliveryValue: number;
-  status: "Pending" | "Completed" | "Not Completed";
+  status: string;
   rating: number;
 };
 
 export const columns: ColumnDef<Delivery>[] = [
   {
     accessorKey: "id",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Id
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => <SortButton column={column} label="Id" />,
   },
   {
     accessorKey: "date",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Date
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => <SortButton column={column} label="Date" />,
   },
   {
     accessorKey: "driverName",
@@ -52,38 +30,18 @@ export const columns: ColumnDef<Delivery>[] = [
   },
   {
     accessorKey: "dropoffLocation",
-    header: "Drop Off Location",
+    header: "Dropoff Location",
+  },
+  {
+    accessorKey: "deliveryValue",
+    header: ({ column }) => <SortButton column={column} label="Delivery Value" />,
   },
   {
     accessorKey: "status",
     header: "Status",
   },
   {
-    accessorKey: "deliveryValue",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Delivery Value
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
     accessorKey: "rating",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Rating
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => <SortButton column={column} label="Rating" />,
   },
 ];
