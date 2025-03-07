@@ -7,7 +7,7 @@ import {
 import { DataTableV2 } from "@/components/ui/data-table-v2";
 import { getData } from "@/features/dashboard/driver-management/driver-profiles/DriverProfilesDataSet";
 
-export default function DriverProfiles() {
+export default function DriverProfilesPage() {
   const [data, setData] = useState<DriverProfilesColumns[]>([]);
 
   useEffect(() => {
