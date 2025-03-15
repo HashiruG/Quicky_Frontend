@@ -9,10 +9,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const LoginForm = () => {
   const [loginInput, setLoginInput] = useState({ email: "", password: "" });
   const [passwordValidity, setPasswordValidity] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setLoginInput((prevValue) => {
@@ -32,7 +36,7 @@ const LoginForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (loginInput.password.trim().length < 6) {
@@ -41,9 +45,16 @@ const LoginForm = () => {
     }
 
     try {
-      //database connection
+      const response = await axios.post("http://localhost:8080/auth/login", loginInput);
+
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.token);
+
+        navigate("/delivery-management");
+      }
     } catch (error) {
-      console.log(error);
+      setErrorMessage("Invalid credentials. Please try again.");
+      console.error(error);
     }
   };
 
@@ -90,9 +101,10 @@ const LoginForm = () => {
                 />
                 {!passwordValidity && (
                   <p className="text-red-500">
-                    Password should atleast have six characters.
+                    Password should at least have six characters.
                   </p>
                 )}
+                {errorMessage && <p className="text-red-500">{errorMessage}</p>}
               </div>
               <Button type="submit" className="w-full">
                 Login
