@@ -7,7 +7,7 @@ import {
   Package,
   BadgePercent,
   ChevronDown,
-  Dot
+  Dot,
 } from "lucide-react";
 
 import {
@@ -27,6 +27,20 @@ const items = [
     title: "Dashboard",
     url: "/dashboard",
     icon: Gauge,
+    subMenus: [
+      {
+        name: "Today best",
+        url: "/dashboard/dashboard/today-best",
+      },
+      {
+        name: "New drivers",
+        url: "/dashboard/dashboard/new-drivers",
+      },
+      {
+        name: "Inactive drivers",
+        url: "/dashboard/dashboard/inactive-drivers",
+      },
+    ],
   },
   {
     title: "Realtime Driver Statuses",
@@ -63,7 +77,7 @@ const items = [
     url: "/manage-offers",
     icon: BadgePercent,
     subMenus: [
-      { name: "View Offers", url: "/manage-offers/view"},
+      { name: "View Offers", url: "/manage-offers/view" },
       { name: "Add new Offers", url: "/manage-offers/add" },
     ],
   },
@@ -83,7 +97,7 @@ const SideBarComponent = () => {
                       <SidebarMenuButton>
                         <CollapsibleTrigger asChild>
                           <div className="flex items-center w-full">
-                            <item.icon size={20}/>
+                            <item.icon size={20} />
                             <span className="ml-2">{item.title}</span>
                             <ChevronDown className="ml-auto mr-2" />
                           </div>
@@ -110,7 +124,7 @@ const SideBarComponent = () => {
                   <SidebarMenuItem className="py-2" key={item.title}>
                     <SidebarMenuButton asChild>
                       <Link to={item.url} className="flex items-center">
-                        <item.icon size={20}/>
+                        <item.icon size={20} />
                         <span className="ml-2">{item.title}</span>
                       </Link>
                     </SidebarMenuButton>
