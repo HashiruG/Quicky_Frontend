@@ -11,6 +11,7 @@ import DeliveryRecordsPage from "./pages/DeliveryRecordsPage";
 import DriverProfilesPage from "./pages/DriverProfilesPage";
 import NewRegistrationsPage from "./pages/NewRegistrationsPage";
 import TodayBestPage from "./pages/TodayBestPage";
+import NewDriversPage from "./pages/NewDriversPage";
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
         <Route
           path="/dashboard/dashboard/today-best"
           element={<TodayBestPage />}
+        />
+        <Route
+          path="/dashboard/dashboard/new-drivers"
+          element={<NewDriversPage />}
         />
         <Route
           path="/realtime-driver-statuses"
