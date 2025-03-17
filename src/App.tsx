@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import OngoingOffersPage from "./pages/OngoingOffersPage";
-import DashboardPage from "./pages/DashboardPage";
 import DriverStatusPage from "./pages/DriverStatusPage";
 import ChurnPredictionPage from "./pages/ChurnPredictionPage";
 import AddNewOfferPage from "./pages/AddNewOfferPage";
@@ -11,13 +10,17 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import DeliveryRecordsPage from "./pages/DeliveryRecordsPage";
 import DriverProfilesPage from "./pages/DriverProfilesPage";
 import NewRegistrationsPage from "./pages/NewRegistrationsPage";
+import TodayBestPage from "./pages/TodayBestPage";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route
+          path="/dashboard/dashboard/today-best"
+          element={<TodayBestPage />}
+        />
         <Route
           path="/realtime-driver-statuses"
           element={<DriverStatusPage />}
