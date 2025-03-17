@@ -19,8 +19,18 @@ export default function NewRegistrationsPage() {
   }, []);
 
   return (
-    <Layout title="New Registarations">
-      <DataTableV2 columns={columns} data={data} filterableColumnId="email" />
-    </Layout>
+    <>
+      <Layout
+        title="New Registarations"
+        aboveChildren={null}
+        children={
+          <DataTableV2
+            columns={columns}
+            data={data}
+            filterableColumnId="email"
+          />
+        }
+      ></Layout>
+    </>
   );
 }

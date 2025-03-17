@@ -4,7 +4,7 @@ import {
   TodayBestColumns,
   columns,
 } from "@/features/dashboard/dashboard/today-best/TodayBestColumns";
-import { DataTableV2 } from "@/components/ui/data-table-v2";
+import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
 import { getData } from "@/features/dashboard/dashboard/today-best/TodayBestDataSet";
 import { TodayBestAreaChart } from "@/features/dashboard/dashboard/today-best/TodayBestAreaChart";
 
