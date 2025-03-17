@@ -3,9 +3,13 @@ import NewOfferForm from "@/features/dashboard/offer management/NewOfferForm";
 
 const AddNewofferPage = () => {
   return (
-    <Layout title="Add New Offer">
-      <NewOfferForm></NewOfferForm>
-    </Layout>
+    <>
+      <Layout
+        title="Add New Offer"
+        aboveChildren={null}
+        children={<NewOfferForm></NewOfferForm>}
+      ></Layout>
+    </>
   );
 };
 
