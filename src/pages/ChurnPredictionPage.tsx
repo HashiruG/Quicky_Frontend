@@ -5,9 +5,13 @@ import Layout from "@/features/dashboard/common/Layout";
 
 const ChurnPredictionPage = () => {
   return (
-    <Layout title="Churn Predictions">
-    <DataTableV2 columns={columns} data={data} />
-  </Layout>
+    <>
+      <Layout
+        title="Churn Predictions"
+        aboveChildren={null}
+        children={<DataTableV2 columns={columns} data={data} />}
+      ></Layout>
+    </>
   );
 };
 
