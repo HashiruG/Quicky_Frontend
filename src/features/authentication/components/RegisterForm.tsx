@@ -11,78 +11,45 @@ import { Label } from "@/components/ui/label";
 import React, { useState } from "react";
 
 const RegisterForm = () => {
-  const [registerInputs, setRegisterInputs] = useState({
-    email: "",
+  const [registerInput, setRegisterInput] = useState({
+    username: "",
     password: "",
   });
+  const [passwordValidity, setPasswordValidity] = useState(true);
+  const [emailValidity, setEmailValidity] = useState(true);
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  const [errors, setErrors] = useState({
-    email: "",
-    password: "",
-  });
+  const handleEmailChange = (e) => {
+    setRegisterInput((prevValue) => {
+      return {
+        ...prevValue,
+        username: e.target.value,
+      };
+    });
+  };
 
-  function validateEmail(email: string) {
-    const emailRegex = /^[a-z][^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
-  function validatePassword(password: string) {
-    const capitalLetterRegex = /[A-Z]/;
-    const symbolRegex = /[\W_]/;
+  const handlePasswordChange = (e) => {
+    setRegisterInput((prevValue) => {
+      return {
+        ...prevValue,
+        password: e.target.value,
+      };
+    });
+  };
 
-    if (password.length < 6) {
-      return "Password must be at least 6 characters";
-    }
-    if (!capitalLetterRegex.test(password)) {
-      return "Password must contain at least one uppercase letter";
-    }
-    if (!symbolRegex.test(password)) {
-      return "Password must contain at least one symbol";
-    }
-    return "";
-  }
-
-  function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const email = e.target.value;
-    setRegisterInputs((preRegisterInputs) => ({
-      ...preRegisterInputs,
-      email,
-    }));
-
-    if (!validateEmail(email)) {
-      setErrors((preErrors) => ({
-        ...preErrors,
-        email: "Invalid email format",
-      }));
-    } else {
-      setErrors((preErrors) => ({
-        ...preErrors,
-        email: "",
-      }));
-    }
-  }
-  function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const password = e.target.value;
-    setRegisterInputs((preRegisterInputs) => ({
-      ...preRegisterInputs,
-      password,
-    }));
-
-    const passwordError = validatePassword(password);
-    setErrors((prev) => ({ ...prev, password: passwordError }));
-  }
-
-  function handleSubmit(e: React.FormEvent) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!registerInputs.email || !registerInputs.password) {
-      alert("Please fill in all fields.");
+    if (registerInput.password.trim().length < 6) {
+      setPasswordValidity(false);
       return;
     }
-    if (errors.email || errors.password) {
-      alert("Please fix the errors before submitting.");
+
+    if (!emailRegex.test(registerInput.username)) {
+      setEmailValidity(false);
       return;
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -98,13 +65,17 @@ const RegisterForm = () => {
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
-                  type="email"
+                  type="text"
                   placeholder="Enter your email here"
                   required
-                  value={registerInputs.email}
+                  value={registerInput.username}
                   onChange={handleEmailChange}
                 />
-                {errors.email && <p className="text-red-500">{errors.email}</p>}
+                {!emailValidity && (
+                  <p className="text-red-500">
+                    Enter a valid email as the username.
+                  </p>
+                )}
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
@@ -115,17 +86,19 @@ const RegisterForm = () => {
                   type="password"
                   placeholder="Enter your password here"
                   required
-                  value={registerInputs.password}
+                  value={registerInput.password}
                   onChange={handlePasswordChange}
                 />
-                {errors.password && (
-                  <p className="text-red-500">{errors.password}</p>
+                {!passwordValidity && (
+                  <p className="text-red-500">
+                    Password should at least have six characters.
+                  </p>
                 )}
               </div>
               <Button
                 type="submit"
                 className="w-full"
-                disabled={!!errors.email || !!errors.password}
+                disabled={!registerInput.username || !registerInput.password}
               >
                 Register
               </Button>
