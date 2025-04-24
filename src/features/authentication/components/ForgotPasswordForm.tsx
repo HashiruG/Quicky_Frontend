@@ -8,14 +8,17 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { ThumbsUp } from "lucide-react";
+
 import axios from "axios";
-import { se } from "date-fns/locale";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ForgotPasswordForm = () => {
   const [userName, setUserName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [requestSuccess, setRequestSuccess] = useState(false);
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
@@ -27,14 +30,14 @@ const ForgotPasswordForm = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/auth/forgot-password",
-        userName
+        "http://localhost:8080/auth/forgot-password",{username:userName}
       );
       if (response.status === 200) {
+        setRequestSuccess(true);
         // redirect to login page
         setTimeout(() => {
-          navigate("/login");
-        }, 3000);
+          navigate("/");
+        }, 7000);
       }
     } catch (error) {
       if (error.response.status === 404) {
@@ -49,6 +52,19 @@ const ForgotPasswordForm = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-6">
+          {requestSuccess && (
+            <Alert className="py-5">
+              <ThumbsUp className="h-10 w-10" />
+              <AlertTitle className="ml-5">
+                Password reset link has been sent to your email address. Check
+                it out.
+              </AlertTitle>
+              <AlertDescription className="ml-5">
+                This page will be redirected to login page shortly.
+              </AlertDescription>
+            </Alert>
+          )}
+
           <Card>
             <CardHeader>
               <CardTitle className="text-4xl">Forgot Password</CardTitle>
