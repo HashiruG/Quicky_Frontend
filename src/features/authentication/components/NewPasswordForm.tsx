@@ -8,31 +8,52 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
+import axios from "axios";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NewPasswordForm = () => {
+  const [searchParams] = useSearchParams();
+  const [errorMessage, setErrorMessage] = useState("");
+  const token = searchParams.get("token");
+  const passwordResetRequest = { token: token, newPassword: "" };
+  const navigate = useNavigate();
+
   const [newPassword, setNewPassword] = useState({
     newPassword: "",
     newPasswordReEnter: "",
   });
+
   const [passwordValidation, setPasswordValidation] = useState({
     passwordLength: true,
     passwordMatch: true,
   });
 
   const handlePasswordChange = (e) => {
+
+    setErrorMessage("");
+
+    setPasswordValidation((prevValue) => {
+      return { ...prevValue, passwordLength: true };
+    });
+
     setNewPassword((prevValue) => {
       return { ...prevValue, newPassword: e.target.value };
     });
   };
 
   const handlePasswordReEnter = (e) => {
+    setPasswordValidation((prevValue) => {
+      return { ...prevValue, passwordMatch: true };
+    });
+
     setNewPassword((prevValue) => {
-      return { ...prevValue, newPasswordValidation: e.target.value };
+      return { ...prevValue, newPasswordReEnter: e.target.value };
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (newPassword.newPassword.trim().length < 6) {
@@ -44,12 +65,28 @@ const NewPasswordForm = () => {
     }
 
     if (newPassword.newPassword !== newPassword.newPasswordReEnter) {
-      setPasswordValidation({passwordLength:true, passwordMatch: false})
-    
+      setPasswordValidation({ passwordLength: true, passwordMatch: false });
+      console.log(newPassword);
+      
       return;
     }
 
-    //backend logic
+    passwordResetRequest.newPassword = newPassword.newPassword;
+
+    try {
+      console.log(passwordResetRequest);
+      
+      const response = await axios.post(
+        "http://localhost:8080/auth/reset-password",
+        passwordResetRequest
+      );
+      if (response.status === 200) {
+        navigate("/");
+      }
+    } catch (error) {
+      setErrorMessage("An error occurred, please try again later.");
+    }
+
   };
 
   return (
@@ -96,6 +133,9 @@ const NewPasswordForm = () => {
                 <Button type="submit" className="w-full">
                   Submit
                 </Button>
+                {errorMessage && (
+                  <p className="text-red-500 text-sm">{errorMessage}</p>
+                )}
               </div>
             </CardContent>
           </Card>
