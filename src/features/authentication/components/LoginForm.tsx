@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LoginForm = () => {
-  const [loginInput, setLoginInput] = useState({ email: "", password: "" });
+  const [loginInput, setLoginInput] = useState({ username: "", password: "" });
   const [passwordValidity, setPasswordValidity] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const LoginForm = () => {
     setLoginInput((prevValue) => {
       return {
         ...prevValue,
-        email: e.target.value,
+        username: e.target.value,
       };
     });
   };
@@ -46,11 +46,10 @@ const LoginForm = () => {
 
     try {
       const response = await axios.post("http://localhost:8080/auth/login", loginInput);
-
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
 
-        navigate("/delivery-management");
+        navigate("/dashboard/dashboard/today-best");
       }
     } catch (error) {
       setErrorMessage("Invalid credentials. Please try again.");
@@ -78,7 +77,7 @@ const LoginForm = () => {
                   placeholder="Enter your email here"
                   required
                   onChange={handleEmailChange}
-                  value={loginInput.email}
+                  value={loginInput.username}
                 />
               </div>
               <div className="grid gap-2">
