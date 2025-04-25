@@ -8,6 +8,8 @@ import {
   BadgePercent,
   ChevronDown,
   Dot,
+  UserPlus,
+  LogOut,
 } from "lucide-react";
 
 import {
@@ -18,11 +20,13 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarFooter,
 } from "@/components/ui/sidebar";
 import { Collapsible, CollapsibleTrigger } from "@radix-ui/react-collapsible";
 import { CollapsibleContent } from "@/components/ui/collapsible";
+import { useNavigate } from "react-router-dom";
 
-const items = [
+const navItems = [
   {
     title: "Dashboard",
     url: "/dashboard",
@@ -84,13 +88,15 @@ const items = [
 ];
 
 const SideBarComponent = () => {
+  const navigate = useNavigate();
+
   return (
     <Sidebar className="top-14 ">
       <SidebarContent className="bg-slate-950 text-white m-0">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) =>
+              {navItems.map((item) =>
                 item.subMenus ? (
                   <Collapsible key={item.title}>
                     <SidebarMenuItem className="py-2">
@@ -107,7 +113,7 @@ const SideBarComponent = () => {
                     <ul className="pl-6">
                       {item.subMenus.map((subMenu) => (
                         <CollapsibleContent key={subMenu.name}>
-                          <SidebarMenuButton asChild>
+                          <SidebarMenuButton>
                             <Link
                               to={subMenu.url}
                               className="flex items-center"
@@ -122,7 +128,7 @@ const SideBarComponent = () => {
                   </Collapsible>
                 ) : (
                   <SidebarMenuItem className="py-2" key={item.title}>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton>
                       <Link to={item.url} className="flex items-center">
                         <item.icon size={20} />
                         <span className="ml-2">{item.title}</span>
@@ -135,6 +141,23 @@ const SideBarComponent = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter className="bg-slate-950 text-white sm:pb-14">
+        <SidebarMenuButton>
+          <Link to="/register" className="flex items-center">
+            <UserPlus size={20} />
+            <span className="ml-2">Register</span>
+          </Link>
+        </SidebarMenuButton>
+        <SidebarMenuButton
+          onClick={() => {
+            localStorage.removeItem("token");
+            navigate("/");
+          }}
+        >
+          <LogOut size={20} />
+          <span className="ml-2">Log Out</span>
+        </SidebarMenuButton>
+      </SidebarFooter>
     </Sidebar>
   );
 };
