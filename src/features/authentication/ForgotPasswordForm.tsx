@@ -11,7 +11,7 @@ import { Label } from "@radix-ui/react-label";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ThumbsUp } from "lucide-react";
 
-import axios from "axios";
+import api from "../../api/api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -29,9 +29,9 @@ const ForgotPasswordForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:8080/auth/forgot-password",{username:userName}
-      );
+      const response = await api.post("auth/forgot-password", {
+        username: userName,
+      });
       if (response.status === 200) {
         setRequestSuccess(true);
         // redirect to login page
