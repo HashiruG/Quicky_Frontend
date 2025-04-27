@@ -1,4 +1,4 @@
-import RegisterForm from "@/features/authentication/components/RegisterForm";
+import RegisterForm from "@/features/authentication/RegisterForm";
 import { Truck } from "lucide-react";
 
 const RegisterPage = () => {
