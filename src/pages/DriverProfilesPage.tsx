@@ -24,7 +24,11 @@ export default function DriverProfilesPage() {
         title="Driver Profiles"
         aboveChildren={null}
         children={
-          <DataTableV2 columns={columns} data={data} filterableColumnId="id" />
+          <DataTableV2
+            columns={columns}
+            data={data}
+            filterableColumnId="driverId"
+          />
         }
       ></Layout>
     </>
