@@ -5,7 +5,7 @@ import {
   columns,
 } from "@/features/dashboard/driver-management/driver-profiles/DriverProfilesColumns";
 import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
-import { getData } from "@/features/dashboard/driver-management/driver-profiles/DriverProfilesDataSet";
+import { getData } from "@/features/dashboard/driver-management/driver-profiles/DriverProfilesApi";
 
 export default function DriverProfilesPage() {
   const [data, setData] = useState<DriverProfilesColumns[]>([]);
