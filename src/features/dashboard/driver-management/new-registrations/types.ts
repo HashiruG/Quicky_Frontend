@@ -3,7 +3,6 @@ export type NewRegistrationsColumns = {
     name: string;
     email: string;
     dateOfBirth: string;
-    registrationDate: string;
     address: string;
     mobileNumber: string;
   };

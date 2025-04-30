@@ -75,9 +75,6 @@ const MoreDriverRegistrationDetails: React.FC<
               <strong>Date of birth:</strong> {data.dateOfBirth}
             </p>
             <p>
-              <strong>Registration Date:</strong> {data.registrationDate}
-            </p>
-            <p>
               <strong>Address:</strong> {data.address}
             </p>
             <p>
