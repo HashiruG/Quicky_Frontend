@@ -34,28 +34,10 @@ const MoreDriverRegistrationDetails: React.FC<
     try {
       if (actionType === "accept") {
         await acceptDriver(data.serialNumber, data);
-        toast.success("Driver accepted", {
-          action: {
-            label: "Undo",
-            onClick: () => {
-              console.log("Undo Accept:", data);
-              toast("Acceptance undone");
-              // You can call a delete API here if needed
-            },
-          },
-        });
+        toast.success("Driver accepted", {});
         console.log("Accepted:", data);
       } else if (actionType === "reject") {
-        toast.error("Driver rejected", {
-          action: {
-            label: "Undo",
-            onClick: () => {
-              console.log("Undo Reject:", data);
-              toast("Rejection undone");
-              // Optionally: implement undo rejection logic
-            },
-          },
-        });
+        toast.error("Driver rejected", {});
         console.log("Rejected:", data);
       }
 
