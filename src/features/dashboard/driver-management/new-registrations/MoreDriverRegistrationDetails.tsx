@@ -12,7 +12,7 @@ import {
 import ConfirmActionDialog from "./ConfirmActionDialog";
 import { toast } from "sonner";
 import { NewRegistrationsColumns } from "./types";
-import { acceptDriver } from "./NewRegistrationsApi";
+import { acceptDriver, rejectDriver } from "./NewRegistrationsApi";
 
 type MoreDriverRegistrationDetailsProps = {
   data: NewRegistrationsColumns;
@@ -37,6 +37,7 @@ const MoreDriverRegistrationDetails: React.FC<
         toast.success("Driver accepted", {});
         console.log("Accepted:", data);
       } else if (actionType === "reject") {
+        await rejectDriver(data.serialNumber);
         toast.error("Driver rejected", {});
         console.log("Rejected:", data);
       }
