@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import SortButton from "../../common/SortButton";
 
 export type NewDriversColumns = {
-  id: string;
+  driverId: string;
   name: string;
   email: string;
   rating: number;
@@ -11,8 +11,8 @@ export type NewDriversColumns = {
 
 export const columns: ColumnDef<NewDriversColumns>[] = [
   {
-    accessorKey: "id",
-    header: ({ column }) => <SortButton column={column} label="Id" />,
+    accessorKey: "driverId",
+    header: ({ column }) => <SortButton column={column} label="driverId" />,
   },
   {
     accessorKey: "name",
