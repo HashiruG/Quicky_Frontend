@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../api/api"
+import { loginService } from "@/services/authentication/api";
 
 const LoginForm = () => {
   const [loginInput, setLoginInput] = useState({ username: "", password: "" });
@@ -45,15 +45,11 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await api.post("/auth/login", loginInput);
-      if (response.status === 200) {
-        localStorage.setItem("token", response.data.token);
-
-        navigate("/dashboard/dashboard/today-best");
-      }
+      const response = await loginService(loginInput);
+      localStorage.setItem("token", response.data.token);
+      navigate("/dashboard/dashboard/today-best");
     } catch (error) {
-      setErrorMessage("Invalid credentials. Please try again.");
-      console.error(error);
+      setErrorMessage(error.message);
     }
   };
 

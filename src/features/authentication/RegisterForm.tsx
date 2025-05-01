@@ -8,9 +8,10 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import api from "../../api/api";
+import { registerService } from "../../services/authentication/api";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import { log } from "console";
 
 const RegisterForm = () => {
   const [registerInput, setRegisterInput] = useState({
@@ -59,16 +60,10 @@ const RegisterForm = () => {
     }
 
     try {
-      const response = await api.post("/auth/register", registerInput);
-      if (response.status === 201) {
-        navigate("/");
-      }
+      await registerService(registerInput);
+      navigate("/");
     } catch (error) {
-      if (error.response.status === 409) {
-        setErrorMessage("Email already exists. Please try another one.");
-      } else {
-        setErrorMessage("An error occurred. Please try again.");
-      }
+      setErrorMessage(error.message);
     }
   };
 

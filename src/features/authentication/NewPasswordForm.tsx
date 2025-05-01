@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
-import api from "../../api/api";
+import {passwordResetService} from "../../services/authentication/api";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -73,14 +73,10 @@ const NewPasswordForm = () => {
     passwordResetRequest.newPassword = newPassword.newPassword;
 
     try {
-      console.log(passwordResetRequest);
-
-      const response = await api.post("auth/reset-password",passwordResetRequest);
-      if (response.status === 200) {
-        navigate("/");
-      }
+      await passwordResetService(passwordResetRequest);
+      navigate("/");
     } catch (error) {
-      setErrorMessage("An error occurred, please try again later.");
+      setErrorMessage(error.message);
     }
   };
 
