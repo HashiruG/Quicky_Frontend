@@ -1,12 +1,17 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "@/components/ui/button";
 import SortButton from "../../common/SortButton";
+import React from "react";
+import MoreDriverDetails from "./MoreDriverDetails";
 
 export type DriverProfilesColumns = {
   driverId: string;
   name: string;
   email: string;
   rating: number;
+  dateOfBirth: string;
+  registrationDate: string;
+  address: string;
+  mobileNumber: string;
 };
 
 export const columns: ColumnDef<DriverProfilesColumns>[] = [
@@ -29,12 +34,11 @@ export const columns: ColumnDef<DriverProfilesColumns>[] = [
 
   {
     id: "actions",
-    cell: () => {
-      return (
-        <Button variant="ghost" className="h-8 w-12 p-0">
-          <span>View</span>
-        </Button>
-      );
+    cell: ({ row }) => {
+      const [open, setOpen] = React.useState(false);
+      const data = row.original;
+
+      return <MoreDriverDetails data={data} open={open} setOpen={setOpen} />;
     },
   },
 ];

@@ -1,11 +1,9 @@
 import Layout from "@/features/dashboard/common/Layout";
 import { useEffect, useState } from "react";
-import {
-  NewRegistrationsColumns,
-  columns,
-} from "@/features/dashboard/driver-management/new-registrations/NewRegistrationsColumns";
+import { columns } from "@/features/dashboard/driver-management/new-registrations/NewRegistrationsColumns";
 import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
-import { getData } from "@/features/dashboard/driver-management/new-registrations/NewRegistrationsDataSet";
+import { NewRegistrationsColumns } from "@/features/dashboard/driver-management/new-registrations/types";
+import { getData } from "@/features/dashboard/driver-management/new-registrations/NewRegistrationsApi";
 
 export default function NewRegistrationsPage() {
   const [data, setData] = useState<NewRegistrationsColumns[]>([]);
