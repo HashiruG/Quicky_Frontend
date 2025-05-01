@@ -1,12 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "@/components/ui/button";
 import SortButton from "../../common/SortButton";
-
-export type NewRegistrationsColumns = {
-  serialNumber: string;
-  name: string;
-  email: string;
-};
+import React from "react";
+import { NewRegistrationsColumns } from "./types";
+import MoreDriverRegistrationDetails from "./MoreDriverRegistrationDetails";
 
 export const columns: ColumnDef<NewRegistrationsColumns>[] = [
   {
@@ -23,14 +19,18 @@ export const columns: ColumnDef<NewRegistrationsColumns>[] = [
     accessorKey: "email",
     header: "Email",
   },
-
   {
     id: "actions",
-    cell: () => {
+    cell: ({ row }) => {
+      const [open, setOpen] = React.useState(false);
+      const data = row.original;
+
       return (
-        <Button variant="ghost" className="h-8 w-12 p-0">
-          <span>View</span>
-        </Button>
+        <MoreDriverRegistrationDetails
+          data={data}
+          open={open}
+          setOpen={setOpen}
+        />
       );
     },
   },
