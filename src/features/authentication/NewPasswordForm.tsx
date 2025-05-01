@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
-import axios from "axios";
+import api from "../../api/api";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -31,7 +31,6 @@ const NewPasswordForm = () => {
   });
 
   const handlePasswordChange = (e) => {
-
     setErrorMessage("");
 
     setPasswordValidation((prevValue) => {
@@ -67,7 +66,7 @@ const NewPasswordForm = () => {
     if (newPassword.newPassword !== newPassword.newPasswordReEnter) {
       setPasswordValidation({ passwordLength: true, passwordMatch: false });
       console.log(newPassword);
-      
+
       return;
     }
 
@@ -75,18 +74,14 @@ const NewPasswordForm = () => {
 
     try {
       console.log(passwordResetRequest);
-      
-      const response = await axios.post(
-        "http://localhost:8080/auth/reset-password",
-        passwordResetRequest
-      );
+
+      const response = await api.post("auth/reset-password",passwordResetRequest);
       if (response.status === 200) {
         navigate("/");
       }
     } catch (error) {
       setErrorMessage("An error occurred, please try again later.");
     }
-
   };
 
   return (

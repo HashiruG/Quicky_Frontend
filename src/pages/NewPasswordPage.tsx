@@ -1,4 +1,4 @@
-import NewPasswordForm from "@/features/authentication/components/NewPasswordForm";
+import NewPasswordForm from "@/features/authentication/NewPasswordForm";
 import { Truck } from "lucide-react";
 
 const NewPasswordPage = () => {

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import axios from "axios";
+import api from "../../api/api";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
@@ -59,20 +59,14 @@ const RegisterForm = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/auth/register",
-        registerInput
-      );
-      console.log(response);
-
+      const response = await api.post("/auth/register", registerInput);
       if (response.status === 201) {
         navigate("/");
       }
     } catch (error) {
       if (error.response.status === 409) {
         setErrorMessage("Email already exists. Please try another one.");
-      }
-      else{
+      } else {
         setErrorMessage("An error occurred. Please try again.");
       }
     }
@@ -129,7 +123,9 @@ const RegisterForm = () => {
               >
                 Register
               </Button>
-              {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
+              {errorMessage && (
+                <p className="text-red-500 text-sm">{errorMessage}</p>
+              )}
             </div>
           </CardContent>
         </Card>

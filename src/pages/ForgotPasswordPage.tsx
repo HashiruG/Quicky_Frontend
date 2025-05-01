@@ -1,4 +1,4 @@
-import ForgotPasswordForm from "@/features/authentication/components/ForgotPasswordForm";
+import ForgotPasswordForm from "@/features/authentication/ForgotPasswordForm";
 import { Truck } from "lucide-react";
 
 const ForgotPasswordPage = () => {
