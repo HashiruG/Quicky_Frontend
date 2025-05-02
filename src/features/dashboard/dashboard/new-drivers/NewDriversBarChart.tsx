@@ -8,7 +8,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import chartData from "./NewDriversBarChartDataSet";
+import { chartData, NewDriversData } from "./NewDriversApi";
 
 const chartConfig = {
   drivers: {
@@ -18,33 +18,43 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function NewDriversBarChart() {
+  const [rawData, setRawData] = React.useState<NewDriversData[]>([]);
   const [activeChart, setActiveChart] = React.useState<"daily" | "monthly">(
     "daily"
   );
 
+  React.useEffect(() => {
+    chartData().then(setRawData);
+  }, []);
+
   const monthlyData = React.useMemo(() => {
     const monthlyMap = new Map();
-    chartData.forEach(({ date, drivers }) => {
+    rawData.forEach(({ date, drivers }) => {
+      if (!date) return;
       const month = date.slice(0, 7);
       monthlyMap.set(month, (monthlyMap.get(month) || 0) + drivers);
     });
     return Array.from(monthlyMap, ([date, drivers]) => ({ date, drivers }));
-  }, []);
+  }, [rawData]);
 
-  const dataToShow = activeChart === "daily" ? chartData : monthlyData;
+  const dataToShow = activeChart === "daily" ? rawData : monthlyData;
 
   const total = React.useMemo(
     () => dataToShow.reduce((acc, curr) => acc + curr.drivers, 0),
     [dataToShow]
   );
 
-  const latestMonth = chartData
-    .map(({ date }) => date.slice(0, 7))
+  const latestMonth = rawData
+    .map(({ date }) => (typeof date === "string" ? date.slice(0, 7) : null))
+    .filter((month): month is string => !!month)
     .sort()
     .pop();
 
-  const latestMonthDriversCount = chartData
-    .filter(({ date }) => date.startsWith(latestMonth || ""))
+  const latestMonthDriversCount = rawData
+    .filter(
+      ({ date }) =>
+        typeof date === "string" && latestMonth && date.startsWith(latestMonth)
+    )
     .reduce((acc, { drivers }) => acc + drivers, 0);
 
   return (

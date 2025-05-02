@@ -25,7 +25,11 @@ export default function NewDriversPagePage() {
         title="New Drivers"
         aboveChildren={<NewDriversBarChart></NewDriversBarChart>}
         children={
-          <DataTableV2 columns={columns} data={data} filterableColumnId="id" />
+          <DataTableV2
+            columns={columns}
+            data={data}
+            filterableColumnId="driverId"
+          />
         }
       ></Layout>
     </>
