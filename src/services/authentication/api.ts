@@ -1,6 +1,6 @@
 import api from "../../api/api";
 
-export const loginService = async (loginInput) => {
+export const loginService = async (loginInput: { username: string; password: string; }) => {
   try {
     const response = await api.post("/auth/login", loginInput);
     return response;
@@ -9,7 +9,7 @@ export const loginService = async (loginInput) => {
   }
 };
 
-export const registerService = async (registerInput) => {
+export const registerService = async (registerInput: { username: string; password: string; }) => {
   try {
     const response = await api.post("/auth/register", registerInput);
     return response;
@@ -22,7 +22,7 @@ export const registerService = async (registerInput) => {
   }
 };
 
-export const passwordResetService = async (passwordResetRequest) => {
+export const passwordResetService = async (passwordResetRequest: { token: string | null; newPassword: string; }) => {
   try {
     const response = await api.post(
       "/auth/reset-password",
@@ -34,7 +34,7 @@ export const passwordResetService = async (passwordResetRequest) => {
   }
 };
 
-export const forgotPasswordService = async (forgotPasswordRequest) => {
+export const forgotPasswordService = async (forgotPasswordRequest: { username: string; }) => {
   try {
     const response = await api.post(
       "/auth/forgot-password",

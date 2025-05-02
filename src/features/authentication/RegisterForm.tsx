@@ -11,7 +11,6 @@ import { Label } from "@/components/ui/label";
 import { registerService } from "../../services/authentication/api";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import { log } from "console";
 
 const RegisterForm = () => {
   const [registerInput, setRegisterInput] = useState({
@@ -24,7 +23,7 @@ const RegisterForm = () => {
   const navigate = useNavigate();
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  const handleEmailChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailValidity(true);
     setErrorMessage("");
     setRegisterInput((prevValue) => {
@@ -35,7 +34,7 @@ const RegisterForm = () => {
     });
   };
 
-  const handlePasswordChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordValidity(true);
     setErrorMessage("");
     setRegisterInput((prevValue) => {
@@ -46,7 +45,7 @@ const RegisterForm = () => {
     });
   };
 
-  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (registerInput.password.trim().length < 6) {
