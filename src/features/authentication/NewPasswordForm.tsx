@@ -30,7 +30,7 @@ const NewPasswordForm = () => {
     passwordMatch: true,
   });
 
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     setErrorMessage("");
 
     setPasswordValidation((prevValue) => {
@@ -42,7 +42,7 @@ const NewPasswordForm = () => {
     });
   };
 
-  const handlePasswordReEnter = (e) => {
+  const handlePasswordReEnter = (e:React.ChangeEvent<HTMLInputElement>) => {
     setPasswordValidation((prevValue) => {
       return { ...prevValue, passwordMatch: true };
     });
@@ -52,7 +52,7 @@ const NewPasswordForm = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (newPassword.newPassword.trim().length < 6) {

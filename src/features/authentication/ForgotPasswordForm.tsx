@@ -21,12 +21,12 @@ const ForgotPasswordForm = () => {
   const [requestSuccess, setRequestSuccess] = useState(false);
   const navigate = useNavigate();
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setErrorMessage("");
     setUserName(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await forgotPasswordService({ username: userName });
@@ -38,7 +38,7 @@ const ForgotPasswordForm = () => {
       if (error.response.status === 404) {
         setErrorMessage("No user found with the given username.");
       } else {
-        setErrorMessage("An errored, please try again later.");
+        setErrorMessage("An error occured, please try again later.");
       }
     }
   };
