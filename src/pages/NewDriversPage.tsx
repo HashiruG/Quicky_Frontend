@@ -5,7 +5,7 @@ import {
   columns,
 } from "@/features/dashboard/dashboard/new-drivers/NewDriversColumns";
 import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
-import { getData } from "@/features/dashboard/dashboard/new-drivers/NewDriversDataSet";
+import { getData } from "@/features/dashboard/dashboard/new-drivers/NewDriversApi";
 import { NewDriversBarChart } from "@/features/dashboard/dashboard/new-drivers/NewDriversBarChart";
 
 export default function NewDriversPagePage() {
