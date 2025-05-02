@@ -34,7 +34,15 @@ export const columns: ColumnDef<NewDriversColumns>[] = [
       const [open, setOpen] = React.useState(false);
       const data = row.original;
 
-      return <MoreDriverDetails data={data} open={open} setOpen={setOpen} />;
+      return (
+        <MoreDriverDetails
+          data={data}
+          open={open}
+          setOpen={setOpen}
+          description1={""}
+          dataName={undefined}
+        />
+      );
     },
   },
 ];

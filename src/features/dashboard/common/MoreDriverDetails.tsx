@@ -25,12 +25,16 @@ type MoreDriverDetailsProps = {
   data: DriverData;
   open: boolean;
   setOpen: (open: boolean) => void;
+  description1: String;
+  dataName?: keyof DriverData;
 };
 
 const MoreDriverDetails: React.FC<MoreDriverDetailsProps> = ({
   data,
   open,
   setOpen,
+  description1,
+  dataName,
 }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -71,6 +75,11 @@ const MoreDriverDetails: React.FC<MoreDriverDetailsProps> = ({
           <p>
             <strong>Mobile Number:</strong> {data.mobileNumber}
           </p>
+          {dataName && (
+            <p>
+              <strong>{description1}</strong> {data[dataName]}
+            </p>
+          )}
         </div>
         <DialogFooter className="p-0">
           <Button onClick={() => setOpen(false)}>Close</Button>
