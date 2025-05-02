@@ -6,12 +6,13 @@ export type TodayBestColumns = {
   id: string;
   name: string;
   email: string;
+  earningToday: number;
 };
 
 export const columns: ColumnDef<TodayBestColumns>[] = [
   {
-    accessorKey: "id",
-    header: ({ column }) => <SortButton column={column} label="Id" />,
+    accessorKey: "driverId",
+    header: ({ column }) => <SortButton column={column} label="driverId" />,
   },
   {
     accessorKey: "name",
@@ -20,6 +21,10 @@ export const columns: ColumnDef<TodayBestColumns>[] = [
   {
     accessorKey: "email",
     header: "Email",
+  },
+  {
+    accessorKey: "earningToday",
+    header: ({ column }) => <SortButton column={column} label="earning" />,
   },
 
   {

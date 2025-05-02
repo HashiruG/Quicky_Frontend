@@ -25,7 +25,11 @@ export default function NewRegistrationsPage() {
         title="Today best"
         aboveChildren={<TodayBestAreaChart></TodayBestAreaChart>}
         children={
-          <DataTableV2 columns={columns} data={data} filterableColumnId="id" />
+          <DataTableV2
+            columns={columns}
+            data={data}
+            filterableColumnId="driverId"
+          />
         }
       ></Layout>
     </>
