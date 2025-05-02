@@ -19,6 +19,7 @@ type DriverData = {
   registrationDate?: string;
   address?: string;
   mobileNumber?: string;
+  earningToday?: number;
 };
 
 type MoreDriverDetailsProps = {
