@@ -1,17 +1,19 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "@/components/ui/button";
 import SortButton from "../../common/SortButton";
+import React from "react";
+import MoreDriverDetails from "../../common/MoreDriverDetails";
 
 export type TodayBestColumns = {
   id: string;
   name: string;
   email: string;
+  earningToday: number;
 };
 
 export const columns: ColumnDef<TodayBestColumns>[] = [
   {
-    accessorKey: "id",
-    header: ({ column }) => <SortButton column={column} label="Id" />,
+    accessorKey: "driverId",
+    header: ({ column }) => <SortButton column={column} label="driverId" />,
   },
   {
     accessorKey: "name",
@@ -21,14 +23,25 @@ export const columns: ColumnDef<TodayBestColumns>[] = [
     accessorKey: "email",
     header: "Email",
   },
+  {
+    accessorKey: "earningToday",
+    header: ({ column }) => <SortButton column={column} label="earning" />,
+  },
 
   {
     id: "actions",
-    cell: () => {
+    cell: ({ row }) => {
+      const [open, setOpen] = React.useState(false);
+      const data = row.original;
+
       return (
-        <Button variant="ghost" className="h-8 w-12 p-0">
-          <span>View</span>
-        </Button>
+        <MoreDriverDetails
+          data={data}
+          open={open}
+          setOpen={setOpen}
+          description1={"Today Earnings:"}
+          dataName={"earningToday"}
+        />
       );
     },
   },
