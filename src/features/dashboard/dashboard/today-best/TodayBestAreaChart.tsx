@@ -17,10 +17,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import chartData, {
-  totalTodayIncome,
-} from "@/features/dashboard/dashboard/today-best/TodayBestAreaChartDataSet";
 import AmountFormatter from "../../common/AmountFormatter";
+import { chartData, DriversEarningsData } from "./EarningsApi";
 
 const chartConfig = {
   drivers: {
@@ -33,11 +31,16 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function TodayBestAreaChart() {
+  const [rawData, setRawData] = React.useState<DriversEarningsData[]>([]);
   const [timeRange, setTimeRange] = React.useState("90d");
 
-  const filteredData = chartData.filter((item) => {
+  React.useEffect(() => {
+    chartData().then(setRawData);
+  }, []);
+
+  const filteredData = rawData.filter((item) => {
     const date = new Date(item.date);
-    const referenceDate = new Date("2024-06-30");
+    const referenceDate = new Date();
     let daysToSubtract = 90;
     if (timeRange === "30d") {
       daysToSubtract = 30;
@@ -49,12 +52,16 @@ export function TodayBestAreaChart() {
     return date >= startDate;
   });
 
+  const today = new Date().toISOString().split("T")[0]; // "YYYY-MM-DD"
+  const todayData = filteredData.find((item) => item.date === today);
+  const todayAmount = todayData?.amount || 0;
+
   return (
     <Card>
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1 text-center sm:text-left">
           <CardTitle>
-            <AmountFormatter amount={totalTodayIncome}></AmountFormatter>
+            <AmountFormatter amount={todayAmount}></AmountFormatter>
           </CardTitle>
         </div>
 
@@ -128,7 +135,7 @@ export function TodayBestAreaChart() {
             />
 
             <Area
-              dataKey="income"
+              dataKey="amount"
               type="natural"
               fill="url(#fillIncome)"
               stroke="var(--color-income)"
