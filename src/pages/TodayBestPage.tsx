@@ -5,7 +5,7 @@ import {
   columns,
 } from "@/features/dashboard/dashboard/today-best/TodayBestColumns";
 import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
-import { getData } from "@/features/dashboard/dashboard/today-best/TodayBestDataSet";
+import { getData } from "@/features/dashboard/dashboard/today-best/EarningsApi";
 import { TodayBestAreaChart } from "@/features/dashboard/dashboard/today-best/TodayBestAreaChart";
 
 export default function NewRegistrationsPage() {
