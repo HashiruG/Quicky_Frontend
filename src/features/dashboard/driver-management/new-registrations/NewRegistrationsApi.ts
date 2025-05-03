@@ -12,6 +12,8 @@ export async function acceptDriver(serialNumber: string, driver: NewRegistration
       `http://localhost:8080/new-registrations/reject-driver/${serialNumber}`
     );
 
+    window.location.reload();
+
     return { response1: response1.data, response2: response2.data };
   } catch (error) {
     console.error("Failed to accept driver", error);
@@ -24,6 +26,8 @@ export async function rejectDriver(serialNumber: string) {
     const response = await axios.delete(
       `http://localhost:8080/new-registrations/reject-driver/${serialNumber}`
     );
+
+    window.location.reload();
 
     return response.data;
   } catch (error) {
