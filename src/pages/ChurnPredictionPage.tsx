@@ -1,4 +1,4 @@
-import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
+import { ChurnPredictionTable } from "@/features/dashboard/churn prediction/ChurnPredictionTable";
 import {
   columns,
   ChurnPredictionColumns,
@@ -8,7 +8,7 @@ import { churnPredictionService } from "@/services/churnPrediction/api";
 import { useEffect, useState } from "react";
 
 const ChurnPredictionPage = () => {
-  const [data, setData] = useState<ChurnPredictionColumns>([]);
+  const [data, setData] = useState<ChurnPredictionColumns[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -28,7 +28,7 @@ const ChurnPredictionPage = () => {
       <Layout
         title="Churn Predictions"
         aboveChildren={null}
-        children={<DataTableV2 columns={columns} data={data} />}
+        children={<ChurnPredictionTable columns={columns} data={data} />}
       ></Layout>
     </>
   );
