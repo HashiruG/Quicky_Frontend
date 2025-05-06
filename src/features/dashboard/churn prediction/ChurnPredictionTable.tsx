@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/table";
 
 import { DataTablePagination } from "../../../components/ui/pagination";
-
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 interface DataTableProps<TData, TValue> {
@@ -34,6 +34,8 @@ export function ChurnPredictionTable<TData, TValue>({
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [rowSelection, setRowSelection] = React.useState({});
   const [selectedIds, setSelectedIds] = React.useState<string[]>([]);
+
+  const navigate = useNavigate();
 
   const table = useReactTable({
     data,
@@ -61,7 +63,7 @@ export function ChurnPredictionTable<TData, TValue>({
   return (
     <div className="w-full flex flex-col">
       <div className="flex justify-end pt-2 pb-4">
-        {selectedIds.length > 0 && <Button>Add Custom Offer</Button>}
+        {selectedIds.length > 0 && <Button onClick={() => { navigate("/manage-offers/add", { state: { selectedIds } })}}>Add Custom Offer</Button>}
       </div>
       <div className="rounded-md border w-full">
         <Table>
