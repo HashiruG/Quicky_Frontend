@@ -4,7 +4,7 @@ import {
   ChurnPredictionColumns,
 } from "@/features/dashboard/churn prediction/ChurnPredictionColumns";
 import Layout from "@/features/dashboard/common/Layout";
-import { churnPredictionService } from "@/services/churnPrediction/api";
+import { fetchChurnDriverService } from "@/services/churnPrediction/api";
 import { useEffect, useState } from "react";
 
 const ChurnPredictionPage = () => {
@@ -13,7 +13,7 @@ const ChurnPredictionPage = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await churnPredictionService();
+        const response = await fetchChurnDriverService();
         setData(response.data);
         console.log("Response data:", response.data);
       } catch (error) {
