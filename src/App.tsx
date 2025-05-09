@@ -15,6 +15,7 @@ import NewDriversPage from "./pages/NewDriversPage";
 import InactiveDriversPage from "./pages/InactiveDriversPage";
 import { AuthProvider } from "./features/authentication/AuthProvider";
 import ProtectedRoute from "./features/authentication/ProtectedRoute";
+import PayoutRequestPage from "./pages/PayoutRequestPage";
 
 function App() {
   return (
@@ -56,13 +57,13 @@ function App() {
             <Route path="/manage-offers/add" element={<AddNewOfferPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/reset-password" element={<NewPasswordPage />} />
+            <Route path="/payout-requests" element={<PayoutRequestPage />} />
           </Route>
 
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         </Routes>
       </AuthProvider>
     </Router>
-
   );
 }
 
