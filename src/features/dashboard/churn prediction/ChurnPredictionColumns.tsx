@@ -3,17 +3,16 @@ import { Checkbox } from "@/components/ui/checkbox"
 import SortButton from "../common/SortButton";
 
 
-export type ChurnPrediction = {
-  id: string;
+export type ChurnPredictionColumns = {
   driverId: string;
-  driverName: string;
-  driverMobile: string;
-  earnings: number;
-  status:string;
-
+  name: string;
+  rating: number;
+  mobileNumber: string;
+  registrationDate: string;
+  totalEarnings: number;
 };
 
-export const columns: ColumnDef<ChurnPrediction>[] = [
+export const columns: ColumnDef<ChurnPredictionColumns>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -33,28 +32,29 @@ export const columns: ColumnDef<ChurnPrediction>[] = [
         aria-label="Select row"
       />
     ),},
-  {
-    accessorKey: "id",
-    header: "Prediction Id",
-  },
+
   {
     accessorKey: "driverId",
     header: "Driver Id",
   },
   {
-    accessorKey: "driverName",
+    accessorKey: "name",
     header: "Driver Name",
   },
   {
-    accessorKey: "driverMobile",
+    accessorKey: "rating",
+    header: "Driver Rating",
+  },
+  {
+    accessorKey: "mobileNumber",
     header: "Driver Mobile",
   },
   {
-    accessorKey: "earnings",
+    accessorKey: "registrationDate",
+    header: "Registration Date",
+  },
+  {
+    accessorKey: "totalEarnings",
     header: ({ column }) => <SortButton column={column} label="Earnings" />,
     },
-  {
-    accessorKey: "status",
-    header: "Status",
-  },
 ];

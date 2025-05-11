@@ -1,0 +1,16 @@
+import api from "../../api/api";
+
+export const acceptPayoutService = async (payoutId: number) => {
+    const response = await api.post(`/payout-accept/${payoutId}`);
+    return response;
+}
+
+export const rejectPayoutService = async (payoutId: number) => {
+    const response = await api.post(`/payout-reject/${payoutId}`);
+    return response;
+}
+
+export const getPayoutsService = async () => {
+    const response = await api.get("/payouts-requests");
+    return response;
+}

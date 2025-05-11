@@ -10,6 +10,7 @@ import {
   Dot,
   UserPlus,
   LogOut,
+  DollarSign
 } from "lucide-react";
 
 import {
@@ -85,6 +86,11 @@ const navItems = [
       { name: "Add new Offers", url: "/manage-offers/add" },
     ],
   },
+  {
+    title: "Payout Requests",
+    url: "/payout-requests",
+    icon: DollarSign,
+  }
 ];
 
 const SideBarComponent = () => {
