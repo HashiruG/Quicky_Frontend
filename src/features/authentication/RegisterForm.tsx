@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import api from "../../api/api";
+import { registerService } from "../../services/authentication/api";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
@@ -23,7 +23,7 @@ const RegisterForm = () => {
   const navigate = useNavigate();
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailValidity(true);
     setErrorMessage("");
     setRegisterInput((prevValue) => {
@@ -34,7 +34,7 @@ const RegisterForm = () => {
     });
   };
 
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordValidity(true);
     setErrorMessage("");
     setRegisterInput((prevValue) => {
@@ -45,7 +45,7 @@ const RegisterForm = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (registerInput.password.trim().length < 6) {
@@ -59,16 +59,10 @@ const RegisterForm = () => {
     }
 
     try {
-      const response = await api.post("/auth/register", registerInput);
-      if (response.status === 201) {
-        navigate("/");
-      }
+      await registerService(registerInput);
+      navigate("/");
     } catch (error) {
-      if (error.response.status === 409) {
-        setErrorMessage("Email already exists. Please try another one.");
-      } else {
-        setErrorMessage("An error occurred. Please try again.");
-      }
+      setErrorMessage(error.message);
     }
   };
 

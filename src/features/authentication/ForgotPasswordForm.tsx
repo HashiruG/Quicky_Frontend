@@ -11,7 +11,7 @@ import { Label } from "@radix-ui/react-label";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ThumbsUp } from "lucide-react";
 
-import api from "../../api/api";
+import { forgotPasswordService } from "@/services/authentication/api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -21,29 +21,24 @@ const ForgotPasswordForm = () => {
   const [requestSuccess, setRequestSuccess] = useState(false);
   const navigate = useNavigate();
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setErrorMessage("");
     setUserName(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await api.post("auth/forgot-password", {
-        username: userName,
-      });
-      if (response.status === 200) {
-        setRequestSuccess(true);
-        // redirect to login page
-        setTimeout(() => {
-          navigate("/");
-        }, 7000);
-      }
+      await forgotPasswordService({ username: userName });
+      setRequestSuccess(true);
+      setTimeout(() => {
+        navigate("/");
+      }, 7000);
     } catch (error) {
       if (error.response.status === 404) {
         setErrorMessage("No user found with the given username.");
       } else {
-        setErrorMessage("An errored, please try again later.");
+        setErrorMessage("An error occured, please try again later.");
       }
     }
   };
