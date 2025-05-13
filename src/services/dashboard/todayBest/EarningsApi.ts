@@ -1,4 +1,3 @@
-import axios from "axios";
 import { TodayBestColumns } from "../../../features/dashboard/dashboard/today-best/TodayBestColumns";
 import api from "@/api/api";
 
@@ -20,7 +19,7 @@ export type DriversEarningsData = {
 
 export async function chartData(): Promise<DriversEarningsData[]> {
   try {
-    const response = await axios.get("http://localhost:8080/earnings");
+    const response = await api.get("/earnings");
 
     return response.data.map((item: any) => ({
       date: item.earningDate,
