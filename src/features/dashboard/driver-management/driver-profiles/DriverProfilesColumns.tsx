@@ -4,24 +4,44 @@ import React from "react";
 import MoreDriverDetails from "../../common/MoreDriverDetails";
 
 export type DriverProfilesColumns = {
-  driverId: string;
-  name: string;
-  email: string;
-  rating: number;
+  userDetailsId: number;
+  firstName: string;
+  lastName: string;
   dateOfBirth: string;
-  registrationDate: string;
-  address: string;
+  gender: string;
+  homeNo: string;
+  streetName: string;
+  city: string;
+  district: string;
+  licenseNumber: string;
+  licenseFrontURL: string;
+  licenseBackURL: string;
+  email: string;
   mobileNumber: string;
+
+  registrationDate: string;
+  availability: boolean;
+  stripeId: string;
+  walletBalance: number;
+  rating: number;
 };
 
 export const columns: ColumnDef<DriverProfilesColumns>[] = [
   {
-    accessorKey: "driverId",
-    header: ({ column }) => <SortButton column={column} label="driverId" />,
+    accessorKey: "Driver-Id",
+    header: ({ column }) => <SortButton column={column} label="Driver-Id" />,
+    cell: (info) => {
+      const row = info.row.original;
+      return `${row.userDetailsId}`;
+    },
   },
   {
-    accessorKey: "name",
     header: "Name",
+    accessorKey: "Name",
+    cell: (info) => {
+      const row = info.row.original;
+      return `${row.firstName} ${row.lastName}`;
+    },
   },
   {
     accessorKey: "email",
