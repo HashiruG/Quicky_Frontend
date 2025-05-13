@@ -12,7 +12,10 @@ import {
 import ConfirmActionDialog from "./ConfirmActionDialog";
 import { toast } from "sonner";
 import { NewRegistrationsColumns } from "./types";
-import { acceptDriver, rejectDriver } from "./NewRegistrationsApi";
+import {
+  acceptDriver,
+  rejectDriver,
+} from "../../../../services/newRegistrations/NewRegistrationsApi";
 
 type MoreDriverRegistrationDetailsProps = {
   data: NewRegistrationsColumns;
