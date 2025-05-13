@@ -8,7 +8,10 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { chartData, NewDriversData } from "./NewDriversApi";
+import {
+  chartData,
+  NewDriversData,
+} from "../../../../services/dashboard/newDrivers/NewDriversApi";
 
 const chartConfig = {
   drivers: {
