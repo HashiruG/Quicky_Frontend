@@ -1,5 +1,5 @@
+import api from "@/api/api";
 import { NewRegistrationsColumns } from "@/features/dashboard/driver-management/new-registrations/types";
-import api from "../../api/api";
 
 export async function acceptDriver(userDetailsId: number, driver: NewRegistrationsColumns) {
   try {

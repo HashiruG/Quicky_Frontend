@@ -1,5 +1,5 @@
-import { DriverProfilesColumns } from "../../features/dashboard/driver-management/driver-profiles/DriverProfilesColumns";
 import api from "@/api/api";
+import { DriverProfilesColumns } from "@/features/dashboard/driver-management/driver-profiles/DriverProfilesColumns";
 
 export async function getData(): Promise<DriverProfilesColumns[]> {
   try {
