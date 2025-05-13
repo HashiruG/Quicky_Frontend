@@ -18,7 +18,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import AmountFormatter from "../../common/AmountFormatter";
-import { chartData, DriversEarningsData } from "./EarningsApi";
+import {
+  chartData,
+  DriversEarningsData,
+} from "../../../../services/dashboard/todayBest/EarningsApi";
 
 const chartConfig = {
   drivers: {

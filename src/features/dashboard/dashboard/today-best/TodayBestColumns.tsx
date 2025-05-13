@@ -4,28 +4,57 @@ import React from "react";
 import MoreDriverDetails from "../../common/MoreDriverDetails";
 
 export type TodayBestColumns = {
-  id: string;
-  name: string;
+  userDetailsId: number;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  gender: string;
+  homeNo: string;
+  streetName: string;
+  city: string;
+  district: string;
+  licenseNumber: string;
+  licenseFrontURL: string;
+  licenseBackURL: string;
   email: string;
-  earningToday: number;
+  mobileNumber: string;
+
+  registrationDate: string;
+  availability: boolean;
+  stripeId: string;
+  walletBalance: number;
+  rating: number;
+  earnings: number;
 };
 
 export const columns: ColumnDef<TodayBestColumns>[] = [
   {
-    accessorKey: "driverId",
-    header: ({ column }) => <SortButton column={column} label="driverId" />,
+    accessorKey: "userDetailsId",
+    header: ({ column }) => <SortButton column={column} label="Driver-Id" />,
+    cell: (info) => {
+      const row = info.row.original;
+      return `${row.userDetailsId}`;
+    },
   },
   {
-    accessorKey: "name",
     header: "Name",
+    accessorKey: "Name",
+    cell: (info) => {
+      const row = info.row.original;
+      return `${row.firstName} ${row.lastName}`;
+    },
   },
   {
     accessorKey: "email",
     header: "Email",
   },
   {
-    accessorKey: "earningToday",
-    header: ({ column }) => <SortButton column={column} label="earning" />,
+    accessorKey: "rating",
+    header: ({ column }) => <SortButton column={column} label="Rating" />,
+  },
+  {
+    accessorKey: "earnings",
+    header: ({ column }) => <SortButton column={column} label="Earnings" />,
   },
 
   {
@@ -40,7 +69,7 @@ export const columns: ColumnDef<TodayBestColumns>[] = [
           open={open}
           setOpen={setOpen}
           description1={"Today Earnings:"}
-          dataName={"earningToday"}
+          dataName={"earnings"}
         />
       );
     },

@@ -5,7 +5,7 @@ import {
   columns,
 } from "@/features/dashboard/dashboard/today-best/TodayBestColumns";
 import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
-import { getData } from "@/features/dashboard/dashboard/today-best/EarningsApi";
+import { getData } from "@/services/dashboard/todayBest/EarningsApi";
 import { TodayBestAreaChart } from "@/features/dashboard/dashboard/today-best/TodayBestAreaChart";
 
 export default function NewRegistrationsPage() {
@@ -28,7 +28,7 @@ export default function NewRegistrationsPage() {
           <DataTableV2
             columns={columns}
             data={data}
-            filterableColumnId="driverId"
+            filterableColumnId="userDetailsId"
           />
         }
       ></Layout>

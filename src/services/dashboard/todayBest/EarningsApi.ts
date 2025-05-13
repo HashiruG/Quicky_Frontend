@@ -1,10 +1,10 @@
-import axios from "axios";
-import { TodayBestColumns } from "./TodayBestColumns";
+import { TodayBestColumns } from "../../../features/dashboard/dashboard/today-best/TodayBestColumns";
+import api from "@/api/api";
 
 export async function getData(): Promise<TodayBestColumns[]> {
   try {
-    const response = await axios.get<TodayBestColumns[]>(
-      "http://localhost:8080/driver-profiles/earnings/today"
+    const response = await api.get<TodayBestColumns[]>(
+      "/driver-profiles/earnings/today"
     );
     return response.data;
   } catch (error) {
@@ -19,7 +19,7 @@ export type DriversEarningsData = {
 
 export async function chartData(): Promise<DriversEarningsData[]> {
   try {
-    const response = await axios.get("http://localhost:8080/earnings");
+    const response = await api.get("/earnings");
 
     return response.data.map((item: any) => ({
       date: item.earningDate,

@@ -31,6 +31,7 @@ type DriverData = {
   stripeId?: string;
   walletBalance?: number;
   rating?: number;
+  earnings?: number;
 };
 
 type MoreDriverDetailsProps = {
