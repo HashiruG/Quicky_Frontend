@@ -15,7 +15,7 @@ import { NewRegistrationsColumns } from "./types";
 import {
   acceptDriver,
   rejectDriver,
-} from "../../../../services/newRegistrations/NewRegistrationsApi";
+} from "@/services/driverManagement/newRegistrations/NewRegistrationsApi";
 
 type MoreDriverRegistrationDetailsProps = {
   data: NewRegistrationsColumns;

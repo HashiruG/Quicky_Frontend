@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { columns } from "@/features/dashboard/driver-management/new-registrations/NewRegistrationsColumns";
 import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
 import { NewRegistrationsColumns } from "@/features/dashboard/driver-management/new-registrations/types";
-import { getData } from "@/services/newRegistrations/NewRegistrationsApi";
+import { getData } from "@/services/driverManagement/newRegistrations/NewRegistrationsApi";
 
 export default function NewRegistrationsPage() {
   const [data, setData] = useState<NewRegistrationsColumns[]>([]);
@@ -25,7 +25,7 @@ export default function NewRegistrationsPage() {
           <DataTableV2
             columns={columns}
             data={data}
-            filterableColumnId="email"
+            filterableColumnId="Registration-Id"
           />
         }
       ></Layout>

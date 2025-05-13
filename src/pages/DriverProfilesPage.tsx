@@ -5,7 +5,7 @@ import {
   columns,
 } from "@/features/dashboard/driver-management/driver-profiles/DriverProfilesColumns";
 import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
-import { getData } from "@/services/driverProfiles/DriverProfilesApi";
+import { getData } from "@/services/driverManagement/driverProfiles/DriverProfilesApi";
 
 export default function DriverProfilesPage() {
   const [data, setData] = useState<DriverProfilesColumns[]>([]);
@@ -27,7 +27,7 @@ export default function DriverProfilesPage() {
           <DataTableV2
             columns={columns}
             data={data}
-            filterableColumnId="driverId"
+            filterableColumnId="Driver-Id"
           />
         }
       ></Layout>

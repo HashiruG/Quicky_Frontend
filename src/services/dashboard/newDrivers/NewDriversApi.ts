@@ -1,5 +1,5 @@
 import axios from "axios";
-import { NewDriversColumns } from "./NewDriversColumns";
+import { NewDriversColumns } from "../../../features/dashboard/dashboard/new-drivers/NewDriversColumns";
 
 export async function getData(): Promise<NewDriversColumns[]> {
   try {
