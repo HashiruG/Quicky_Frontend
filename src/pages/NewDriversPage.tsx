@@ -28,7 +28,7 @@ export default function NewDriversPagePage() {
           <DataTableV2
             columns={columns}
             data={data}
-            filterableColumnId="Driver-Id"
+            filterableColumnId="userDetailsId"
           />
         }
       ></Layout>

@@ -6,7 +6,7 @@ import MoreDriverRegistrationDetails from "./MoreDriverRegistrationDetails";
 
 export const columns: ColumnDef<NewRegistrationsColumns>[] = [
   {
-    accessorKey: "Registration-Id",
+    accessorKey: "userDetailsId",
     header: ({ column }) => (
       <SortButton column={column} label="Registration-Id" />
     ),

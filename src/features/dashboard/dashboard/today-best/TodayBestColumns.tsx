@@ -29,7 +29,7 @@ export type TodayBestColumns = {
 
 export const columns: ColumnDef<TodayBestColumns>[] = [
   {
-    accessorKey: "Driver-Id",
+    accessorKey: "userDetailsId",
     header: ({ column }) => <SortButton column={column} label="Driver-Id" />,
     cell: (info) => {
       const row = info.row.original;
@@ -51,6 +51,10 @@ export const columns: ColumnDef<TodayBestColumns>[] = [
   {
     accessorKey: "rating",
     header: ({ column }) => <SortButton column={column} label="Rating" />,
+  },
+  {
+    accessorKey: "earnings",
+    header: ({ column }) => <SortButton column={column} label="Earnings" />,
   },
 
   {

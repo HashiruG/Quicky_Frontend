@@ -28,7 +28,7 @@ export type NewDriversColumns = {
 
 export const columns: ColumnDef<NewDriversColumns>[] = [
   {
-    accessorKey: "Driver-Id",
+    accessorKey: "userDetailsId",
     header: ({ column }) => <SortButton column={column} label="Driver-Id" />,
     cell: (info) => {
       const row = info.row.original;
