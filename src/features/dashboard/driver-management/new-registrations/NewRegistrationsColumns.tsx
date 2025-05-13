@@ -17,7 +17,7 @@ export const columns: ColumnDef<NewRegistrationsColumns>[] = [
   },
   {
     header: "Name",
-    accessorKey: "Name", // still required for sorting/filtering, or can be null
+    accessorKey: "Name",
     cell: (info) => {
       const row = info.row.original;
       return `${row.firstName} ${row.lastName}`;
