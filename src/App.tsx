@@ -16,54 +16,64 @@ import InactiveDriversPage from "./pages/InactiveDriversPage";
 import { AuthProvider } from "./features/authentication/AuthProvider";
 import ProtectedRoute from "./features/authentication/ProtectedRoute";
 import PayoutRequestPage from "./pages/PayoutRequestPage";
+import { Toaster } from "sonner";
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route element={<ProtectedRoute />}>
-            <Route
-              path="/dashboard/dashboard/today-best"
-              element={<TodayBestPage />}
-            />
-            <Route
-              path="/dashboard/dashboard/new-drivers"
-              element={<NewDriversPage />}
-            />
-            <Route
-              path="/dashboard/dashboard/inactive-drivers"
-              element={<InactiveDriversPage />}
-            />
-            <Route
-              path="/realtime-driver-statuses"
-              element={<DriverStatusPage />}
-            />
-            <Route
-              path="/driver-management/driver-profiles"
-              element={<DriverProfilesPage />}
-            />
-            <Route
-              path="/driver-management/new-registrations"
-              element={<NewRegistrationsPage />}
-            />
-            <Route
-              path="/delivery-management"
-              element={<DeliveryRecordsPage />}
-            />
-            <Route path="/churn-prediction" element={<ChurnPredictionPage />} />
-            <Route path="/manage-offers/view" element={<OngoingOffersPage />} />
-            <Route path="/manage-offers/add" element={<AddNewOfferPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/reset-password" element={<NewPasswordPage />} />
-            <Route path="/payout-requests" element={<PayoutRequestPage />} />
-          </Route>
+    <>
+      <Router>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<LoginPage />} />
+            <Route element={<ProtectedRoute />}>
+              <Route
+                path="/dashboard/dashboard/today-best"
+                element={<TodayBestPage />}
+              />
+              <Route
+                path="/dashboard/dashboard/new-drivers"
+                element={<NewDriversPage />}
+              />
+              <Route
+                path="/dashboard/dashboard/inactive-drivers"
+                element={<InactiveDriversPage />}
+              />
+              <Route
+                path="/realtime-driver-statuses"
+                element={<DriverStatusPage />}
+              />
+              <Route
+                path="/driver-management/driver-profiles"
+                element={<DriverProfilesPage />}
+              />
+              <Route
+                path="/driver-management/new-registrations"
+                element={<NewRegistrationsPage />}
+              />
+              <Route
+                path="/delivery-management"
+                element={<DeliveryRecordsPage />}
+              />
+              <Route
+                path="/churn-prediction"
+                element={<ChurnPredictionPage />}
+              />
+              <Route
+                path="/manage-offers/view"
+                element={<OngoingOffersPage />}
+              />
+              <Route path="/manage-offers/add" element={<AddNewOfferPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/reset-password" element={<NewPasswordPage />} />
+              <Route path="/payout-requests" element={<PayoutRequestPage />} />
+            </Route>
 
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        </Routes>
-      </AuthProvider>
-    </Router>
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          </Routes>
+        </AuthProvider>
+      </Router>
+      <Toaster richColors position="top-right" />
+    </>
   );
 }
 
