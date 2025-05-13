@@ -36,11 +36,11 @@ const MoreDriverRegistrationDetails: React.FC<
 
     try {
       if (actionType === "accept") {
-        await acceptDriver(data.serialNumber, data);
+        await acceptDriver(data.userDetailsId, data);
         toast.success("Driver accepted", {});
         console.log("Accepted:", data);
       } else if (actionType === "reject") {
-        await rejectDriver(data.serialNumber);
+        await rejectDriver(data.userDetailsId);
         toast.error("Driver rejected", {});
         console.log("Rejected:", data);
       }
@@ -64,24 +64,75 @@ const MoreDriverRegistrationDetails: React.FC<
           <DialogHeader>
             <DialogTitle>Details</DialogTitle>
             <DialogDescription>
-              Here's more information about {data.name}
+              Here's more information about{" "}
+              {data.firstName + " " + data.lastName}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-1">
             <p>
-              <strong>Name:</strong> {data.name}
+              <strong>Registration ID:</strong> {data.userDetailsId}
             </p>
             <p>
-              <strong>Email:</strong> {data.email}
+              <strong>Name:</strong> {data.firstName + " " + data.lastName}
             </p>
             <p>
-              <strong>Date of birth:</strong> {data.dateOfBirth}
+              <strong>Date of Birth:</strong> {data.dateOfBirth}
             </p>
             <p>
-              <strong>Address:</strong> {data.address}
+              <strong>Gender:</strong> {data.gender}
             </p>
             <p>
-              <strong>Mobile Number:</strong> {data.mobileNumber}
+              <strong>Address:</strong>{" "}
+              {data.homeNo +
+                ", " +
+                data.streetName +
+                ", " +
+                data.city +
+                ", " +
+                data.district}
+            </p>
+            <p>
+              <strong>License Number:</strong> {data.licenseNumber}
+            </p>
+            <p>
+              <strong>License Front:</strong>{" "}
+              <a
+                href={data.licenseFrontURL}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "blue" }}
+              >
+                View Image
+              </a>
+            </p>
+            <p>
+              <strong>License Back:</strong>{" "}
+              <a
+                href={data.licenseBackURL}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "blue" }}
+              >
+                View Image
+              </a>
+            </p>
+            <p>
+              <strong>Email:</strong>{" "}
+              <a
+                href={`mailto:${data.email}`}
+                style={{ color: "blue", textDecoration: "underline" }}
+              >
+                {data.email}
+              </a>
+            </p>
+            <p>
+              <strong>Mobile Number:</strong>{" "}
+              <a
+                href={`tel:${data.mobileNumber}`}
+                style={{ color: "blue", textDecoration: "underline" }}
+              >
+                {data.mobileNumber}
+              </a>
             </p>
           </div>
           <DialogFooter className="p-0">

@@ -6,14 +6,22 @@ import MoreDriverRegistrationDetails from "./MoreDriverRegistrationDetails";
 
 export const columns: ColumnDef<NewRegistrationsColumns>[] = [
   {
-    accessorKey: "serialNumber",
+    accessorKey: "Registration-Id",
     header: ({ column }) => (
-      <SortButton column={column} label="Serial number" />
+      <SortButton column={column} label="Registration-Id" />
     ),
+    cell: (info) => {
+      const row = info.row.original;
+      return `${row.userDetailsId}`;
+    },
   },
   {
-    accessorKey: "name",
     header: "Name",
+    accessorKey: "Name", // still required for sorting/filtering, or can be null
+    cell: (info) => {
+      const row = info.row.original;
+      return `${row.firstName} ${row.lastName}`;
+    },
   },
   {
     accessorKey: "email",

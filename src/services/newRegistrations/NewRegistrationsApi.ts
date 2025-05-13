@@ -55,11 +55,11 @@ import api from "../../api/api";
 /**
  * Accepts a new driver by adding to the system and then removing from the pending list.
  */
-export async function acceptDriver(serialNumber: string, driver: NewRegistrationsColumns) {
+export async function acceptDriver(userDetailsId: number, driver: NewRegistrationsColumns) {
   try {
-    const response1 = await api.post(`/new-registrations/add-driver/${serialNumber}`, driver);
+    const response1 = await api.post(`/new-registrations/add-driver/${userDetailsId}`, driver);
 
-    const response2 = await api.delete(`/new-registrations/reject-driver/${serialNumber}`);
+    const response2 = await api.delete(`/new-registrations/reject-driver/${userDetailsId}`);
 
     window.location.reload();
 
@@ -76,9 +76,9 @@ export async function acceptDriver(serialNumber: string, driver: NewRegistration
 /**
  * Rejects a driver by serial number and removes them from the pending list.
  */
-export async function rejectDriver(serialNumber: string) {
+export async function rejectDriver(userDetailsId: number) {
   try {
-    const response = await api.delete(`/new-registrations/reject-driver/${serialNumber}`);
+    const response = await api.delete(`/new-registrations/reject-driver/${userDetailsId}`);
 
     window.location.reload();
 
@@ -90,7 +90,7 @@ export async function rejectDriver(serialNumber: string) {
 }
 
 /**
- * Fetches the list of new driver registrations.
+ * Fetches the list of new driver registrations. Okay
  */
 export async function getData(): Promise<NewRegistrationsColumns[]> {
   try {
