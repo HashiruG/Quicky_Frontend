@@ -1,9 +1,9 @@
-import publicApi from "@/api/publicApi";
+import axios from "axios";
 import api from "../../api/api";
 
 export const loginService = async (loginInput: { username: string; password: string; }) => {
   try {
-    const response = await publicApi.post("/auth/login", loginInput);
+    const response = await axios.post("http://localhost:8080/auth/login", loginInput);
     return response;
   } catch (error) {
     throw new Error("Invalid credentials. Please try again.");
@@ -12,7 +12,7 @@ export const loginService = async (loginInput: { username: string; password: str
 
 export const registerService = async (registerInput: { username: string; password: string; }) => {
   try {
-    const response = await publicApi.post("/auth/register", registerInput);
+    const response = await axios.post("http://localhost:8080/auth/register", registerInput);
     return response;
   } catch (error) {
     if (error.response.status === 409) {
