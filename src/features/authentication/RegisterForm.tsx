@@ -62,7 +62,11 @@ const RegisterForm = () => {
       await registerService(registerInput);
       navigate("/");
     } catch (error) {
-      setErrorMessage(error.message);
+      if (error.response.status === 409) {
+        setErrorMessage("Email already exists. Please try another one.");
+      }else {
+        setErrorMessage("An error occurred. Please try again later.");
+      }
     }
   };
 

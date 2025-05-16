@@ -49,7 +49,11 @@ const LoginForm = () => {
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard/dashboard/today-best");
     } catch (error) {
-      setErrorMessage(error.message);
+      if(error.response.status === 403) {
+        setErrorMessage("Invalid credentials. Please try again.");
+      }else{
+        setErrorMessage("An error occurred. Please try again later.");
+      }
     }
   };
 
