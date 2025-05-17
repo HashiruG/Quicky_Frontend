@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { registerService } from "../../services/authentication/api";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import axios from "axios";
 
 const RegisterForm = () => {
   const [registerInput, setRegisterInput] = useState({
@@ -62,7 +63,7 @@ const RegisterForm = () => {
       await registerService(registerInput);
       navigate("/");
     } catch (error) {
-      if (error.response.status === 409) {
+      if (error instanceof axios.AxiosError && error.response?.status === 409) {
         setErrorMessage("Email already exists. Please try another one.");
       }else {
         setErrorMessage("An error occurred. Please try again later.");

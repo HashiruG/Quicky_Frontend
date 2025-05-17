@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginService } from "@/services/authentication/api";
+import axios from "axios";
 
 const LoginForm = () => {
   const [loginInput, setLoginInput] = useState({ username: "", password: "" });
@@ -18,7 +19,7 @@ const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     setLoginInput((prevValue) => {
       return {
         ...prevValue,
@@ -27,7 +28,7 @@ const LoginForm = () => {
     });
   };
 
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     setLoginInput((prevValue) => {
       return {
         ...prevValue,
@@ -36,7 +37,7 @@ const LoginForm = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (loginInput.password.trim().length < 6) {
@@ -48,8 +49,8 @@ const LoginForm = () => {
       const response = await loginService(loginInput);
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard/dashboard/today-best");
-    } catch (error) {
-      if(error.response.status === 403) {
+    } catch (error:unknown) {
+      if(error instanceof axios.AxiosError && error.response?.status === 403) {
         setErrorMessage("Invalid credentials. Please try again.");
       }else{
         setErrorMessage("An error occurred. Please try again later.");
