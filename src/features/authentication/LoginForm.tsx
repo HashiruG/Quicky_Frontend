@@ -52,7 +52,7 @@ const LoginForm = () => {
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard/dashboard/today-best");
     } catch (error:unknown) {
-      if(error instanceof axios.AxiosError && error.response?.status === 403) {
+      if(error instanceof axios.AxiosError && error.response?.status === 401) {
         setErrorMessage("Invalid credentials. Please try again.");
       }else{
         setErrorMessage("An error occurred. Please try again later.");
