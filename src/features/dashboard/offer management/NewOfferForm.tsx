@@ -16,12 +16,35 @@ const NewOfferForm = () => {
   const [discountPercentage, setDiscountPercentage] = useState("");
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formattedStartDate = startDate?.toISOString().split("T")[0];
     const formattedEndDate = endDate?.toISOString().split("T")[0];
+
+    if (
+      !offerTitle ||
+      !offerDescription ||
+      !discountPercentage ||
+      !startDate ||
+      !endDate
+    ) {
+      setErrorMsg("Please fill in all fields.");
+      return;
+    }
+
+    if (endDate < startDate) {
+      setErrorMsg("End date must be after start date.");
+      return;
+    }
+
+    const discount = parseFloat(discountPercentage);
+    if (isNaN(discount) || discount < 0 || discount > 100) {
+      setErrorMsg("Discount must be between 0 and 100.");
+      return;
+    }
 
     const offerData = {
       offerTitle,
@@ -52,7 +75,7 @@ const NewOfferForm = () => {
           <CardTitle className="text-2xl">Enter Offer Details</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-6">
             <div className="grid gap-2">
               <Label htmlFor="title">Offer Title</Label>
               <Input
@@ -60,8 +83,10 @@ const NewOfferForm = () => {
                 type="text"
                 placeholder="Enter the offer title"
                 value={offerTitle}
-                onChange={(e) => setOfferTitle(e.target.value)}
-                required
+                onChange={(e) => {
+                  setErrorMsg("");
+                  setOfferTitle(e.target.value);
+                }}
               />
             </div>
 
@@ -72,8 +97,10 @@ const NewOfferForm = () => {
                 type="text"
                 placeholder="Enter the offer description"
                 value={offerDescription}
-                onChange={(e) => setOfferDescription(e.target.value)}
-                required
+                onChange={(e) => {
+                  setErrorMsg("");
+                  setOfferDescription(e.target.value);
+                }}
               />
             </div>
 
@@ -95,14 +122,17 @@ const NewOfferForm = () => {
                 type="number"
                 placeholder="Enter the discount percentage"
                 value={discountPercentage}
-                onChange={(e) => setDiscountPercentage(e.target.value)}
-                required
+                onChange={(e) => {
+                  setErrorMsg("");
+                  setDiscountPercentage(e.target.value);
+                }}
               />
             </div>
 
             <Button type="submit" className="w-full">
               Add Offer
             </Button>
+            {errorMsg && <p className="text-red-500">{errorMsg}</p>}
           </div>
         </CardContent>
       </Card>

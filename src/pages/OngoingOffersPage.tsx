@@ -6,8 +6,17 @@ import {
   deleteOfferService,
 } from "@/services/offerManangement/api";
 
+type OfferType = {
+  offerId: number;
+  offerTitle: string;
+  offerDescription: string;
+  discountPercentage: number;
+  startDate: string;
+  endDate: string;
+};
+
 const OngoingOffersPage = () => {
-  const [offers, setOffers] = useState([{}]);
+  const [offers, setOffers] = useState<OfferType[]>([]);
   useEffect(() => {
     const fetchOffers = async () => {
       try {
@@ -24,6 +33,9 @@ const OngoingOffersPage = () => {
   const handleDelete = async (id: number) => {
     try {
       await deleteOfferService(id);
+      setOffers((prevOffers) =>
+        prevOffers.filter((offer) => offer.offerId !== id)
+      );
     } catch (error) {
       console.error("Error deleting offer:", error);
     }
@@ -36,7 +48,7 @@ const OngoingOffersPage = () => {
         aboveChildren={null}
         children={
           <div className="flex flex-col justify-center md:flex-row flex-wrap md:justify-start gap-10 mx-5">
-            {offers.map((offer: any) => (
+            {offers.map((offer) => (
               <Offer
                 key={offer.offerId}
                 title={offer.offerTitle}
