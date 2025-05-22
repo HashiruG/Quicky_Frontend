@@ -20,6 +20,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const handleEmailChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    setErrorMessage("");
     setLoginInput((prevValue) => {
       return {
         ...prevValue,
@@ -29,6 +30,7 @@ const LoginForm = () => {
   };
 
   const handlePasswordChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    setErrorMessage("");
     setLoginInput((prevValue) => {
       return {
         ...prevValue,

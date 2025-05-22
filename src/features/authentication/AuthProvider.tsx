@@ -1,8 +1,12 @@
-import { createContext,} from "react";
+import { createContext } from "react";
 
-export const AuthContext = createContext();
+interface AuthContextType {
+  isAuthenticated: boolean;
+}
 
-export const AuthProvider = ({ children }) => {
+export const AuthContext = createContext<AuthContextType>({ isAuthenticated: false });
+
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const token = localStorage.getItem("token");
 
