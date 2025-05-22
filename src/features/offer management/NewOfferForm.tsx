@@ -41,8 +41,8 @@ const NewOfferForm = () => {
     }
 
     const discount = parseFloat(discountPercentage);
-    if (isNaN(discount) || discount < 0 || discount > 100) {
-      setErrorMsg("Discount must be between 0 and 100.");
+    if (isNaN(discount) || discount < 1 || discount > 100) {
+      setErrorMsg("Discount must be between 1 and 100.");
       return;
     }
 
