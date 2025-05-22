@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import SortButton from "../../common/SortButton";
+import SortButton from "../../../common/SortButton";
 
 export type InactiveDriversColumns = {
   id: string;

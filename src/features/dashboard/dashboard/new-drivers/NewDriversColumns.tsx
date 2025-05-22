@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
-import SortButton from "../../common/SortButton";
-import MoreDriverDetails from "../../common/MoreDriverDetails";
+import SortButton from "../../../common/SortButton";
+import MoreDriverDetails from "../../../common/MoreDriverDetails";
 import React from "react";
 
 export type NewDriversColumns = {

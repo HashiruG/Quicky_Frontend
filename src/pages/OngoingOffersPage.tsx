@@ -1,5 +1,5 @@
-import Offer from "@/features/dashboard/offer management/Offer";
-import Layout from "@/features/dashboard/common/Layout";
+import Offer from "@/features/offer management/Offer";
+import Layout from "@/features/common/Layout";
 import { useEffect, useState } from "react";
 import {
   getOffersService,

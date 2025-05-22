@@ -1,10 +1,10 @@
-import Layout from "@/features/dashboard/common/Layout";
+import Layout from "@/features/common/Layout";
 import { useEffect, useState } from "react";
 import {
   InactiveDriversColumns,
   columns,
 } from "@/features/dashboard/dashboard/inactive-drivers/InactiveDriversColumns";
-import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
+import { DataTableV2 } from "@/features/common/data-table-v2";
 import { getData } from "@/features/dashboard/dashboard/inactive-drivers/InactiveDriversDataSet";
 import { InactiveDriversPieChart } from "@/features/dashboard/dashboard/inactive-drivers/InactiveDriversPieChart";
 

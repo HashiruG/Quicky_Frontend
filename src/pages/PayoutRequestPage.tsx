@@ -1,6 +1,6 @@
-import Layout from "@/features/dashboard/common/Layout";
-import { columns, PayoutRequest} from "@/features/dashboard/payouts/PayoutRequestColumns";
-import { PayoutRequestTable} from "@/features/dashboard/payouts/PayOutRequestTable";
+import Layout from "@/features/common/Layout";
+import { columns, PayoutRequest} from "@/features/payouts/PayoutRequestColumns";
+import { PayoutRequestTable} from "@/features/payouts/PayOutRequestTable";
 import { acceptPayoutService, getPayoutsService, rejectPayoutService } from "@/services/payouts/api";
 import { useEffect, useState } from "react";
 

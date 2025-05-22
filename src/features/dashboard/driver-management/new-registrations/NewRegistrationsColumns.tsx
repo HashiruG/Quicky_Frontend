@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import SortButton from "../../common/SortButton";
+import SortButton from "../../../common/SortButton";
 import React from "react";
 import { NewRegistrationsColumns } from "./types";
 import MoreDriverRegistrationDetails from "./MoreDriverRegistrationDetails";

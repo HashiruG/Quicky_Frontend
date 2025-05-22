@@ -1,10 +1,10 @@
-import Layout from "@/features/dashboard/common/Layout";
+import Layout from "@/features/common/Layout";
 import { useEffect, useState } from "react";
 import {
   NewDriversColumns,
   columns,
 } from "@/features/dashboard/dashboard/new-drivers/NewDriversColumns";
-import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
+import { DataTableV2 } from "@/features/common/data-table-v2";
 import { getData } from "@/services/dashboard/newDrivers/NewDriversApi";
 import { NewDriversBarChart } from "@/features/dashboard/dashboard/new-drivers/NewDriversBarChart";
 

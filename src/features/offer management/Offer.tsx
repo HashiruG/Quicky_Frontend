@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import OfferImsge from "../../../assets/offer.jpg";
+import OfferImsge from "../../assets/offer.jpg"
 import { Button } from "@/components/ui/button";
 
 interface OfferProps {
