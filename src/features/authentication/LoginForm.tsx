@@ -30,6 +30,7 @@ const LoginForm = () => {
   };
 
   const handlePasswordChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    setPasswordValidity(true);
     setErrorMessage("");
     setLoginInput((prevValue) => {
       return {
@@ -54,6 +55,8 @@ const LoginForm = () => {
     } catch (error:unknown) {
       if(error instanceof axios.AxiosError && error.response?.status === 401) {
         setErrorMessage("Invalid credentials. Please try again.");
+      }else if(error instanceof axios.AxiosError && error.response?.status === 404){
+        setErrorMessage("User not found with given username.");
       }else{
         setErrorMessage("An error occurred. Please try again later.");
       }
