@@ -1,22 +1,47 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "@/components/ui/button";
 import SortButton from "../../../common/SortButton";
+import MoreDriverDetails from "@/features/common/MoreDriverDetails";
+import React from "react";
 
 export type InactiveDriversColumns = {
-  id: string;
-  name: string;
+  userDetailsId: number;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  gender: string;
+  homeNo: string;
+  streetName: string;
+  city: string;
+  district: string;
+  licenseNumber: string;
+  licenseFrontURL: string;
+  licenseBackURL: string;
   email: string;
+  mobileNumber: string;
+
+  registrationDate: string;
+  availability: boolean;
+  stripeId: string;
+  walletBalance: number;
   rating: number;
 };
 
 export const columns: ColumnDef<InactiveDriversColumns>[] = [
   {
-    accessorKey: "id",
-    header: ({ column }) => <SortButton column={column} label="Id" />,
+    accessorKey: "userDetailsId",
+    header: ({ column }) => <SortButton column={column} label="Driver-Id" />,
+    cell: (info) => {
+      const row = info.row.original;
+      return `${row.userDetailsId}`;
+    },
   },
   {
-    accessorKey: "name",
     header: "Name",
+    accessorKey: "Name",
+    cell: (info) => {
+      const row = info.row.original;
+      return `${row.firstName} ${row.lastName}`;
+    },
   },
   {
     accessorKey: "email",
@@ -29,11 +54,18 @@ export const columns: ColumnDef<InactiveDriversColumns>[] = [
 
   {
     id: "actions",
-    cell: () => {
+    cell: ({ row }) => {
+      const [open, setOpen] = React.useState(false);
+      const data = row.original;
+
       return (
-        <Button variant="ghost" className="h-8 w-12 p-0">
-          <span>View</span>
-        </Button>
+        <MoreDriverDetails
+          data={data}
+          open={open}
+          setOpen={setOpen}
+          description1={""}
+          dataName={undefined}
+        />
       );
     },
   },
