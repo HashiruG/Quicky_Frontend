@@ -14,22 +14,22 @@ export async function getData(): Promise<InactiveDriversColumns[]> {
 }
 
 export type InactiveDriversData = {
-  date: string;
-  drivers: number;
+  inactiveDriversCount: number;
+  activeDriversCount: number;
 };
 
-// export async function chartData(): Promise<InactiveDriversData[]> {
-//   try {
-//     const response = await api.get(
-//       "/driver-profiles/new-drivers/count-by-day"
-//     );
+export async function chartData(): Promise<InactiveDriversData[]> {
+  try {
+    const response = await api.get(
+      "/driver-profiles/inactive-drivers/count-by-availability"
+    );
 
-//     return response.data.map((item: any) => ({
-//       date: item.registrationDate,
-//       drivers: item.driversCount,
-//     }));
-//   } catch (error) {
-//     console.error("Failed to fetch driver data:", error);
-//     return [];
-//   }
-// }
+    return response.data.map((item: any) => ({
+      inactiveDriversCount: item.inactiveDriversCount,
+      activeDriversCount: item.activeDriversCount,
+    }));
+  } catch (error) {
+    console.error("Failed to fetch driver data:", error);
+    return [];
+  }
+}
