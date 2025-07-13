@@ -28,6 +28,14 @@ export const columns: ColumnDef<NewRegistrationsColumns>[] = [
     header: "Email",
   },
   {
+    accessorKey: "mobileNumber",
+    header: "MobileNumber",
+  },
+  {
+    accessorKey: "dateOfBirth",
+    header: "DateOfBirth",
+  },
+  {
     id: "actions",
     cell: ({ row }) => {
       const [open, setOpen] = React.useState(false);
