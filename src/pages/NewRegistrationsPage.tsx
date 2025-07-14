@@ -19,7 +19,7 @@ export default function NewRegistrationsPage() {
   return (
     <>
       <Layout
-        title="New Registarations"
+        title="New Registrations"
         aboveChildren={null}
         children={
           <DataTableV2
