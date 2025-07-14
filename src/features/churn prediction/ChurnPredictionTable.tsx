@@ -56,14 +56,22 @@ export function ChurnPredictionTable<TData, TValue>({
 
   React.useEffect(() => {
     const selectedRows = table.getSelectedRowModel().rows;
-    const ids = selectedRows.map((row) => row.original.driverId);
+    const ids = selectedRows.map((row) => row.original.driverDetailsId);
     setSelectedIds(ids);
   }, [rowSelection, table]);
 
   return (
     <div className="w-full flex flex-col">
       <div className="flex justify-end pt-2 pb-4">
-        {selectedIds.length > 0 && <Button onClick={() => { navigate("/manage-offers/add", { state: { selectedIds } })}}>Add Custom Offer</Button>}
+        {selectedIds.length > 0 && (
+          <Button
+            onClick={() => {
+              navigate("/manage-offers/add", { state: { selectedIds } });
+            }}
+          >
+            Add Custom Offer
+          </Button>
+        )}
       </div>
       <div className="rounded-md border w-full">
         <Table>

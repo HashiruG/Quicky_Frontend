@@ -9,7 +9,9 @@ import { postOfferService } from "@/services/offerManangement/api";
 
 const NewOfferForm = () => {
   const location = useLocation();
-  const selectedIds = location.state?.selectedIds || [];
+  const [selectedIds, setSelectedIds] = useState(
+    location.state?.selectedIds || []
+  );
 
   const [offerTitle, setOfferTitle] = useState("");
   const [offerDescription, setOfferDescription] = useState("");
