@@ -1,7 +1,7 @@
 import Layout from "@/features/common/Layout";
-import { columns, PayoutRequest} from "@/features/payouts/PayoutRequestColumns";
-import { PayoutRequestTable} from "@/features/payouts/PayOutRequestTable";
-import { acceptPayoutService, getPayoutsService, rejectPayoutService } from "@/services/payouts/api";
+import { columns, PayoutRequest } from "@/features/payouts/PayoutRequestColumns";
+import { PayoutRequestTable } from "@/features/payouts/PayOutRequestTable";
+import { getPayoutsService } from "@/services/payouts/api";
 import { useEffect, useState } from "react";
 
 const PayoutRequestPage = () => {
@@ -10,9 +10,8 @@ const PayoutRequestPage = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await getPayoutsService()
+        const response = await getPayoutsService();
         setData(response.data);
-        console.log("Response data:", response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -20,30 +19,12 @@ const PayoutRequestPage = () => {
     fetchData();
   }, []);
 
-   const handleAccept = async (payoutId: number) => {
-    try {
-      await acceptPayoutService(payoutId);
-      setData((prev) => prev.filter((p) => p.payoutId !== payoutId));
-    } catch (error) {
-      console.error("Accept failed", error);
-    }
-  };
-
-  const handleReject = async (payoutId: number) => {
-    try {
-      await rejectPayoutService(payoutId);
-      setData((prev) => prev.filter((p) => p.payoutId !== payoutId));
-    } catch (error) {
-      console.error("Reject failed", error);
-    }
-  };
-
   return (
     <>
       <Layout
         title="Payout Requests"
         aboveChildren={null}
-        children={<PayoutRequestTable columns={columns(handleAccept,handleReject)} data={data} />}
+        children={<PayoutRequestTable columns={columns()} data={data} />}
       ></Layout>
     </>
   );

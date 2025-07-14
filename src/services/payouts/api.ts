@@ -11,6 +11,6 @@ export const rejectPayoutService = async (payoutId: number) => {
 }
 
 export const getPayoutsService = async () => {
-    const response = await api.get("payout/payout-requests");
+    const response = await api.get("payout/get-payouts");
     return response;
 }
