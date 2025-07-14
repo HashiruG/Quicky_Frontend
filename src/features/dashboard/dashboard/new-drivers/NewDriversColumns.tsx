@@ -51,6 +51,14 @@ export const columns: ColumnDef<NewDriversColumns>[] = [
     accessorKey: "rating",
     header: ({ column }) => <SortButton column={column} label="Rating" />,
   },
+  {
+    accessorKey: "mobileNumber",
+    header: "MobileNumber",
+  },
+  {
+    accessorKey: "dateOfBirth",
+    header: "DateOfBirth",
+  },
 
   {
     id: "actions",

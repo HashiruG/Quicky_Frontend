@@ -22,7 +22,7 @@ export default function NewRegistrationsPage() {
   return (
     <>
       <Layout
-        title="Today best"
+        title="Platform revenue"
         aboveChildren={<TodayBestAreaChart></TodayBestAreaChart>}
         children={
           <DataTableV2

@@ -5,8 +5,8 @@ import {
   columns,
 } from "@/features/dashboard/dashboard/inactive-drivers/InactiveDriversColumns";
 import { DataTableV2 } from "@/features/common/data-table-v2";
-import { getData } from "@/features/dashboard/dashboard/inactive-drivers/InactiveDriversDataSet";
 import { InactiveDriversPieChart } from "@/features/dashboard/dashboard/inactive-drivers/InactiveDriversPieChart";
+import { getData } from "@/services/dashboard/inactiveDrivers/InactiveDriversApi";
 
 export default function InactiveDriversPagePage() {
   const [data, setData] = useState<InactiveDriversColumns[]>([]);
