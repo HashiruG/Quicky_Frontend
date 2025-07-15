@@ -1,12 +1,12 @@
+import React from "react";
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
-  ColumnFiltersState,
-  getFilteredRowModel,
   SortingState,
   useReactTable,
+  getFilteredRowModel
 } from "@tanstack/react-table";
 
 import {
@@ -15,10 +15,9 @@ import {
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
-import React from "react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -27,69 +26,62 @@ interface DataTableProps<TData, TValue> {
 
 export function PayoutRequestTable<TData, TValue>({
   columns,
-  data,
+  data
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
+  const [globalFilter, setGlobalFilter] = React.useState<string>("");
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    onSortingChange: setSorting,
+    globalFilterFn: "includesString", 
     state: {
       sorting,
-      columnFilters,
+      globalFilter
     },
+    onGlobalFilterChange: setGlobalFilter
   });
 
   return (
     <div className="w-full flex flex-col">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter by payout ID"
-          value={
-            (table.getColumn("payoutId")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("payoutId")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
+          placeholder="Filter by payout ID / Date / Driver Name / Status / Transaction ID"
+          value={globalFilter}
+          onChange={e => table.setGlobalFilter(e.target.value)}
+          className="max-w-md"
         />
       </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
+            {table.getHeaderGroups().map(headerGroup => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
+                {headerGroup.headers.map(header => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
+              table.getRowModel().rows.map(row => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
-                  {row.getVisibleCells().map((cell) => (
+                  {row.getVisibleCells().map(cell => (
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -101,10 +93,7 @@ export function PayoutRequestTable<TData, TValue>({
               ))
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                <TableCell colSpan={columns.length} className="h-24 text-center">
                   No results.
                 </TableCell>
               </TableRow>
