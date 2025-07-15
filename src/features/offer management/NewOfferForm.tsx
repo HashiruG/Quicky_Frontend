@@ -111,7 +111,7 @@ const NewOfferForm = () => {
               />
             </div>
 
-            <div className="flex gap-10">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-10">
               <div className="grid gap-2">
                 <Label>Start Date</Label>
                 <DatePicker date={startDate} setDate={setStartDate} />
