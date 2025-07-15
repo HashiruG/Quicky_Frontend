@@ -42,6 +42,11 @@ const NewOfferForm = () => {
       return;
     }
 
+    if(endDate < new Date()) {
+      setErrorMsg("End date must be in the future.");
+      return;
+    }
+
     const discount = parseFloat(discountPercentage);
     if (isNaN(discount) || discount < 1 || discount > 100) {
       setErrorMsg("Discount must be between 1 and 100.");
