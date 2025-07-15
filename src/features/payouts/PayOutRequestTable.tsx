@@ -3,6 +3,8 @@ import {
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
+  ColumnFiltersState,
+  getFilteredRowModel,
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
@@ -15,6 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
 import React from "react";
 
 interface DataTableProps<TData, TValue> {
@@ -27,6 +30,9 @@ export function PayoutRequestTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
 
   const table = useReactTable({
     data,
@@ -34,13 +40,28 @@ export function PayoutRequestTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
     state: {
       sorting,
+      columnFilters,
     },
   });
 
   return (
     <div className="w-full flex flex-col">
+      <div className="flex items-center py-4">
+        <Input
+          placeholder="Filter by payout ID"
+          value={
+            (table.getColumn("payoutId")?.getFilterValue() as string) ?? ""
+          }
+          onChange={(event) =>
+            table.getColumn("payoutId")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
