@@ -11,6 +11,7 @@ import {
   UserPlus,
   LogOut,
   DollarSign,
+  Percent
 } from "lucide-react";
 
 import {
@@ -90,6 +91,11 @@ const navItems = [
     title: "Payout Requests",
     url: "/payout-requests",
     icon: DollarSign,
+  },
+   {
+    title: "Commission Rate",
+    url: "/commission-rates",
+    icon: Percent,
   },
 ];
 
