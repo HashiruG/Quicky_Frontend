@@ -24,6 +24,7 @@ const Offer = ({
   deactivate,
   children,
 }: OfferProps) => {
+  const isOfferExpired = new Date(endDate) < new Date();
   return (
     <Card className="md:w-[300px] w-[90%] flex flex-col">
       <CardHeader className="flex flex-col items-center justify-center">
@@ -40,7 +41,8 @@ const Offer = ({
             {description}
           </h2>
           <h2 className="py-1">
-            <span className="font-semibold">Offer Type -{offerType}</span>
+            <span className="font-semibold">Offer Type - </span>
+            {offerType}
           </h2>
           <h2 className="py-1">
             <span className="font-semibold">
@@ -56,12 +58,15 @@ const Offer = ({
             <span className="font-semibold">End date - </span>
             {endDate}
           </h2>
+
+          {isOfferExpired && (
+            <h3 className="text-red-500  font-semibold pb-2">Offer Expired</h3>
+          )}
         </div>
 
-        <div className="mt-4 flex flex-row gap-2">
+        <div className="mt-1 flex flex-row">
           {children}
-
-          <Button onClick={deactivate} className="bg-slate-900 w-full">
+          <Button onClick={deactivate} className="bg-slate-900 w-full mx-3">
             Deactivate
           </Button>
         </div>

@@ -9,9 +9,7 @@ import { postOfferService } from "@/services/offerManangement/api";
 
 const NewOfferForm = () => {
   const location = useLocation();
-  const [selectedIds, setSelectedIds] = useState(
-    location.state?.selectedIds || []
-  );
+  const [selectedRows] = useState(location.state?.selectedRows || []);
 
   const [offerTitle, setOfferTitle] = useState("");
   const [offerDescription, setOfferDescription] = useState("");
@@ -20,7 +18,7 @@ const NewOfferForm = () => {
   const [endDate, setEndDate] = useState<Date>();
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formattedStartDate = startDate?.toISOString().split("T")[0];
@@ -42,6 +40,11 @@ const NewOfferForm = () => {
       return;
     }
 
+    if (endDate < new Date()) {
+      setErrorMsg("End date must be in the future.");
+      return;
+    }
+
     const discount = parseFloat(discountPercentage);
     if (isNaN(discount) || discount < 1 || discount > 100) {
       setErrorMsg("Discount must be between 1 and 100.");
@@ -51,21 +54,22 @@ const NewOfferForm = () => {
     const offerData = {
       offerTitle,
       offerDescription,
-      discountPercentage,
+      discountPercentage: discount,
       startDate: formattedStartDate,
       endDate: formattedEndDate,
-      selectedIds,
+      selectedDrivers: selectedRows,
     };
 
     try {
-      postOfferService(offerData);
-
+      await postOfferService(offerData);
       setOfferTitle("");
       setOfferDescription("");
       setDiscountPercentage("");
       setStartDate(undefined);
       setEndDate(undefined);
+      setErrorMsg("");
     } catch (error) {
+      setErrorMsg("Error creating offer.");
       console.error("Error creating offer:", error);
     }
   };
@@ -106,7 +110,7 @@ const NewOfferForm = () => {
               />
             </div>
 
-            <div className="flex gap-10">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-10">
               <div className="grid gap-2">
                 <Label>Start Date</Label>
                 <DatePicker date={startDate} setDate={setStartDate} />
@@ -122,6 +126,8 @@ const NewOfferForm = () => {
               <Input
                 id="value"
                 type="number"
+                min="1"
+                max="100"
                 placeholder="Enter the discount percentage"
                 value={discountPercentage}
                 onChange={(e) => {
