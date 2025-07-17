@@ -2,10 +2,12 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 
 export type ChurnPredictionColumns = {
-  driverDetailsId: string;
+  predictionId: number;
+  driverDetailsId: number;
   driverName: string;
   gender: string;
   city: string;
+  status: string;
 };
 
 export const columns: ColumnDef<ChurnPredictionColumns>[] = [
@@ -29,7 +31,10 @@ export const columns: ColumnDef<ChurnPredictionColumns>[] = [
       />
     ),
   },
-
+   {
+    accessorKey: "predictionId",
+    header: "Prediction Id",
+  },
   {
     accessorKey: "driverDetailsId",
     header: "Driver Id",
@@ -45,5 +50,9 @@ export const columns: ColumnDef<ChurnPredictionColumns>[] = [
   {
     accessorKey: "city",
     header: "Based city",
+  },
+   {
+    accessorKey: "status",
+    header: "Status",
   },
 ];
