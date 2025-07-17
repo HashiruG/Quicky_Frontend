@@ -22,7 +22,7 @@ import {
 
 const chartConfig = {} satisfies ChartConfig;
 
-const COLORS = ["#EF4444", "#22C55E"];
+const COLORS = ["#EF4444", "#22C55E"]; // Red: Inactive, Green: Active
 
 export function InactiveDriversPieChart() {
   const id = "pie-active-inactive";
@@ -56,7 +56,7 @@ export function InactiveDriversPieChart() {
           <CardDescription>Active vs Inactive Drivers</CardDescription>
         </div>
       </CardHeader>
-      <CardContent className="flex flex-1 justify-center pb-0">
+      <CardContent className="flex flex-col items-center gap-4 pb-4">
         <ChartContainer
           id={id}
           config={chartConfig}
@@ -75,7 +75,7 @@ export function InactiveDriversPieChart() {
               outerRadius={110}
               strokeWidth={5}
               activeIndex={-1}
-              label={({ name }) => name}
+              // label removed to avoid slice text
             >
               {chartData.map((_entry, index) => (
                 <Cell
@@ -115,6 +115,23 @@ export function InactiveDriversPieChart() {
             </Pie>
           </PieChart>
         </ChartContainer>
+
+        <div className="flex gap-6 mt-2">
+          <div className="flex items-center gap-2">
+            <span
+              className="w-4 h-4 rounded-full"
+              style={{ backgroundColor: "#22C55E" }}
+            ></span>
+            <span className="text-sm text-muted-foreground">Active</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span
+              className="w-4 h-4 rounded-full"
+              style={{ backgroundColor: "#EF4444" }}
+            ></span>
+            <span className="text-sm text-muted-foreground">Inactive</span>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
