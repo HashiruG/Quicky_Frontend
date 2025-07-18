@@ -1,15 +1,13 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/checkbox"
-import SortButton from "../common/SortButton";
-
+import { Checkbox } from "@/components/ui/checkbox";
 
 export type ChurnPredictionColumns = {
-  driverId: string;
-  name: string;
-  rating: number;
-  mobileNumber: string;
-  registrationDate: string;
-  totalEarnings: number;
+  predictionId: number;
+  driverDetailsId: number;
+  driverName: string;
+  gender: string;
+  city: string;
+  status: string;
 };
 
 export const columns: ColumnDef<ChurnPredictionColumns>[] = [
@@ -31,30 +29,30 @@ export const columns: ColumnDef<ChurnPredictionColumns>[] = [
         onCheckedChange={(value) => row.toggleSelected(!!value)}
         aria-label="Select row"
       />
-    ),},
-
+    ),
+  },
+   {
+    accessorKey: "predictionId",
+    header: "Prediction Id",
+  },
   {
-    accessorKey: "driverId",
+    accessorKey: "driverDetailsId",
     header: "Driver Id",
   },
   {
-    accessorKey: "name",
+    accessorKey: "driverName",
     header: "Driver Name",
   },
   {
-    accessorKey: "rating",
-    header: "Driver Rating",
+    accessorKey: "gender",
+    header: "Gender",
   },
   {
-    accessorKey: "mobileNumber",
-    header: "Driver Mobile",
+    accessorKey: "city",
+    header: "Based city",
   },
-  {
-    accessorKey: "registrationDate",
-    header: "Registration Date",
+   {
+    accessorKey: "status",
+    header: "Status",
   },
-  {
-    accessorKey: "totalEarnings",
-    header: ({ column }) => <SortButton column={column} label="Earnings" />,
-    },
 ];

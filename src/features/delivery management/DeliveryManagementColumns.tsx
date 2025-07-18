@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import SortButton from "../dashboard/common/SortButton";
+import SortButton from "../common/SortButton";
 type Delivery = {
   id: string;
   date: string;

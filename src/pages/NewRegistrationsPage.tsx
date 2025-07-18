@@ -1,7 +1,7 @@
-import Layout from "@/features/dashboard/common/Layout";
+import Layout from "@/features/common/Layout";
 import { useEffect, useState } from "react";
 import { columns } from "@/features/dashboard/driver-management/new-registrations/NewRegistrationsColumns";
-import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
+import { DataTableV2 } from "@/features/common/data-table-v2";
 import { NewRegistrationsColumns } from "@/features/dashboard/driver-management/new-registrations/types";
 import { getData } from "@/services/driverManagement/newRegistrations/NewRegistrationsApi";
 
@@ -19,7 +19,7 @@ export default function NewRegistrationsPage() {
   return (
     <>
       <Layout
-        title="New Registarations"
+        title="New Registrations"
         aboveChildren={null}
         children={
           <DataTableV2

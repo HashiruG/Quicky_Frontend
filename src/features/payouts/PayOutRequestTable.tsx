@@ -1,12 +1,12 @@
-import * as React from "react";
+import React from "react";
 import {
   ColumnDef,
-  SortingState,
   flexRender,
   getCoreRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
+  SortingState,
   useReactTable,
+  getFilteredRowModel
 } from "@tanstack/react-table";
 
 import {
@@ -15,62 +15,53 @@ import {
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from "@/components/ui/table";
-
-import { DataTablePagination } from "../../../components/ui/pagination";
-import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function ChurnPredictionTable<TData, TValue>({
+export function PayoutRequestTable<TData, TValue>({
   columns,
-  data,
+  data
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [rowSelection, setRowSelection] = React.useState({});
-  const [selectedIds, setSelectedIds] = React.useState<string[]>([]);
-
-  const navigate = useNavigate();
+  const [globalFilter, setGlobalFilter] = React.useState<string>("");
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     onSortingChange: setSorting,
-    onRowSelectionChange: setRowSelection,
-    initialState: {
-      pagination: { pageSize: 5 },
-    },
+    globalFilterFn: "includesString", 
     state: {
       sorting,
-      rowSelection,
+      globalFilter
     },
+    onGlobalFilterChange: setGlobalFilter
   });
-
-  React.useEffect(() => {
-    const selectedRows = table.getSelectedRowModel().rows;
-    const ids = selectedRows.map((row) => row.original.driverId);
-    setSelectedIds(ids);
-  }, [rowSelection, table]);
 
   return (
     <div className="w-full flex flex-col">
-      <div className="flex justify-end pt-2 pb-4">
-        {selectedIds.length > 0 && <Button onClick={() => { navigate("/manage-offers/add", { state: { selectedIds } })}}>Add Custom Offer</Button>}
+      <div className="flex items-center py-4">
+        <Input
+          placeholder="Filter by payout ID / Date / Driver Name / Status / Transaction ID"
+          value={globalFilter}
+          onChange={e => table.setGlobalFilter(e.target.value)}
+          className="max-w-md"
+        />
       </div>
-      <div className="rounded-md border w-full">
+      <div className="rounded-md border">
         <Table>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
+            {table.getHeaderGroups().map(headerGroup => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
+                {headerGroup.headers.map(header => (
                   <TableHead key={header.id}>
                     {header.isPlaceholder
                       ? null
@@ -85,12 +76,12 @@ export function ChurnPredictionTable<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
+              table.getRowModel().rows.map(row => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
-                  {row.getVisibleCells().map((cell) => (
+                  {row.getVisibleCells().map(cell => (
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -102,20 +93,13 @@ export function ChurnPredictionTable<TData, TValue>({
               ))
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                <TableCell colSpan={columns.length} className="h-24 text-center">
                   No results.
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
-      </div>
-
-      <div className="space-x-2 py-4">
-        <DataTablePagination table={table} />
       </div>
     </div>
   );

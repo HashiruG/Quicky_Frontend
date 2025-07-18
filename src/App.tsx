@@ -17,6 +17,7 @@ import { AuthProvider } from "./features/authentication/AuthProvider";
 import ProtectedRoute from "./features/authentication/ProtectedRoute";
 import PayoutRequestPage from "./pages/PayoutRequestPage";
 import { Toaster } from "sonner";
+import CommissionRatePage from "./pages/CommissionRatePage";
 
 function App() {
   return (
@@ -64,10 +65,10 @@ function App() {
               />
               <Route path="/manage-offers/add" element={<AddNewOfferPage />} />
               <Route path="/register" element={<RegisterPage />} />
-              <Route path="/reset-password" element={<NewPasswordPage />} />
               <Route path="/payout-requests" element={<PayoutRequestPage />} />
+              <Route path="/commission-rates" element={<CommissionRatePage/>} />
             </Route>
-
+            <Route path="/reset-password" element={<NewPasswordPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           </Routes>
         </AuthProvider>

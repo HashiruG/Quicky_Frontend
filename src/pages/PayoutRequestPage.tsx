@@ -1,31 +1,30 @@
-import Layout from "@/features/dashboard/common/Layout";
-import { columns } from "@/features/dashboard/payouts/PayoutRequestColumns";
-import { PayoutRequestTable } from "@/features/dashboard/payouts/PayOutRequestTable";
+import Layout from "@/features/common/Layout";
+import { columns, PayoutRequest } from "@/features/payouts/PayoutRequestColumns";
+import { PayoutRequestTable } from "@/features/payouts/PayOutRequestTable";
+import { getPayoutsService } from "@/services/payouts/api";
+import { useEffect, useState } from "react";
 
 const PayoutRequestPage = () => {
+  const [data, setData] = useState<PayoutRequest[]>([]);
 
-    const data = [
-        {
-        payoutId: "12345",
-        driverName: "John Doe",
-        amount: 100,
-        requestedAt: "2023-10-01",
-        },
-        {
-        payoutId: "67890",
-        driverName: "Jane Smith",
-        amount: 200,
-        requestedAt: "2023-10-02",
-        },
-
-    ];
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await getPayoutsService();
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <>
       <Layout
         title="Payout Requests"
         aboveChildren={null}
-        children={<PayoutRequestTable columns={columns} data={data} />}
+        children={<PayoutRequestTable columns={columns()} data={data} />}
       ></Layout>
     </>
   );

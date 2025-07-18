@@ -1,14 +1,9 @@
-"use client";
-
 import * as React from "react";
 import {
   ColumnDef,
   SortingState,
-  ColumnFiltersState,
-  VisibilityState,
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
@@ -23,56 +18,64 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { DataTablePagination } from "../../../components/ui/pagination";
-import ColumnFilterInput from "@/features/dashboard/common/ColumnFilterInput";
+import { DataTablePagination } from "../../components/ui/pagination";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  filterableColumnId?: string;
 }
 
-export function DataTableV2<TData, TValue>({
+export function ChurnPredictionTable<TData extends { driverDetailsId: string; predictionId: string }, TValue>({
   columns,
-  data,
-  filterableColumnId,
+  data
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
+  const [selectedRowsInfo, setSelectedRowsInfo] = React.useState<
+    { driverDetailsId: number; predictionId: number }[]
+  >([]);
+
+  const navigate = useNavigate();
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    onSortingChange: setSorting,
+    onRowSelectionChange: setRowSelection,
     initialState: {
       pagination: { pageSize: 5 },
     },
     state: {
       sorting,
-      columnFilters,
-      columnVisibility,
+      rowSelection,
     },
   });
 
+  React.useEffect(() => {
+    const selectedRows = table.getSelectedRowModel().rows;
+    const rowsData = selectedRows.map((row) => ({
+      driverDetailsId: row.original.driverDetailsId,
+      predictionId: row.original.predictionId,
+    }));
+    setSelectedRowsInfo(rowsData);
+  }, [rowSelection, table]);
+
   return (
     <div className="w-full flex flex-col">
-      <div className="flex items-center py-4">
-        {filterableColumnId && (
-          <ColumnFilterInput
-            table={table}
-            columnId={filterableColumnId}
-            placeholder={`Filter by ${filterableColumnId}`}
-          />
+      <div className="flex justify-end pt-2 pb-4">
+        {selectedRowsInfo.length > 0 && (
+          <Button
+            onClick={() => {
+              navigate("/manage-offers/add", { state: { selectedRows: selectedRowsInfo } });
+            }}
+          >
+            Add Custom Offer
+          </Button>
         )}
       </div>
       <div className="rounded-md border w-full">

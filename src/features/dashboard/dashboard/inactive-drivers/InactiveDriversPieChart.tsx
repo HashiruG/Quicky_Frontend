@@ -1,6 +1,5 @@
-import * as React from "react";
-import { Label, Pie, PieChart, Sector } from "recharts";
-import { PieSectorDataItem } from "recharts/types/polar/Pie";
+import { useEffect, useState } from "react";
+import { Pie, PieChart, Label, Cell } from "recharts";
 
 import {
   Card,
@@ -17,99 +16,45 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import chartData from "./InactiveDriversPieChartDataSet";
+  chartData as fetchChartData,
+  InactiveDriversData,
+} from "@/services/dashboard/inactiveDrivers/InactiveDriversApi";
 
-const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  desktop: {
-    label: "Desktop",
-  },
-  mobile: {
-    label: "Mobile",
-  },
-  january: {
-    label: "January",
-    color: "hsl(var(--chart-1))",
-  },
-  february: {
-    label: "February",
-    color: "hsl(var(--chart-2))",
-  },
-  march: {
-    label: "March",
-    color: "hsl(var(--chart-3))",
-  },
-  april: {
-    label: "April",
-    color: "hsl(var(--chart-4))",
-  },
-  may: {
-    label: "May",
-    color: "hsl(var(--chart-5))",
-  },
-} satisfies ChartConfig;
+const chartConfig = {} satisfies ChartConfig;
+
+const COLORS = ["#EF4444", "#22C55E"];
 
 export function InactiveDriversPieChart() {
-  const id = "pie-interactive";
-  const [activeMonth, setActiveMonth] = React.useState(chartData[0].month);
+  const id = "pie-active-inactive";
+  const [data, setData] = useState<InactiveDriversData[]>([]);
 
-  const activeIndex = React.useMemo(
-    () => chartData.findIndex((item) => item.month === activeMonth),
-    [activeMonth]
-  );
-  const months = React.useMemo(() => chartData.map((item) => item.month), []);
+  useEffect(() => {
+    async function loadChartData() {
+      const result = await fetchChartData();
+      setData(result);
+    }
+
+    loadChartData();
+  }, []);
+
+  const chartData =
+    data.length > 0
+      ? [
+          { name: "Inactive", value: data[0].inactiveDriversCount },
+          { name: "Active", value: data[0].activeDriversCount },
+        ]
+      : [];
+
+  const total = chartData.reduce((sum, item) => sum + item.value, 0);
 
   return (
     <Card data-chart={id} className="flex flex-col">
       <ChartStyle id={id} config={chartConfig} />
-      <CardHeader className="flex-row items-start space-y-0 pb-0">
+      <CardHeader>
         <div className="grid gap-1">
-          <CardTitle>Pie Chart - Interactive</CardTitle>
-          <CardDescription>January - June 2024</CardDescription>
+          <CardTitle>Driver Status</CardTitle>
+          <CardDescription>Active vs Inactive Drivers</CardDescription>
         </div>
-        <Select value={activeMonth} onValueChange={setActiveMonth}>
-          <SelectTrigger
-            className="ml-auto h-7 w-[130px] rounded-lg pl-2.5"
-            aria-label="Select a value"
-          >
-            <SelectValue placeholder="Select month" />
-          </SelectTrigger>
-          <SelectContent align="end" className="rounded-xl">
-            {months.map((key) => {
-              const config = chartConfig[key as keyof typeof chartConfig];
-
-              if (!config) {
-                return null;
-              }
-
-              return (
-                <SelectItem
-                  key={key}
-                  value={key}
-                  className="rounded-lg [&_span]:flex"
-                >
-                  <div className="flex items-center gap-2 text-xs">
-                    <span
-                      className="flex h-3 w-3 shrink-0 rounded-sm"
-                      style={{
-                        backgroundColor: `var(--color-${key})`,
-                      }}
-                    />
-                    {config?.label}
-                  </div>
-                </SelectItem>
-              );
-            })}
-          </SelectContent>
-        </Select>
       </CardHeader>
       <CardContent className="flex flex-1 justify-center pb-0">
         <ChartContainer
@@ -124,25 +69,20 @@ export function InactiveDriversPieChart() {
             />
             <Pie
               data={chartData}
-              dataKey="desktop"
-              nameKey="month"
+              dataKey="value"
+              nameKey="name"
               innerRadius={60}
+              outerRadius={110}
               strokeWidth={5}
-              activeIndex={activeIndex}
-              activeShape={({
-                outerRadius = 0,
-                ...props
-              }: PieSectorDataItem) => (
-                <g>
-                  <Sector {...props} outerRadius={outerRadius + 10} />
-                  <Sector
-                    {...props}
-                    outerRadius={outerRadius + 25}
-                    innerRadius={outerRadius + 12}
-                  />
-                </g>
-              )}
+              activeIndex={-1}
+              label={({ name }) => name}
             >
+              {chartData.map((_entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
               <Label
                 content={({ viewBox }) => {
                   if (viewBox && "cx" in viewBox && "cy" in viewBox) {
@@ -158,14 +98,14 @@ export function InactiveDriversPieChart() {
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {chartData[activeIndex].desktop.toLocaleString()}
+                          {total}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          Total Drivers
                         </tspan>
                       </text>
                     );

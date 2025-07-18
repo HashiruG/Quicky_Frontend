@@ -1,12 +1,12 @@
-import Layout from "@/features/dashboard/common/Layout";
+import Layout from "@/features/common/Layout";
 import { useEffect, useState } from "react";
 import {
   InactiveDriversColumns,
   columns,
 } from "@/features/dashboard/dashboard/inactive-drivers/InactiveDriversColumns";
-import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
-import { getData } from "@/features/dashboard/dashboard/inactive-drivers/InactiveDriversDataSet";
+import { DataTableV2 } from "@/features/common/data-table-v2";
 import { InactiveDriversPieChart } from "@/features/dashboard/dashboard/inactive-drivers/InactiveDriversPieChart";
+import { getData } from "@/services/dashboard/inactiveDrivers/InactiveDriversApi";
 
 export default function InactiveDriversPagePage() {
   const [data, setData] = useState<InactiveDriversColumns[]>([]);

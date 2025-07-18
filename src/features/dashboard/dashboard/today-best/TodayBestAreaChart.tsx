@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import AmountFormatter from "../../common/AmountFormatter";
+import AmountFormatter from "../../../common/AmountFormatter";
 import {
   chartData,
   DriversEarningsData,

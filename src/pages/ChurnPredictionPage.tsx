@@ -1,9 +1,9 @@
-import { ChurnPredictionTable } from "@/features/dashboard/churn prediction/ChurnPredictionTable";
+import { ChurnPredictionTable } from "@/features/churn prediction/ChurnPredictionTable";
 import {
   columns,
   ChurnPredictionColumns,
-} from "@/features/dashboard/churn prediction/ChurnPredictionColumns";
-import Layout from "@/features/dashboard/common/Layout";
+} from "@/features/churn prediction/ChurnPredictionColumns";
+import Layout from "@/features/common/Layout";
 import { fetchChurnDriverService } from "@/services/churnPrediction/api";
 import { useEffect, useState } from "react";
 

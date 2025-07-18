@@ -76,7 +76,8 @@ const NewPasswordForm = () => {
       await passwordResetService(passwordResetRequest);
       navigate("/");
     } catch (error) {
-      setErrorMessage(error.message);
+      console.log(error);
+      setErrorMessage("An error occurred. Please try again later.");
     }
   };
 

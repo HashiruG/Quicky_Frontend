@@ -1,5 +1,5 @@
-import Layout from "@/features/dashboard/common/Layout";
-import NewOfferForm from "@/features/dashboard/offer management/NewOfferForm";
+import Layout from "@/features/common/Layout";
+import NewOfferForm from "@/features/offer management/NewOfferForm";
 
 const AddNewofferPage = () => {
   return (

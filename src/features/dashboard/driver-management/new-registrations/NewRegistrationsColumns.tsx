@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import SortButton from "../../common/SortButton";
+import SortButton from "../../../common/SortButton";
 import React from "react";
 import { NewRegistrationsColumns } from "./types";
 import MoreDriverRegistrationDetails from "./MoreDriverRegistrationDetails";
@@ -26,6 +26,14 @@ export const columns: ColumnDef<NewRegistrationsColumns>[] = [
   {
     accessorKey: "email",
     header: "Email",
+  },
+  {
+    accessorKey: "mobileNumber",
+    header: "MobileNumber",
+  },
+  {
+    accessorKey: "dateOfBirth",
+    header: "DateOfBirth",
   },
   {
     id: "actions",

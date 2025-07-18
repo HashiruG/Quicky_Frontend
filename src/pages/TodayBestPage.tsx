@@ -1,10 +1,10 @@
-import Layout from "@/features/dashboard/common/Layout";
+import Layout from "@/features/common/Layout";
 import { useEffect, useState } from "react";
 import {
   TodayBestColumns,
   columns,
 } from "@/features/dashboard/dashboard/today-best/TodayBestColumns";
-import { DataTableV2 } from "@/features/dashboard/common/data-table-v2";
+import { DataTableV2 } from "@/features/common/data-table-v2";
 import { getData } from "@/services/dashboard/todayBest/EarningsApi";
 import { TodayBestAreaChart } from "@/features/dashboard/dashboard/today-best/TodayBestAreaChart";
 
@@ -22,7 +22,7 @@ export default function NewRegistrationsPage() {
   return (
     <>
       <Layout
-        title="Today best"
+        title="Platform revenue"
         aboveChildren={<TodayBestAreaChart></TodayBestAreaChart>}
         children={
           <DataTableV2

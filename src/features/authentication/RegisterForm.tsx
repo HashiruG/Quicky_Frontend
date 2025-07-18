@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { registerService } from "../../services/authentication/api";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import axios from "axios";
 
 const RegisterForm = () => {
   const [registerInput, setRegisterInput] = useState({
@@ -48,21 +49,27 @@ const RegisterForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+     if (!emailRegex.test(registerInput.username)) {
+      setEmailValidity(false);
+      return;
+    }
+
     if (registerInput.password.trim().length < 6) {
       setPasswordValidity(false);
       return;
     }
 
-    if (!emailRegex.test(registerInput.username)) {
-      setEmailValidity(false);
-      return;
-    }
+   
 
     try {
       await registerService(registerInput);
       navigate("/");
     } catch (error) {
-      setErrorMessage(error.message);
+      if (error instanceof axios.AxiosError && error.response?.status === 409) {
+        setErrorMessage("Email already exists. Please try another one.");
+      }else {
+        setErrorMessage("An error occurred. Please try again later.");
+      }
     }
   };
 
@@ -113,7 +120,6 @@ const RegisterForm = () => {
               <Button
                 type="submit"
                 className="w-full"
-                disabled={!registerInput.username || !registerInput.password}
               >
                 Register
               </Button>

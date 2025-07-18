@@ -1,6 +1,6 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import Header from "@/features/dashboard/common/Header";
-import SideBarComponent from "@/features/dashboard/common/SideBarComponent";
+import Header from "@/features/common/Header";
+import SideBarComponent from "@/features/common/SideBarComponent";
 import React from "react";
 
 const Layout: React.FC<{

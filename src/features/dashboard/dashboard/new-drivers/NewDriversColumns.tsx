@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
-import SortButton from "../../common/SortButton";
-import MoreDriverDetails from "../../common/MoreDriverDetails";
+import SortButton from "../../../common/SortButton";
+import MoreDriverDetails from "../../../common/MoreDriverDetails";
 import React from "react";
 
 export type NewDriversColumns = {
@@ -50,6 +50,14 @@ export const columns: ColumnDef<NewDriversColumns>[] = [
   {
     accessorKey: "rating",
     header: ({ column }) => <SortButton column={column} label="Rating" />,
+  },
+  {
+    accessorKey: "mobileNumber",
+    header: "MobileNumber",
+  },
+  {
+    accessorKey: "dateOfBirth",
+    header: "DateOfBirth",
   },
 
   {

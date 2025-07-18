@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
-import SortButton from "../../common/SortButton";
+import SortButton from "../../../common/SortButton";
 import React from "react";
-import MoreDriverDetails from "../../common/MoreDriverDetails";
+import MoreDriverDetails from "../../../common/MoreDriverDetails";
 
 export type DriverProfilesColumns = {
   userDetailsId: number;
@@ -50,6 +50,14 @@ export const columns: ColumnDef<DriverProfilesColumns>[] = [
   {
     accessorKey: "rating",
     header: ({ column }) => <SortButton column={column} label="Rating" />,
+  },
+  {
+    accessorKey: "mobileNumber",
+    header: "MobileNumber",
+  },
+  {
+    accessorKey: "dateOfBirth",
+    header: "DateOfBirth",
   },
 
   {

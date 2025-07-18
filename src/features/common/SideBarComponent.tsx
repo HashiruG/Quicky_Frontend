@@ -10,7 +10,8 @@ import {
   Dot,
   UserPlus,
   LogOut,
-  DollarSign
+  DollarSign,
+  Percent
 } from "lucide-react";
 
 import {
@@ -34,7 +35,7 @@ const navItems = [
     icon: Gauge,
     subMenus: [
       {
-        name: "Today best",
+        name: "Platform revenue",
         url: "/dashboard/dashboard/today-best",
       },
       {
@@ -90,7 +91,12 @@ const navItems = [
     title: "Payout Requests",
     url: "/payout-requests",
     icon: DollarSign,
-  }
+  },
+   {
+    title: "Commission Rate",
+    url: "/commission-rates",
+    icon: Percent,
+  },
 ];
 
 const SideBarComponent = () => {

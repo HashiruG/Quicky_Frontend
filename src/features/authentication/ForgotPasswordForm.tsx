@@ -14,6 +14,7 @@ import { ThumbsUp } from "lucide-react";
 import { forgotPasswordService } from "@/services/authentication/api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const ForgotPasswordForm = () => {
   const [userName, setUserName] = useState("");
@@ -34,8 +35,8 @@ const ForgotPasswordForm = () => {
       setTimeout(() => {
         navigate("/");
       }, 7000);
-    } catch (error) {
-      if (error.response.status === 404) {
+    } catch (error: unknown) {
+      if (error instanceof axios.AxiosError && error.response?.status === 404) {
         setErrorMessage("No user found with the given username.");
       } else {
         setErrorMessage("An error occured, please try again later.");

@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
-import SortButton from "../../common/SortButton";
+import SortButton from "../../../common/SortButton";
 import React from "react";
-import MoreDriverDetails from "../../common/MoreDriverDetails";
+import MoreDriverDetails from "../../../common/MoreDriverDetails";
 
 export type TodayBestColumns = {
   userDetailsId: number;

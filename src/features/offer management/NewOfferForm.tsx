@@ -9,38 +9,67 @@ import { postOfferService } from "@/services/offerManangement/api";
 
 const NewOfferForm = () => {
   const location = useLocation();
-  const selectedIds = location.state?.selectedIds || [];
+  const [selectedRows] = useState(location.state?.selectedRows || []);
 
   const [offerTitle, setOfferTitle] = useState("");
   const [offerDescription, setOfferDescription] = useState("");
   const [discountPercentage, setDiscountPercentage] = useState("");
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formattedStartDate = startDate?.toISOString().split("T")[0];
     const formattedEndDate = endDate?.toISOString().split("T")[0];
 
+    if (
+      !offerTitle ||
+      !offerDescription ||
+      !discountPercentage ||
+      !startDate ||
+      !endDate
+    ) {
+      setErrorMsg("Please fill in all fields.");
+      return;
+    }
+
+    if (endDate < startDate) {
+      setErrorMsg("End date must be after start date.");
+      return;
+    }
+
+    if (endDate < new Date()) {
+      setErrorMsg("End date must be in the future.");
+      return;
+    }
+
+    const discount = parseFloat(discountPercentage);
+    if (isNaN(discount) || discount < 1 || discount > 100) {
+      setErrorMsg("Discount must be between 1 and 100.");
+      return;
+    }
+
     const offerData = {
       offerTitle,
       offerDescription,
-      discountPercentage,
+      discountPercentage: discount,
       startDate: formattedStartDate,
       endDate: formattedEndDate,
-      selectedIds,
+      selectedDrivers: selectedRows,
     };
 
     try {
-      postOfferService(offerData);
-
+      await postOfferService(offerData);
       setOfferTitle("");
       setOfferDescription("");
       setDiscountPercentage("");
       setStartDate(undefined);
       setEndDate(undefined);
+      setErrorMsg("");
     } catch (error) {
+      setErrorMsg("Error creating offer.");
       console.error("Error creating offer:", error);
     }
   };
@@ -52,7 +81,7 @@ const NewOfferForm = () => {
           <CardTitle className="text-2xl">Enter Offer Details</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-6">
             <div className="grid gap-2">
               <Label htmlFor="title">Offer Title</Label>
               <Input
@@ -60,8 +89,10 @@ const NewOfferForm = () => {
                 type="text"
                 placeholder="Enter the offer title"
                 value={offerTitle}
-                onChange={(e) => setOfferTitle(e.target.value)}
-                required
+                onChange={(e) => {
+                  setErrorMsg("");
+                  setOfferTitle(e.target.value);
+                }}
               />
             </div>
 
@@ -72,12 +103,14 @@ const NewOfferForm = () => {
                 type="text"
                 placeholder="Enter the offer description"
                 value={offerDescription}
-                onChange={(e) => setOfferDescription(e.target.value)}
-                required
+                onChange={(e) => {
+                  setErrorMsg("");
+                  setOfferDescription(e.target.value);
+                }}
               />
             </div>
 
-            <div className="flex gap-10">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-10">
               <div className="grid gap-2">
                 <Label>Start Date</Label>
                 <DatePicker date={startDate} setDate={setStartDate} />
@@ -95,14 +128,17 @@ const NewOfferForm = () => {
                 type="number"
                 placeholder="Enter the discount percentage"
                 value={discountPercentage}
-                onChange={(e) => setDiscountPercentage(e.target.value)}
-                required
+                onChange={(e) => {
+                  setErrorMsg("");
+                  setDiscountPercentage(e.target.value);
+                }}
               />
             </div>
 
             <Button type="submit" className="w-full">
               Add Offer
             </Button>
+            {errorMsg && <p className="text-red-500">{errorMsg}</p>}
           </div>
         </CardContent>
       </Card>
