@@ -27,10 +27,10 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
-export function ChurnPredictionTable<TData extends { driverDetailsId: string; predictionId: string }, TValue>({
-  columns,
-  data
-}: DataTableProps<TData, TValue>) {
+export function ChurnPredictionTable<
+  TData extends { driverDetailsId: number; predictionId: number },
+  TValue
+>({ columns, data }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [rowSelection, setRowSelection] = React.useState({});
   const [selectedRowsInfo, setSelectedRowsInfo] = React.useState<
@@ -55,12 +55,11 @@ export function ChurnPredictionTable<TData extends { driverDetailsId: string; pr
       rowSelection,
     },
   });
-
   React.useEffect(() => {
     const selectedRows = table.getSelectedRowModel().rows;
     const rowsData = selectedRows.map((row) => ({
-      driverDetailsId: row.original.driverDetailsId,
-      predictionId: row.original.predictionId,
+      driverDetailsId: Number(row.original.driverDetailsId),
+      predictionId: Number(row.original.predictionId),
     }));
     setSelectedRowsInfo(rowsData);
   }, [rowSelection, table]);
@@ -71,7 +70,9 @@ export function ChurnPredictionTable<TData extends { driverDetailsId: string; pr
         {selectedRowsInfo.length > 0 && (
           <Button
             onClick={() => {
-              navigate("/manage-offers/add", { state: { selectedRows: selectedRowsInfo } });
+              navigate("/manage-offers/add", {
+                state: { selectedRows: selectedRowsInfo },
+              });
             }}
           >
             Add Custom Offer

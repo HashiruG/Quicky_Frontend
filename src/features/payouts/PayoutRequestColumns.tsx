@@ -69,7 +69,7 @@ export const columns = (): ColumnDef<PayoutRequest>[] => [
           rel="noopener noreferrer"
           className="font-medium text-slate-800 underline"
         >
-          {id}
+          {String(id)}
         </a>
       );
     },

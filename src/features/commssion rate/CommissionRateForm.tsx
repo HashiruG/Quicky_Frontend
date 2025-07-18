@@ -38,6 +38,8 @@ const CommissionRateForm = () => {
       })
       .catch((err) => {
         setErrorMsg("Update failed.");
+        console.log(err);
+        
       });
   };
 
