@@ -125,7 +125,7 @@ const NewOfferForm = () => {
               <Label htmlFor="value">Discount (%) on Commission</Label>
               <Input
                 id="value"
-                type="number
+                type="number"
                 placeholder="Enter the discount percentage"
                 value={discountPercentage}
                 onChange={(e) => {
