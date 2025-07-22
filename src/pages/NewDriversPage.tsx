@@ -4,7 +4,7 @@ import {
   NewDriversColumns,
   columns,
 } from "@/features/dashboard/dashboard/new-drivers/NewDriversColumns";
-import { DataTableV2 } from "@/features/common/data-table-v2";
+import { DataTableV2 } from "@/features/common/data-table-v3";
 import { getData } from "@/services/dashboard/newDrivers/NewDriversApi";
 import { NewDriversBarChart } from "@/features/dashboard/dashboard/new-drivers/NewDriversBarChart";
 
@@ -24,13 +24,7 @@ export default function NewDriversPagePage() {
       <Layout
         title="New Drivers"
         aboveChildren={<NewDriversBarChart></NewDriversBarChart>}
-        children={
-          <DataTableV2
-            columns={columns}
-            data={data}
-            filterableColumnId="userDetailsId"
-          />
-        }
+        children={<DataTableV2 columns={columns} data={data} />}
       ></Layout>
     </>
   );

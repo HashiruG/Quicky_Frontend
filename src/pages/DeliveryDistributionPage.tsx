@@ -1,6 +1,6 @@
 import Layout from "@/features/common/Layout";
 import { useEffect, useState } from "react";
-import { DataTableV2 } from "@/features/common/data-table-v2";
+import { DataTableV2 } from "@/features/common/data-table-v3";
 import { DeliveryDistributionAreaChart } from "@/features/dashboard/dashboard/delivery-distribution/DeliveryDistributionAreaChart";
 import {
   columns,
@@ -26,13 +26,7 @@ export default function NewRegistrationsPage() {
         aboveChildren={
           <DeliveryDistributionAreaChart></DeliveryDistributionAreaChart>
         }
-        children={
-          <DataTableV2
-            columns={columns}
-            data={data}
-            filterableColumnId="userDetailsId"
-          />
-        }
+        children={<DataTableV2 columns={columns} data={data} />}
       ></Layout>
     </>
   );

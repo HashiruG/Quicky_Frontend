@@ -1,11 +1,11 @@
 import Layout from "@/features/common/Layout";
 import { useEffect, useState } from "react";
-import { DataTableV2 } from "@/features/common/data-table-v2";
+import { DataTableV2 } from "@/features/common/data-table-v3";
 import {
   columns,
   DeliveryColumns,
 } from "@/features/delivery management/DeliveryManagementColumns";
-import { getData } from "@/services/deliveryManagement/deliveryManagementApi";
+import { getData } from "@/services/deliveryManagement/DeliveryManagementApi";
 
 export default function DeliveryRecordsPage() {
   const [data, setData] = useState<DeliveryColumns[]>([]);
@@ -23,13 +23,7 @@ export default function DeliveryRecordsPage() {
       <Layout
         title="Delivery Orders"
         aboveChildren={null}
-        children={
-          <DataTableV2
-            columns={columns}
-            data={data}
-            filterableColumnId="deliveryId"
-          />
-        }
+        children={<DataTableV2 columns={columns} data={data} />}
       ></Layout>
     </>
   );
