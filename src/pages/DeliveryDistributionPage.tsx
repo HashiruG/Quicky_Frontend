@@ -22,7 +22,7 @@ export default function NewRegistrationsPage() {
   return (
     <>
       <Layout
-        title="Platform revenue"
+        title="Today Deliveries"
         aboveChildren={
           <DeliveryDistributionAreaChart></DeliveryDistributionAreaChart>
         }

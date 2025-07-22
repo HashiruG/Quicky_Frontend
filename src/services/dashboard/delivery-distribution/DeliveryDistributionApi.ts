@@ -4,7 +4,7 @@ import { DeliveryDistributionColumns } from "@/features/dashboard/dashboard/deli
 export async function getData(): Promise<DeliveryDistributionColumns[]> {
   try {
     const response = await api.get<DeliveryDistributionColumns[]>(
-      "/deliveries_count"
+      "/delivery_records/today"
     );
     return response.data;
   } catch (error) {
