@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
 import { Pie, PieChart, Label, Cell } from "recharts";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
@@ -46,14 +40,32 @@ export function InactiveDriversPieChart() {
       : [];
 
   const total = chartData.reduce((sum, item) => sum + item.value, 0);
+  let percentage = 0;
+
+  if (
+    data &&
+    data.length > 0 &&
+    typeof data[0].activeDriversCount === "number" &&
+    typeof data[0].inactiveDriversCount === "number"
+  ) {
+    const active = data[0].activeDriversCount;
+    const inactive = data[0].inactiveDriversCount;
+    const total = active + inactive;
+
+    if (total !== 0) {
+      percentage = (active / total) * 100;
+      percentage = parseFloat(percentage.toFixed(2));
+    }
+  }
 
   return (
     <Card data-chart={id} className="flex flex-col">
       <ChartStyle id={id} config={chartConfig} />
       <CardHeader>
         <div className="grid gap-1">
-          <CardTitle>Driver Status</CardTitle>
-          <CardDescription>Active vs Inactive Drivers</CardDescription>
+          <CardTitle>
+            Active Drivers: <span className="text-lime-500">{percentage}%</span>
+          </CardTitle>
         </div>
       </CardHeader>
       <CardContent className="flex flex-col items-center gap-4 pb-4">
