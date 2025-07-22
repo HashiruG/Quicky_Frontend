@@ -1,9 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
 import SortButton from "../common/SortButton";
-type Delivery = {
+export type DeliveryColumns = {
+  lastName: string;
+  firstName: string;
   id: string;
   date: string;
-  driverName: string;
   pickupLocation: string;
   dropoffLocation: string;
   deliveryValue: number;
@@ -11,34 +12,38 @@ type Delivery = {
   rating: number;
 };
 
-export const columns: ColumnDef<Delivery>[] = [
+export const columns: ColumnDef<DeliveryColumns>[] = [
   {
-    accessorKey: "id",
-    header: ({ column }) => <SortButton column={column} label="Id" />,
+    accessorKey: "deliveryId",
+    header: ({ column }) => <SortButton column={column} label="Delivery-Id" />,
   },
   {
-    accessorKey: "date",
+    accessorKey: "deliveryDate",
     header: ({ column }) => <SortButton column={column} label="Date" />,
   },
   {
-    accessorKey: "driverName",
-    header: "Driver Name",
+    header: "Name",
+    accessorKey: "Name",
+    cell: (info) => {
+      const row = info.row.original;
+      return `${row.firstName} ${row.lastName}`;
+    },
   },
   {
     accessorKey: "pickupLocation",
     header: "Pickup Location",
   },
   {
-    accessorKey: "dropoffLocation",
+    accessorKey: "dropOffLocation",
     header: "Dropoff Location",
   },
   {
-    accessorKey: "deliveryValue",
-    header: ({ column }) => <SortButton column={column} label="Delivery Value" />,
+    accessorKey: "deliveryFee",
+    header: ({ column }) => <SortButton column={column} label="DeliveryFee" />,
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "deliveryStatus",
+    header: "Delivery-Status",
   },
   {
     accessorKey: "rating",
