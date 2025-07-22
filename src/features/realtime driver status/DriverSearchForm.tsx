@@ -1,14 +1,20 @@
+"use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { searchDriverLocation } from "@/services/realtime driver status/RealtimeDriverStatusApi";
 
-const DriverSearchForm = () => {
+interface DriverSearchFormProps {
+  onLocationFetch: (lat: number, lng: number) => void;
+}
+
+const DriverSearchForm: React.FC<DriverSearchFormProps> = ({ onLocationFetch }) => {
   const [driverId, setDriverId] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!driverId) {
@@ -16,7 +22,18 @@ const DriverSearchForm = () => {
       return;
     }
 
-    console.log("Searching location for Driver ID:", driverId);
+    try {
+      const data = await searchDriverLocation(parseInt(driverId));
+      console.log("Fetched driver location data:", data);
+      if (data && data.length > 0) {
+        const { currentLatitude, currentLongitude } = data[0];
+        onLocationFetch(currentLatitude, currentLongitude);
+      } else {
+        setErrorMsg("No location data found for this driver.");
+      }
+    } catch (error) {
+      setErrorMsg("Failed to fetch driver location. Please try again.");
+    }
 
     setDriverId("");
   };
