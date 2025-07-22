@@ -55,7 +55,7 @@ export function TodayBestAreaChart() {
     return date >= startDate;
   });
 
-  const today = new Date().toISOString().split("T")[0]; // "YYYY-MM-DD"
+  const today = new Date().toLocaleDateString("sv-SE"); // "YYYY-MM-DD"
   const todayData = filteredData.find((item) => item.date === today);
   const todayAmount = todayData?.amount || 0;
 
