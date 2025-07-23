@@ -18,6 +18,7 @@ import ProtectedRoute from "./features/authentication/ProtectedRoute";
 import PayoutRequestPage from "./pages/PayoutRequestPage";
 import { Toaster } from "sonner";
 import CommissionRatePage from "./pages/CommissionRatePage";
+import DeliveryDistributionPage from "./pages/DeliveryDistributionPage";
 
 function App() {
   return (
@@ -30,6 +31,10 @@ function App() {
               <Route
                 path="/dashboard/dashboard/today-best"
                 element={<TodayBestPage />}
+              />
+              <Route
+                path="/dashboard/dashboard/delivery-distribution"
+                element={<DeliveryDistributionPage />}
               />
               <Route
                 path="/dashboard/dashboard/new-drivers"
@@ -66,7 +71,10 @@ function App() {
               <Route path="/manage-offers/add" element={<AddNewOfferPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/payout-requests" element={<PayoutRequestPage />} />
-              <Route path="/commission-rates" element={<CommissionRatePage/>} />
+              <Route
+                path="/commission-rates"
+                element={<CommissionRatePage />}
+              />
             </Route>
             <Route path="/reset-password" element={<NewPasswordPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />

@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
 import { Pie, PieChart, Label, Cell } from "recharts";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
@@ -22,7 +16,7 @@ import {
 
 const chartConfig = {} satisfies ChartConfig;
 
-const COLORS = ["#EF4444", "#22C55E"];
+const COLORS = ["#EF4444", "#22C55E"]; // Red: Inactive, Green: Active
 
 export function InactiveDriversPieChart() {
   const id = "pie-active-inactive";
@@ -46,17 +40,35 @@ export function InactiveDriversPieChart() {
       : [];
 
   const total = chartData.reduce((sum, item) => sum + item.value, 0);
+  let percentage = 0;
+
+  if (
+    data &&
+    data.length > 0 &&
+    typeof data[0].activeDriversCount === "number" &&
+    typeof data[0].inactiveDriversCount === "number"
+  ) {
+    const active = data[0].activeDriversCount;
+    const inactive = data[0].inactiveDriversCount;
+    const total = active + inactive;
+
+    if (total !== 0) {
+      percentage = (active / total) * 100;
+      percentage = parseFloat(percentage.toFixed(2));
+    }
+  }
 
   return (
     <Card data-chart={id} className="flex flex-col">
       <ChartStyle id={id} config={chartConfig} />
       <CardHeader>
         <div className="grid gap-1">
-          <CardTitle>Driver Status</CardTitle>
-          <CardDescription>Active vs Inactive Drivers</CardDescription>
+          <CardTitle>
+            Active Drivers: <span className="text-lime-500">{percentage}%</span>
+          </CardTitle>
         </div>
       </CardHeader>
-      <CardContent className="flex flex-1 justify-center pb-0">
+      <CardContent className="flex flex-col items-center gap-4 pb-4">
         <ChartContainer
           id={id}
           config={chartConfig}
@@ -75,7 +87,7 @@ export function InactiveDriversPieChart() {
               outerRadius={110}
               strokeWidth={5}
               activeIndex={-1}
-              label={({ name }) => name}
+              // label removed to avoid slice text
             >
               {chartData.map((_entry, index) => (
                 <Cell
@@ -115,6 +127,23 @@ export function InactiveDriversPieChart() {
             </Pie>
           </PieChart>
         </ChartContainer>
+
+        <div className="flex gap-6 mt-2">
+          <div className="flex items-center gap-2">
+            <span
+              className="w-4 h-4 rounded-full"
+              style={{ backgroundColor: "#22C55E" }}
+            ></span>
+            <span className="text-sm text-muted-foreground">Active</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span
+              className="w-4 h-4 rounded-full"
+              style={{ backgroundColor: "#EF4444" }}
+            ></span>
+            <span className="text-sm text-muted-foreground">Inactive</span>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );

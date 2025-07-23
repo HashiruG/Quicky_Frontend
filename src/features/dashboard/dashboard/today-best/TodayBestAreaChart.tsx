@@ -55,16 +55,19 @@ export function TodayBestAreaChart() {
     return date >= startDate;
   });
 
-  const today = new Date().toISOString().split("T")[0]; // "YYYY-MM-DD"
+  const today = new Date().toLocaleDateString("sv-SE"); // "YYYY-MM-DD"
   const todayData = filteredData.find((item) => item.date === today);
   const todayAmount = todayData?.amount || 0;
 
   return (
     <Card>
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
-        <div className="grid flex-1 gap-1 text-center sm:text-left">
-          <CardTitle>
-            <AmountFormatter amount={todayAmount}></AmountFormatter>
+        <div className="flex items-center">
+          <CardTitle className="flex items-center gap-1">
+            Today Total Revenue:{" "}
+            <span className="text-lime-500">
+              <AmountFormatter amount={todayAmount} />
+            </span>
           </CardTitle>
         </div>
 

@@ -4,7 +4,7 @@ import {
   TodayBestColumns,
   columns,
 } from "@/features/dashboard/dashboard/today-best/TodayBestColumns";
-import { DataTableV2 } from "@/features/common/data-table-v2";
+import { DataTableV2 } from "@/features/common/data-table-v3";
 import { getData } from "@/services/dashboard/todayBest/EarningsApi";
 import { TodayBestAreaChart } from "@/features/dashboard/dashboard/today-best/TodayBestAreaChart";
 
@@ -24,13 +24,7 @@ export default function NewRegistrationsPage() {
       <Layout
         title="Platform revenue"
         aboveChildren={<TodayBestAreaChart></TodayBestAreaChart>}
-        children={
-          <DataTableV2
-            columns={columns}
-            data={data}
-            filterableColumnId="userDetailsId"
-          />
-        }
+        children={<DataTableV2 columns={columns} data={data} />}
       ></Layout>
     </>
   );
