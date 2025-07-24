@@ -17,7 +17,8 @@ export const columns: ColumnDef<NewRegistrationsColumns>[] = [
   },
   {
     header: "Name",
-    accessorKey: "Name",
+    accessorFn: (row) => `${row.firstName} ${row.lastName}`,
+    id: "fullName",
     cell: (info) => {
       const row = info.row.original;
       return `${row.firstName} ${row.lastName}`;
