@@ -1,5 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from "@/components/ui/badge"
+
 
 export type ChurnPredictionColumns = {
   predictionId: number;
@@ -51,8 +53,20 @@ export const columns: ColumnDef<ChurnPredictionColumns>[] = [
     accessorKey: "city",
     header: "Based city",
   },
-   {
-    accessorKey: "status",
-    header: "Status",
+  {
+  accessorKey: "status",
+  header: "Status",
+  cell: ({ row }) => {
+    const status = row.getValue("status") as string;
+
+    return (
+      <Badge
+        variant={status === "Not Incentivized" ? "destructive" : "default"}
+        className={status === "Not Incentivized" ? "bg-red-500 text-white" : "bg-green-500 text-white"}
+      >
+        {status}
+      </Badge>
+    );
   },
+}
 ];

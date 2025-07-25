@@ -48,7 +48,7 @@ export function ChurnPredictionTable<
     onSortingChange: setSorting,
     onRowSelectionChange: setRowSelection,
     initialState: {
-      pagination: { pageSize: 5 },
+      pagination: { pageSize: 10 },
     },
     state: {
       sorting,
