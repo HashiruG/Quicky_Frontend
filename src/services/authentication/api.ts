@@ -15,8 +15,10 @@ export const loginService = async (loginInput: {
 export const registerService = async (registerInput: {
   username: string;
   password: string;
+  role: string;
+  name: string;
 }) => {
-  const response = await axios.post(
+  const response = await api.post(
     "http://localhost:8080/auth/register",
     registerInput
   );
@@ -38,5 +40,16 @@ export const forgotPasswordService = async (forgotPasswordRequest: {
     "/auth/forgot-password",
     forgotPasswordRequest
   );
+  return response;
+};
+
+
+export const getAdminsService = async () => {
+  const response = await api.get("/auth/register/view-admins");
+  return response;
+}
+
+export const removeAdminService = async (username: string) => {
+  const response = await api.delete(`/auth/register/delete-admin/${username}`);
   return response;
 };
