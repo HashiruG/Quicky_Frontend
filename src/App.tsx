@@ -19,6 +19,7 @@ import PayoutRequestPage from "./pages/PayoutRequestPage";
 import { Toaster } from "sonner";
 import CommissionRatePage from "./pages/CommissionRatePage";
 import DeliveryDistributionPage from "./pages/DeliveryDistributionPage";
+import RegisteredAdminsPage from "./pages/RegisteredAdminsPage";
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
               />
               <Route path="/manage-offers/add" element={<AddNewOfferPage />} />
               <Route path="/register" element={<RegisterPage />} />
+              <Route path="/register/view-admins" element={<RegisteredAdminsPage />} />
               <Route path="/payout-requests" element={<PayoutRequestPage />} />
               <Route
                 path="/commission-rates"
