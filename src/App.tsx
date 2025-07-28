@@ -19,6 +19,7 @@ import PayoutRequestPage from "./pages/PayoutRequestPage";
 import { Toaster } from "sonner";
 import CommissionRatePage from "./pages/CommissionRatePage";
 import DeliveryDistributionPage from "./pages/DeliveryDistributionPage";
+import BlacklistPage from "./pages/BlacklistPage";
 
 function App() {
   return (
@@ -55,6 +56,10 @@ function App() {
               <Route
                 path="/driver-management/new-registrations"
                 element={<NewRegistrationsPage />}
+              />
+              <Route
+                path="/driver-management/blacklist"
+                element={<BlacklistPage />}
               />
               <Route
                 path="/delivery-management"

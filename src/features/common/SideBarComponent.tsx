@@ -70,6 +70,10 @@ const navItems = [
         name: "New registrations",
         url: "/driver-management/new-registrations",
       },
+      {
+        name: "Blacklist",
+        url: "/driver-management/blacklist",
+      },
     ],
   },
   {

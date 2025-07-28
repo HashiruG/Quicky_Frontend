@@ -13,4 +13,14 @@ export type NewRegistrationsColumns = {
   licenseBackURL: string;
   email: string;
   mobileNumber: string;
+
+  // Vehicle fields
+  vehicleId: number;
+  numberPlate: string;
+  vehicleType: string;
+  vehicleFrontURL: string;
+  vehicleBackURL: string;
+  vehicleSideURL: string;
+  vehicleRevenueLicenseURL: string;
+  vehicleBookURL: string;
 };
