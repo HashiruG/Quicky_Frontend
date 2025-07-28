@@ -12,6 +12,7 @@ import {
   LogOut,
   DollarSign,
   Percent,
+  Eye,
 } from "lucide-react";
 
 import {
@@ -27,6 +28,7 @@ import {
 import { Collapsible, CollapsibleTrigger } from "@radix-ui/react-collapsible";
 import { CollapsibleContent } from "@/components/ui/collapsible";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/features/authentication/AuthProvider";
 
 const navItems = [
   {
@@ -109,6 +111,12 @@ const navItems = [
 
 const SideBarComponent = () => {
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <Sidebar className="top-14 ">
@@ -162,18 +170,24 @@ const SideBarComponent = () => {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="bg-slate-950 text-white sm:pb-14">
-        <SidebarMenuButton>
-          <Link to="/register" className="flex items-center">
-            <UserPlus size={20} />
-            <span className="ml-2">Register</span>
-          </Link>
-        </SidebarMenuButton>
-        <SidebarMenuButton
-          onClick={() => {
-            localStorage.removeItem("token");
-            navigate("/");
-          }}
-        >
+        {user && user.role === "SUPER_ADMIN" && (
+          <>
+            <SidebarMenuButton>
+              <Link to="/register" className="flex items-center">
+                <UserPlus size={20} />
+                <span className="ml-2">Register New Admin</span>
+              </Link>
+            </SidebarMenuButton>
+            <SidebarMenuButton>
+              <Link to="/register/view-admins" className="flex items-center">
+                <Eye size={20} />
+                <span className="ml-2">View Registered Admins</span>
+              </Link>
+            </SidebarMenuButton>
+          </>
+        )}
+
+        <SidebarMenuButton onClick={handleLogout}>
           <LogOut size={20} />
           <span className="ml-2">Log Out</span>
         </SidebarMenuButton>

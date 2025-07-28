@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DatePicker } from "./DatePicker";
+import { Toaster, toast } from 'sonner'
 import { postOfferService } from "@/services/offerManangement/api";
 
 const NewOfferForm = () => {
@@ -68,6 +69,11 @@ const NewOfferForm = () => {
       setStartDate(undefined);
       setEndDate(undefined);
       setErrorMsg("");
+      toast('👍 Offer created successfully!', {
+        duration: 3000,
+      });
+      
+
     } catch (error) {
       setErrorMsg("Error creating offer.");
       console.error("Error creating offer:", error);
@@ -76,6 +82,7 @@ const NewOfferForm = () => {
 
   return (
     <form className="w-full" onSubmit={handleSubmit}>
+      <Toaster position="top-right" />
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">Enter Offer Details</CardTitle>

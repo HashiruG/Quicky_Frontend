@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
+import { Badge } from "@/components/ui/badge"
 
 export type PayoutRequest = {
   payoutId: string;
@@ -47,10 +48,6 @@ export const columns = (): ColumnDef<PayoutRequest>[] => [
     enableGlobalFilter: false,
   },
   {
-    accessorKey: "status",
-    header: "Status",
-  },
-  {
     accessorKey: "driverMobile",
     header: "Driver Mobile",
     enableGlobalFilter: false,
@@ -74,4 +71,20 @@ export const columns = (): ColumnDef<PayoutRequest>[] => [
       );
     },
   },
+   {
+  accessorKey: "status",
+  header: "Status",
+  cell: ({ row }) => {
+    const status = row.getValue("status") as string;
+
+    return (
+      <Badge
+        variant={status === "Failed" ? "destructive" : "default"}
+        className={status === "Failed" ? "bg-red-500 text-white" : "bg-green-500 text-white"}
+      >
+        {status}
+      </Badge>
+    );
+  },
+}
 ];
