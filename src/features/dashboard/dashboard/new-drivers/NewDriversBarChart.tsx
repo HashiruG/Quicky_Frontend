@@ -16,7 +16,7 @@ import {
 const chartConfig = {
   drivers: {
     label: "Drivers",
-    color: "hsl(var(--chart-2))",
+    color: "#020617",
   },
 } satisfies ChartConfig;
 
@@ -65,8 +65,8 @@ export function NewDriversBarChart() {
       <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
           <CardTitle>
-            <span className="text-lime-500">{latestMonthDriversCount}</span> new
-            drivers in this month
+            <span style={{ color: "#7a8ea3" }}>{latestMonthDriversCount}</span>{" "}
+            new drivers in this month
           </CardTitle>
         </div>
         <div className="flex">
@@ -117,7 +117,7 @@ export function NewDriversBarChart() {
                 />
               }
             />
-            <Bar dataKey="drivers" fill="var(--color-drivers)" />
+            <Bar dataKey="drivers" fill="#020617" />
           </BarChart>
         </ChartContainer>
       </CardContent>

@@ -25,6 +25,16 @@ export type TodayBestColumns = {
   walletBalance: number;
   rating: number;
   earnings: number;
+
+  // Vehicle fields
+  vehicleId: number;
+  numberPlate: string;
+  vehicleType: string;
+  vehicleFrontURL: string;
+  vehicleBackURL: string;
+  vehicleSideURL: string;
+  vehicleRevenueLicenseURL: string;
+  vehicleBookURL: string;
 };
 
 export const columns: ColumnDef<TodayBestColumns>[] = [
@@ -38,7 +48,8 @@ export const columns: ColumnDef<TodayBestColumns>[] = [
   },
   {
     header: "Name",
-    accessorKey: "Name",
+    accessorFn: (row) => `${row.firstName} ${row.lastName}`,
+    id: "fullName",
     cell: (info) => {
       const row = info.row.original;
       return `${row.firstName} ${row.lastName}`;

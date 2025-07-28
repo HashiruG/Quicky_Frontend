@@ -16,7 +16,7 @@ import {
 
 const chartConfig = {} satisfies ChartConfig;
 
-const COLORS = ["#EF4444", "#22C55E"]; // Red: Inactive, Green: Active
+const COLORS = ["#7a8ea3", "#020617"];
 
 export function InactiveDriversPieChart() {
   const id = "pie-active-inactive";
@@ -64,7 +64,8 @@ export function InactiveDriversPieChart() {
       <CardHeader>
         <div className="grid gap-1">
           <CardTitle>
-            Active Drivers: <span className="text-lime-500">{percentage}%</span>
+            Active Drivers:{" "}
+            <span style={{ color: "#7a8ea3" }}>{percentage}%</span>
           </CardTitle>
         </div>
       </CardHeader>
@@ -132,14 +133,14 @@ export function InactiveDriversPieChart() {
           <div className="flex items-center gap-2">
             <span
               className="w-4 h-4 rounded-full"
-              style={{ backgroundColor: "#22C55E" }}
+              style={{ backgroundColor: "#020617" }}
             ></span>
             <span className="text-sm text-muted-foreground">Active</span>
           </div>
           <div className="flex items-center gap-2">
             <span
               className="w-4 h-4 rounded-full"
-              style={{ backgroundColor: "#EF4444" }}
+              style={{ backgroundColor: "#7a8ea3" }}
             ></span>
             <span className="text-sm text-muted-foreground">Inactive</span>
           </div>

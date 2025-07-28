@@ -16,6 +16,8 @@ import {
   acceptDriver,
   rejectDriver,
 } from "@/services/driverManagement/newRegistrations/NewRegistrationsApi";
+import LicenseDetails from "./LicenseDetails";
+import VehicleDetails from "./VehicleDetails";
 
 type MoreDriverRegistrationDetailsProps = {
   data: NewRegistrationsColumns;
@@ -58,6 +60,9 @@ const MoreDriverRegistrationDetails: React.FC<
     }
   };
 
+  const [licenseDialogOpen, setLicenseDialogOpen] = useState(false);
+  const [vehicleDialogOpen, setVehicleDialogOpen] = useState(false);
+
   return (
     <>
       <Dialog open={open} onOpenChange={setOpen}>
@@ -98,31 +103,6 @@ const MoreDriverRegistrationDetails: React.FC<
                 data.district}
             </p>
             <p>
-              <strong>License Number:</strong> {data.licenseNumber}
-            </p>
-            <p>
-              <strong>License Front:</strong>{" "}
-              <a
-                href={data.licenseFrontURL}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "blue" }}
-              >
-                View Image
-              </a>
-            </p>
-            <p>
-              <strong>License Back:</strong>{" "}
-              <a
-                href={data.licenseBackURL}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "blue" }}
-              >
-                View Image
-              </a>
-            </p>
-            <p>
               <strong>Email:</strong>{" "}
               <a
                 href={`mailto:${data.email}`}
@@ -139,6 +119,36 @@ const MoreDriverRegistrationDetails: React.FC<
               >
                 {data.mobileNumber}
               </a>
+            </p>
+            <p className="flex items-center gap-2">
+              <strong>License Details:</strong>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setLicenseDialogOpen(true)}
+              >
+                View
+              </Button>
+              <LicenseDetails
+                data={data}
+                open={licenseDialogOpen}
+                setOpen={setLicenseDialogOpen}
+              />
+            </p>
+            <p className="flex items-center gap-2">
+              <strong>Vehicle Details:</strong>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setVehicleDialogOpen(true)}
+              >
+                View
+              </Button>
+              <VehicleDetails
+                data={data}
+                open={vehicleDialogOpen}
+                setOpen={setVehicleDialogOpen}
+              />
             </p>
           </div>
           <DialogFooter className="p-0">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,6 +9,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import LicenseDetails from "./LicenseDetails";
+import VehicleDetails from "./VehicleDetails";
 
 type DriverData = {
   userDetailsId?: number;
@@ -32,6 +34,16 @@ type DriverData = {
   walletBalance?: number;
   rating?: number;
   earnings?: number;
+
+  // Vehicle fields
+  vehicleId?: number;
+  numberPlate?: string;
+  vehicleType?: string;
+  vehicleFrontURL?: string;
+  vehicleBackURL?: string;
+  vehicleSideURL?: string;
+  vehicleRevenueLicenseURL?: string;
+  vehicleBookURL?: string;
 };
 
 type MoreDriverDetailsProps = {
@@ -49,6 +61,9 @@ const MoreDriverDetails: React.FC<MoreDriverDetailsProps> = ({
   description1,
   dataName,
 }) => {
+  const [licenseDialogOpen, setLicenseDialogOpen] = useState(false);
+  const [vehicleDialogOpen, setVehicleDialogOpen] = useState(false);
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -85,31 +100,6 @@ const MoreDriverDetails: React.FC<MoreDriverDetailsProps> = ({
               data.city +
               ", " +
               data.district}
-          </p>
-          <p>
-            <strong>License Number:</strong> {data.licenseNumber}
-          </p>
-          <p>
-            <strong>License Front:</strong>{" "}
-            <a
-              href={data.licenseFrontURL}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "blue" }}
-            >
-              View Image
-            </a>
-          </p>
-          <p>
-            <strong>License Back:</strong>{" "}
-            <a
-              href={data.licenseBackURL}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "blue" }}
-            >
-              View Image
-            </a>
           </p>
           <p>
             <strong>Email:</strong>{" "}
@@ -158,6 +148,36 @@ const MoreDriverDetails: React.FC<MoreDriverDetailsProps> = ({
               <strong>{description1}</strong> {data[dataName]}
             </p>
           )}
+          <p className="flex items-center gap-2">
+            <strong>License Details:</strong>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setLicenseDialogOpen(true)}
+            >
+              View
+            </Button>
+            <LicenseDetails
+              data={data}
+              open={licenseDialogOpen}
+              setOpen={setLicenseDialogOpen}
+            />
+          </p>
+          <p className="flex items-center gap-2">
+            <strong>Vehicle Details:</strong>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setVehicleDialogOpen(true)}
+            >
+              View
+            </Button>
+            <VehicleDetails
+              data={data}
+              open={vehicleDialogOpen}
+              setOpen={setVehicleDialogOpen}
+            />
+          </p>
         </div>
         <DialogFooter className="p-0">
           <Button onClick={() => setOpen(false)}>Close</Button>
