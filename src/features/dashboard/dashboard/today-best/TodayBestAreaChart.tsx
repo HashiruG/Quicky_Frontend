@@ -29,7 +29,7 @@ const chartConfig = {
   },
   income: {
     label: "Income",
-    color: "hsl(var(--chart-2))",
+    color: "#020617",
   },
 } satisfies ChartConfig;
 
@@ -55,16 +55,19 @@ export function TodayBestAreaChart() {
     return date >= startDate;
   });
 
-  const today = new Date().toISOString().split("T")[0]; // "YYYY-MM-DD"
+  const today = new Date().toLocaleDateString("sv-SE"); // "YYYY-MM-DD"
   const todayData = filteredData.find((item) => item.date === today);
   const todayAmount = todayData?.amount || 0;
 
   return (
     <Card>
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
-        <div className="grid flex-1 gap-1 text-center sm:text-left">
-          <CardTitle>
-            <AmountFormatter amount={todayAmount}></AmountFormatter>
+        <div className="flex items-center">
+          <CardTitle className="flex items-center gap-1">
+            Today Total Revenue:{" "}
+            <span style={{ color: "#7a8ea3" }}>
+              <AmountFormatter amount={todayAmount} />
+            </span>
           </CardTitle>
         </div>
 
@@ -96,16 +99,8 @@ export function TodayBestAreaChart() {
           <AreaChart data={filteredData}>
             <defs>
               <linearGradient id="fillIncome" x1="0" y1="0" x2="0" y2="1">
-                <stop
-                  offset="5%"
-                  stopColor="var(--color-income)"
-                  stopOpacity={0.8}
-                />
-                <stop
-                  offset="95%"
-                  stopColor="var(--color-income)"
-                  stopOpacity={0.1}
-                />
+                <stop offset="5%" stopColor="#020617" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#020617" stopOpacity={0.1} />
               </linearGradient>
             </defs>
             <CartesianGrid vertical={false} />
@@ -141,7 +136,7 @@ export function TodayBestAreaChart() {
               dataKey="amount"
               type="natural"
               fill="url(#fillIncome)"
-              stroke="var(--color-income)"
+              stroke="#020617"
               stackId="a"
             />
             <ChartLegend content={<ChartLegendContent />} />

@@ -4,7 +4,7 @@ import {
   InactiveDriversColumns,
   columns,
 } from "@/features/dashboard/dashboard/inactive-drivers/InactiveDriversColumns";
-import { DataTableV2 } from "@/features/common/data-table-v2";
+import { DataTableV2 } from "@/features/common/data-table-v3";
 import { InactiveDriversPieChart } from "@/features/dashboard/dashboard/inactive-drivers/InactiveDriversPieChart";
 import { getData } from "@/services/dashboard/inactiveDrivers/InactiveDriversApi";
 
@@ -24,9 +24,7 @@ export default function InactiveDriversPagePage() {
       <Layout
         title="Inactive Drivers"
         aboveChildren={<InactiveDriversPieChart></InactiveDriversPieChart>}
-        children={
-          <DataTableV2 columns={columns} data={data} filterableColumnId="id" />
-        }
+        children={<DataTableV2 columns={columns} data={data} />}
       ></Layout>
     </>
   );

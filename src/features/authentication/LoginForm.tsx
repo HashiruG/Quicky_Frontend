@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginService } from "@/services/authentication/api";
+import { useAuth } from "./AuthProvider";
 import axios from "axios";
 
 const LoginForm = () => {
@@ -18,6 +19,7 @@ const LoginForm = () => {
   const [passwordValidity, setPasswordValidity] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleEmailChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     setErrorMessage("");
@@ -50,7 +52,7 @@ const LoginForm = () => {
 
     try {
       const response = await loginService(loginInput);
-      localStorage.setItem("token", response.data.token);
+      login(response.data.token);
       navigate("/dashboard/dashboard/today-best");
     } catch (error:unknown) {
       if(error instanceof axios.AxiosError && error.response?.status === 401) {

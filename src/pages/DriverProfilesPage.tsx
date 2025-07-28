@@ -4,7 +4,7 @@ import {
   DriverProfilesColumns,
   columns,
 } from "@/features/dashboard/driver-management/driver-profiles/DriverProfilesColumns";
-import { DataTableV2 } from "@/features/common/data-table-v2";
+import { DataTableV2 } from "@/features/common/data-table-v3";
 import { getData } from "@/services/driverManagement/driverProfiles/DriverProfilesApi";
 
 export default function DriverProfilesPage() {
@@ -23,13 +23,7 @@ export default function DriverProfilesPage() {
       <Layout
         title="Driver Profiles"
         aboveChildren={null}
-        children={
-          <DataTableV2
-            columns={columns}
-            data={data}
-            filterableColumnId="userDetailsId"
-          />
-        }
+        children={<DataTableV2 columns={columns} data={data} />}
       ></Layout>
     </>
   );

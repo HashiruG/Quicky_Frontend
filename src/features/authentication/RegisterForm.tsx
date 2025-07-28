@@ -8,15 +8,32 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { registerService } from "../../services/authentication/api";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
 
+type RegisterInput = {
+  username: string;
+  password: string;
+  role: string;
+  name: string;
+};
+
 const RegisterForm = () => {
-  const [registerInput, setRegisterInput] = useState({
+  const [registerInput, setRegisterInput] = useState<RegisterInput>({
     username: "",
     password: "",
+    role: "",
+    name: "",
   });
   const [passwordValidity, setPasswordValidity] = useState(true);
   const [emailValidity, setEmailValidity] = useState(true);
@@ -27,29 +44,25 @@ const RegisterForm = () => {
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailValidity(true);
     setErrorMessage("");
-    setRegisterInput((prevValue) => {
-      return {
-        ...prevValue,
-        username: e.target.value,
-      };
-    });
+    setRegisterInput((prevValue) => ({
+      ...prevValue,
+      username: e.target.value,
+    }));
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordValidity(true);
     setErrorMessage("");
-    setRegisterInput((prevValue) => {
-      return {
-        ...prevValue,
-        password: e.target.value,
-      };
-    });
+    setRegisterInput((prevValue) => ({
+      ...prevValue,
+      password: e.target.value,
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-     if (!emailRegex.test(registerInput.username)) {
+    if (!emailRegex.test(registerInput.username)) {
       setEmailValidity(false);
       return;
     }
@@ -59,7 +72,12 @@ const RegisterForm = () => {
       return;
     }
 
-   
+    if (!registerInput.role) {
+      setErrorMessage("Please select a role.");
+      return;
+    }
+
+    console.log("Registering user:", registerInput);
 
     try {
       await registerService(registerInput);
@@ -67,7 +85,7 @@ const RegisterForm = () => {
     } catch (error) {
       if (error instanceof axios.AxiosError && error.response?.status === 409) {
         setErrorMessage("Email already exists. Please try another one.");
-      }else {
+      } else {
         setErrorMessage("An error occurred. Please try again later.");
       }
     }
@@ -83,6 +101,22 @@ const RegisterForm = () => {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-8">
+              <div className="grid gap-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Enter your name here"
+                  required
+                  value={registerInput.name}
+                  onChange={(e) =>
+                    setRegisterInput((prev) => ({
+                      ...prev,
+                      name: e.target.value,
+                    }))
+                  }
+                />
+              </div>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -117,10 +151,31 @@ const RegisterForm = () => {
                   </p>
                 )}
               </div>
-              <Button
-                type="submit"
-                className="w-full"
-              >
+              <div className="grid gap-2">
+                <div className="flex items-center">
+                  <Label htmlFor="role">Role</Label>
+                </div>
+                <Select
+                  value={registerInput.role}
+                  onValueChange={(value) =>
+                    setRegisterInput((prev) => ({
+                      ...prev,
+                      role: value,
+                    }))
+                  }
+                >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select a Role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="ADMIN">Admin</SelectItem>
+                      <SelectItem value="SUPER_ADMIN">Super Admin</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+              <Button type="submit" className="w-full">
                 Register
               </Button>
               {errorMessage && (
