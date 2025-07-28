@@ -13,6 +13,8 @@ import { toast } from "sonner";
 import ConfirmActionDialog from "../new-registrations/ConfirmActionDialog";
 import { blacklistDriver } from "@/services/driverManagement/driverProfiles/DriverProfilesApi";
 import { DriverProfilesColumns } from "./DriverProfilesColumns";
+import VehicleDetails from "./VehicleDetails";
+import LicenseDetails from "./LicenseDetails";
 
 type MoreDriverRegistrationDetailsProps = {
   data: DriverProfilesColumns;
@@ -40,6 +42,9 @@ const MoreDriverRegistrationDetails: React.FC<
       toast.error("Error occurred while processing.");
     }
   };
+
+  const [licenseDialogOpen, setLicenseDialogOpen] = useState(false);
+  const [vehicleDialogOpen, setVehicleDialogOpen] = useState(false);
 
   return (
     <>
@@ -81,31 +86,6 @@ const MoreDriverRegistrationDetails: React.FC<
                 data.district}
             </p>
             <p>
-              <strong>License Number:</strong> {data.licenseNumber}
-            </p>
-            <p>
-              <strong>License Front:</strong>{" "}
-              <a
-                href={data.licenseFrontURL}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "blue" }}
-              >
-                View Image
-              </a>
-            </p>
-            <p>
-              <strong>License Back:</strong>{" "}
-              <a
-                href={data.licenseBackURL}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "blue" }}
-              >
-                View Image
-              </a>
-            </p>
-            <p>
               <strong>Email:</strong>{" "}
               <a
                 href={`mailto:${data.email}`}
@@ -122,6 +102,36 @@ const MoreDriverRegistrationDetails: React.FC<
               >
                 {data.mobileNumber}
               </a>
+            </p>
+            <p className="flex items-center gap-2">
+              <strong>License Details:</strong>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setLicenseDialogOpen(true)}
+              >
+                View
+              </Button>
+              <LicenseDetails
+                data={data}
+                open={licenseDialogOpen}
+                setOpen={setLicenseDialogOpen}
+              />
+            </p>
+            <p className="flex items-center gap-2">
+              <strong>Vehicle Details:</strong>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setVehicleDialogOpen(true)}
+              >
+                View
+              </Button>
+              <VehicleDetails
+                data={data}
+                open={vehicleDialogOpen}
+                setOpen={setVehicleDialogOpen}
+              />
             </p>
           </div>
           <DialogFooter className="p-0">

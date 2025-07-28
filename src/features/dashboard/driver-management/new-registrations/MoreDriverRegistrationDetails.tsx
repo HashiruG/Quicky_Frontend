@@ -17,6 +17,7 @@ import {
   rejectDriver,
 } from "@/services/driverManagement/newRegistrations/NewRegistrationsApi";
 import LicenseDetails from "./LicenseDetails";
+import VehicleDetails from "./VehicleDetails";
 
 type MoreDriverRegistrationDetailsProps = {
   data: NewRegistrationsColumns;
@@ -143,7 +144,7 @@ const MoreDriverRegistrationDetails: React.FC<
               >
                 View
               </Button>
-              <LicenseDetails
+              <VehicleDetails
                 data={data}
                 open={vehicleDialogOpen}
                 setOpen={setVehicleDialogOpen}

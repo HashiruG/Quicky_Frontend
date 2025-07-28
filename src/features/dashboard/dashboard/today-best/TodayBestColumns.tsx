@@ -25,6 +25,16 @@ export type TodayBestColumns = {
   walletBalance: number;
   rating: number;
   earnings: number;
+
+  // Vehicle fields
+  vehicleId: number;
+  numberPlate: string;
+  vehicleType: string;
+  vehicleFrontURL: string;
+  vehicleBackURL: string;
+  vehicleSideURL: string;
+  vehicleRevenueLicenseURL: string;
+  vehicleBookURL: string;
 };
 
 export const columns: ColumnDef<TodayBestColumns>[] = [
