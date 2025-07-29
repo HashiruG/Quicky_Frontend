@@ -39,14 +39,18 @@ const MoreDriverRegistrationDetails: React.FC<
     try {
       if (actionType === "accept") {
         await acceptDriver(data.userDetailsId, data);
-        toast.success("Driver accepted", {});
+        toast("👍 Driver accepted successfully!", {
+          duration: 3000,
+        });
         console.log("Accepted:", data);
         setTimeout(() => {
           window.location.reload();
         }, 2000);
       } else if (actionType === "reject") {
         await rejectDriver(data.userDetailsId);
-        toast.error("Driver rejected", {});
+        toast("👍 Driver rejected successfully!", {
+          duration: 3000,
+        });
         console.log("Rejected:", data);
         setTimeout(() => {
           window.location.reload();

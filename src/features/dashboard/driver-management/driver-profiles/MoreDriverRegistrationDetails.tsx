@@ -30,7 +30,9 @@ const MoreDriverRegistrationDetails: React.FC<
   const handleConfirm = async () => {
     try {
       await blacklistDriver(data.userDetailsId, data);
-      toast.error("Driver blacklisted", {});
+      toast("👍 Driver blacklisted successfully!", {
+        duration: 3000,
+      });
       console.log("Blacklisted:", data);
       setTimeout(() => {
         window.location.reload();

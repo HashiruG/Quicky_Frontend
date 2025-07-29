@@ -32,7 +32,9 @@ const MoreDriverDetails: React.FC<MoreDriverDetailsProps> = ({
   const handleConfirm = async () => {
     try {
       await blacklistDriver(data.userDetailsId, data);
-      toast.error("Driver reactivated", {});
+      toast("👍 Driver reactivated successfully!", {
+        duration: 3000,
+      });
       console.log("Reactivated:", data);
       setTimeout(() => {
         window.location.reload();
