@@ -13,6 +13,8 @@ import { toast } from "sonner";
 import ConfirmActionDialog from "../new-registrations/ConfirmActionDialog";
 import { BlacklistColumns } from "./BlacklistColumns";
 import { blacklistDriver } from "@/services/driverManagement/blacklist/BlacklistApi";
+import LicenseDetails from "./LicenseDetails";
+import VehicleDetails from "./VehicleDetails";
 
 type MoreDriverDetailsProps = {
   data: BlacklistColumns;
@@ -30,8 +32,8 @@ const MoreDriverDetails: React.FC<MoreDriverDetailsProps> = ({
   const handleConfirm = async () => {
     try {
       await blacklistDriver(data.userDetailsId, data);
-      toast.error("Driver blacklisted", {});
-      console.log("Blacklisted:", data);
+      toast.error("Driver reactivated", {});
+      console.log("Reactivated:", data);
       setTimeout(() => {
         window.location.reload();
       }, 2000);
@@ -43,11 +45,14 @@ const MoreDriverDetails: React.FC<MoreDriverDetailsProps> = ({
     }
   };
 
+  const [licenseDialogOpen, setLicenseDialogOpen] = useState(false);
+  const [vehicleDialogOpen, setVehicleDialogOpen] = useState(false);
+
   return (
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="ghost" className="h-8 w-12 p-0">
+          <Button variant="outline" className="h-8 w-12 p-0">
             <span>View</span>
           </Button>
         </DialogTrigger>
@@ -83,31 +88,6 @@ const MoreDriverDetails: React.FC<MoreDriverDetailsProps> = ({
                 data.district}
             </p>
             <p>
-              <strong>License Number:</strong> {data.licenseNumber}
-            </p>
-            <p>
-              <strong>License Front:</strong>{" "}
-              <a
-                href={data.licenseFrontURL}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "blue" }}
-              >
-                View Image
-              </a>
-            </p>
-            <p>
-              <strong>License Back:</strong>{" "}
-              <a
-                href={data.licenseBackURL}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "blue" }}
-              >
-                View Image
-              </a>
-            </p>
-            <p>
               <strong>Email:</strong>{" "}
               <a
                 href={`mailto:${data.email}`}
@@ -125,6 +105,36 @@ const MoreDriverDetails: React.FC<MoreDriverDetailsProps> = ({
                 {data.mobileNumber}
               </a>
             </p>
+            <p className="flex items-center gap-2">
+              <strong>License Details:</strong>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setLicenseDialogOpen(true)}
+              >
+                View
+              </Button>
+              <LicenseDetails
+                data={data}
+                open={licenseDialogOpen}
+                setOpen={setLicenseDialogOpen}
+              />
+            </p>
+            <p className="flex items-center gap-2">
+              <strong>Vehicle Details:</strong>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setVehicleDialogOpen(true)}
+              >
+                View
+              </Button>
+              <VehicleDetails
+                data={data}
+                open={vehicleDialogOpen}
+                setOpen={setVehicleDialogOpen}
+              />
+            </p>
           </div>
           <DialogFooter className="p-0">
             <div className="flex justify-end items-center w-full gap-2 pr-4 pt-4">
@@ -133,7 +143,7 @@ const MoreDriverDetails: React.FC<MoreDriverDetailsProps> = ({
                   setAlertOpen(true);
                 }}
               >
-                Unblacklist
+                Reactivate
               </Button>
               <Button variant="outline" onClick={() => setOpen(false)}>
                 Close
@@ -145,8 +155,8 @@ const MoreDriverDetails: React.FC<MoreDriverDetailsProps> = ({
       <ConfirmActionDialog
         open={alertOpen}
         onOpenChange={setAlertOpen}
-        title="Confirm Unblacklist"
-        description={`Are you sure you want to unblacklist this driver?`}
+        title="Confirm Reactivate"
+        description={`Are you sure you want to reactivate this driver?`}
         onConfirm={handleConfirm}
       />
     </>

@@ -67,6 +67,14 @@ export const columns: ColumnDef<TodayBestColumns>[] = [
     accessorKey: "earnings",
     header: ({ column }) => <SortButton column={column} label="Earnings" />,
   },
+  {
+    accessorKey: "mobileNumber",
+    header: "MobileNumber",
+  },
+  {
+    accessorKey: "dateOfBirth",
+    header: "DateOfBirth",
+  },
 
   {
     id: "actions",

@@ -50,7 +50,7 @@ const MoreDriverRegistrationDetails: React.FC<
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="ghost" className="h-8 w-12 p-0">
+          <Button variant="outline" className="h-8 w-12 p-0">
             <span>View</span>
           </Button>
         </DialogTrigger>
@@ -106,7 +106,7 @@ const MoreDriverRegistrationDetails: React.FC<
             <p className="flex items-center gap-2">
               <strong>License Details:</strong>
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
                 onClick={() => setLicenseDialogOpen(true)}
               >
@@ -121,7 +121,7 @@ const MoreDriverRegistrationDetails: React.FC<
             <p className="flex items-center gap-2">
               <strong>Vehicle Details:</strong>
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
                 onClick={() => setVehicleDialogOpen(true)}
               >
