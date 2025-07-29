@@ -78,7 +78,7 @@ const DriverSearchForm: React.FC<DriverSearchFormProps> = ({
         <div className="flex items-center justify-center">
           <div className="pt-8 align-items-center">
             <CardTitle className="text-2xl">
-              Location of driver-id {tempDriverId}
+              Location of Driver Id {tempDriverId}
             </CardTitle>
           </div>
         </div>

@@ -71,7 +71,7 @@ const navItems = [
         url: "/driver-management/new-registrations",
       },
       {
-        name: "Blacklist",
+        name: "Blacklisted Drivers",
         url: "/driver-management/blacklist",
       },
     ],
