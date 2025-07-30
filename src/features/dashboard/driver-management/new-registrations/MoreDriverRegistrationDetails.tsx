@@ -39,14 +39,18 @@ const MoreDriverRegistrationDetails: React.FC<
     try {
       if (actionType === "accept") {
         await acceptDriver(data.userDetailsId, data);
-        toast.success("Driver accepted", {});
+        toast("👍 Driver accepted successfully!", {
+          duration: 3000,
+        });
         console.log("Accepted:", data);
         setTimeout(() => {
           window.location.reload();
         }, 2000);
       } else if (actionType === "reject") {
         await rejectDriver(data.userDetailsId);
-        toast.error("Driver rejected", {});
+        toast("👍 Driver rejected successfully!", {
+          duration: 3000,
+        });
         console.log("Rejected:", data);
         setTimeout(() => {
           window.location.reload();
@@ -67,7 +71,7 @@ const MoreDriverRegistrationDetails: React.FC<
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="ghost" className="h-8 w-12 p-0">
+          <Button variant="outline" className="h-8 w-12 p-0">
             <span>View</span>
           </Button>
         </DialogTrigger>
@@ -123,7 +127,7 @@ const MoreDriverRegistrationDetails: React.FC<
             <p className="flex items-center gap-2">
               <strong>License Details:</strong>
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
                 onClick={() => setLicenseDialogOpen(true)}
               >
@@ -138,7 +142,7 @@ const MoreDriverRegistrationDetails: React.FC<
             <p className="flex items-center gap-2">
               <strong>Vehicle Details:</strong>
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
                 onClick={() => setVehicleDialogOpen(true)}
               >
