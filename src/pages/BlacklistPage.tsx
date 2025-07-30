@@ -21,7 +21,7 @@ export default function BlacklistPage() {
   return (
     <>
       <Layout
-        title="Blacklist"
+        title="Blacklisted Drivers"
         aboveChildren={null}
         children={<DataTableV2 columns={columns} data={data} />}
       ></Layout>

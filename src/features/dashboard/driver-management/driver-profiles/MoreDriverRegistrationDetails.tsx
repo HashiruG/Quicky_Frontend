@@ -30,7 +30,9 @@ const MoreDriverRegistrationDetails: React.FC<
   const handleConfirm = async () => {
     try {
       await blacklistDriver(data.userDetailsId, data);
-      toast.error("Driver blacklisted", {});
+      toast("👍 Driver blacklisted successfully!", {
+        duration: 3000,
+      });
       console.log("Blacklisted:", data);
       setTimeout(() => {
         window.location.reload();
@@ -50,7 +52,7 @@ const MoreDriverRegistrationDetails: React.FC<
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="ghost" className="h-8 w-12 p-0">
+          <Button variant="outline" className="h-8 w-12 p-0">
             <span>View</span>
           </Button>
         </DialogTrigger>
@@ -106,7 +108,7 @@ const MoreDriverRegistrationDetails: React.FC<
             <p className="flex items-center gap-2">
               <strong>License Details:</strong>
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
                 onClick={() => setLicenseDialogOpen(true)}
               >
@@ -121,7 +123,7 @@ const MoreDriverRegistrationDetails: React.FC<
             <p className="flex items-center gap-2">
               <strong>Vehicle Details:</strong>
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
                 onClick={() => setVehicleDialogOpen(true)}
               >

@@ -81,7 +81,7 @@ const RegisterForm = () => {
 
     try {
       await registerService(registerInput);
-      navigate("/");
+      navigate("/register/view-admins");
     } catch (error) {
       if (error instanceof axios.AxiosError && error.response?.status === 409) {
         setErrorMessage("Email already exists. Please try another one.");

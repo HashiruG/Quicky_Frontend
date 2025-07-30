@@ -55,7 +55,7 @@ const navItems = [
     ],
   },
   {
-    title: "Realtime Driver Statuses",
+    title: "Driver Locations",
     url: "/realtime-driver-statuses",
     icon: MapPin,
   },
@@ -73,7 +73,7 @@ const navItems = [
         url: "/driver-management/new-registrations",
       },
       {
-        name: "Blacklist",
+        name: "Blacklisted Drivers",
         url: "/driver-management/blacklist",
       },
     ],

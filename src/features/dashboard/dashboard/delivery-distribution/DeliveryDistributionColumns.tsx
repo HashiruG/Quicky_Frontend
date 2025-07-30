@@ -44,11 +44,11 @@ export const columns: ColumnDef<DeliveryDistributionColumns>[] = [
     header: ({ column }) => <SortButton column={column} label="DeliveryFee" />,
   },
   {
-    accessorKey: "deliveryStatus",
-    header: "Delivery-Status",
-  },
-  {
     accessorKey: "rating",
     header: ({ column }) => <SortButton column={column} label="Rating" />,
+  },
+  {
+    accessorKey: "deliveryStatus",
+    header: "Delivery-Status",
   },
 ];
