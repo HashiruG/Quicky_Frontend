@@ -55,7 +55,7 @@ const navItems = [
     ],
   },
   {
-    title: "Realtime Driver Statuses",
+    title: "Driver Locations",
     url: "/realtime-driver-statuses",
     icon: MapPin,
   },

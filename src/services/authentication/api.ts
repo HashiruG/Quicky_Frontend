@@ -6,7 +6,7 @@ export const loginService = async (loginInput: {
   password: string;
 }) => {
   const response = await axios.post(
-    "http://localhost:8080/auth/login",
+    "https://quickyadmin-cgencwhxg9hzaceq.southindia-01.azurewebsites.net/auth/login",
     loginInput
   );
   return response;
@@ -19,7 +19,7 @@ export const registerService = async (registerInput: {
   name: string;
 }) => {
   const response = await api.post(
-    "http://localhost:8080/auth/register",
+    "https://quickyadmin-cgencwhxg9hzaceq.southindia-01.azurewebsites.net/register",
     registerInput
   );
   return response;

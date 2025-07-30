@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:8080",
+    baseURL: "https://quickyadmin-cgencwhxg9hzaceq.southindia-01.azurewebsites.net",
 })
 
 
