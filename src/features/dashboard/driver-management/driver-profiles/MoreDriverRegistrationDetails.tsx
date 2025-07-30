@@ -105,6 +105,31 @@ const MoreDriverRegistrationDetails: React.FC<
                 {data.mobileNumber}
               </a>
             </p>
+            <p>
+              <strong>Registration Date:</strong>{" "}
+              {data.registrationDate ?? "N/A"}
+            </p>
+            <p>
+              <strong>Availability:</strong>{" "}
+              {data.availability !== undefined
+                ? data.availability
+                  ? "Available"
+                  : "Not Available"
+                : "N/A"}
+            </p>
+            <p>
+              <strong>Stripe ID:</strong> {data.stripeId ?? "N/A"}
+            </p>
+            <p>
+              <strong>Wallet Balance:</strong>{" "}
+              {data.walletBalance !== undefined
+                ? `Rs. ${data.walletBalance.toFixed(2)}`
+                : "N/A"}
+            </p>
+            <p>
+              <strong>Rating:</strong>{" "}
+              {data.rating !== undefined ? data.rating.toFixed(1) : "N/A"}
+            </p>
             <p className="flex items-center gap-2">
               <strong>License Details:</strong>
               <Button
