@@ -9,10 +9,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { loginService } from "@/services/authentication/api";
 import { useAuth } from "./AuthProvider";
 import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
 
 const LoginForm = () => {
   const [loginInput, setLoginInput] = useState({ username: "", password: "" });
@@ -21,7 +21,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const handleEmailChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setErrorMessage("");
     setLoginInput((prevValue) => {
       return {
@@ -31,7 +31,7 @@ const LoginForm = () => {
     });
   };
 
-  const handlePasswordChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordValidity(true);
     setErrorMessage("");
     setLoginInput((prevValue) => {
@@ -42,7 +42,7 @@ const LoginForm = () => {
     });
   };
 
-  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (loginInput.password.trim().length < 6) {
@@ -54,12 +54,15 @@ const LoginForm = () => {
       const response = await loginService(loginInput);
       login(response.data.token);
       navigate("/dashboard/dashboard/today-best");
-    } catch (error:unknown) {
-      if(error instanceof axios.AxiosError && error.response?.status === 401) {
+    } catch (error: unknown) {
+      if (error instanceof axios.AxiosError && error.response?.status === 401) {
         setErrorMessage("Invalid credentials. Please try again.");
-      }else if(error instanceof axios.AxiosError && error.response?.status === 404){
+      } else if (
+        error instanceof axios.AxiosError &&
+        error.response?.status === 404
+      ) {
         setErrorMessage("User not found with given username.");
-      }else{
+      } else {
         setErrorMessage("An error occurred. Please try again later.");
       }
     }
@@ -91,12 +94,12 @@ const LoginForm = () => {
               <div className="grid gap-2">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
-                  <a
-                    href="/forgot-password"
+                  <Link
+                    to="/forgot-password"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                   >
                     Forgot your password?
-                  </a>
+                  </Link>
                 </div>
                 <Input
                   id="password"
