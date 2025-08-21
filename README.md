@@ -1,50 +1,54 @@
-# React + TypeScript + Vite
+# Quicky Admin Frontend
+This repository include the project files related to admin frontend of Quicky delivery platform.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Getting Started
+To get started with the project, follow these steps:
 
-Currently, two official plugins are available:
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/HashiruG/Quicky_Frontend.git
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd Quicky_Frontend
+    ```
+3. Install the dependencies:
+    ```bash
+    pnpm install
+    ```
+4. To start the server:
+    ```bash
+    pnpm dev
+    ```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Other Repositories associated with this project
+1. Quicky admin backend : [https://github.com/HashiruG/Quicky_Backend](https://github.com/HashiruG/Quicky_Backend)
+2. Quicky admin churn prediction : [https://github.com/HashiruG/Quicky_Admin_Churn_Prediction](https://github.com/HashiruG/Quicky_Admin_Churn_Prediction) 
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Few Screenshots
+<p align="center">
+  <img src="./src/assets/readmeAssets/sc1.png" alt="App Screenshot" width="80%" height="400" style="margin: 20px 0;" />
+</p>
+<p align="center">
+  <img src="./src/assets/readmeAssets/sc2.jpeg" alt="App Screenshot" width="80%" height="400" style="margin: 20px 0;" />
+</p>
+<p align="center">
+  <img src="./src/assets/readmeAssets/sc3.jpeg" alt="App Screenshot" width="80%" height="400" style="margin: 20px 0;" />
+</p>
+<p align="center">
+  <img src="./src/assets/readmeAssets/sc4.png" alt="App Screenshot" width="80%" height="400" style="margin: 20px 0;" />
+</p>
+<p align="center">
+  <img src="./src/assets/readmeAssets/sc5.png" alt="App Screenshot" width="80%" height="400" style="margin: 20px 0;" />
+</p>
+<p align="center">
+  <img src="./src/assets/readmeAssets/sc6.png" alt="App Screenshot" width="80%" height="400" style="margin: 20px 0;" />
+</p>
+<p align="center">
+  <img src="./src/assets/readmeAssets/sc7.png" alt="App Screenshot" width="80%" height="400" style="margin: 20px 0;" />
+</p>
+<p align="center">
+  <img src="./src/assets/readmeAssets/sc8.png" alt="App Screenshot" width="80%" height="400" style="margin: 20px 0;" />
+</p>
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
